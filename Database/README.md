@@ -1,7 +1,7 @@
 ### Database management
 
 ### Files include:
-#### class_PinguinDB
+#### class_PinguinDB.py
 ##### Functions in class PinguinDB
 ###### -__init__(self)
 ###### -change_login(self, name, pword)
@@ -19,7 +19,7 @@
 ###### -receive_posts(self)
 ###### -errorHandler(error)
 
-#### class_User
+#### class_User.py
 ##### Functions in class User
 ###### -__init__(self)
 ##### Data members in class User
