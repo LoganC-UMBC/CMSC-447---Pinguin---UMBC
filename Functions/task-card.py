@@ -168,17 +168,17 @@ board_name = "Base Board"
 list_name = "To Do"
 card_name = "Added Card"
 # call delete function
-ping_card_delete()
+ping_card_delete(board_name, list_name, card_name)
 
 board_name = "Base Board"
 list_name = "To Do"
 card_name = "Added Card"
 card_description = "Added Description"
 # call create function
-#ping_card_create()
+ping_card_create(board_name, list_name, card_name, card_description)
 
 # call modify function
-#ping_card_modify()
+#ping_card_modify(board_name, list_name, card_name)
 
 # find all boards
 print(ping_boards())
