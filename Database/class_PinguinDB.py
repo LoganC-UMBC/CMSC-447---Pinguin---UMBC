@@ -21,15 +21,26 @@ class PinguinDB:
         self.users = self.db.Users
     
     # changes default user credentials
-    def change_login(self, name, pword):
+    def change_user(self, name, pword):
         self.user.name = name
         self.user.pword = pword
         return
     
     # will check 
     def login(self, user, pword):
-        if
-        return
+        if(self.users.count_documents({'user': user} and {'pass':pword})):
+            print("login successful")
+            return 1
+        else:
+            print('login unsucessful')
+            return 0
+        
+    def create_account(self, user, pword):
+        if(self.users.find_one('user')):
+            return 0
+        else:
+            return 1
+        
         
     def testConnections(self):
         print(self.db.list_collection_names())
@@ -50,8 +61,14 @@ class PinguinDB:
 
     def refresh_calendar(self):
         return
+    
+    def refresh_group_invites(self):
+        return
 
     def refresh_all(self):
+        return
+    
+    def calendar_add(self):
         return
     
     #take a list of usernames to parse deliminate on ','
@@ -103,7 +120,7 @@ class PinguinDB:
         return
                 
 
-# x = PinguinDB()
+x = PinguinDB()
 # x.change_login('penny', 'PinguinTizeMeCapn')
 # x.group_create('Pinguin Party',['polly', 'poppy','piety','perry','phoebe'] )
 # print(x.db.Groups.count_documents({}))
@@ -112,4 +129,4 @@ class PinguinDB:
 # print(x.send_invites(['penny', 'polly', 'poppy','piety','perry','phoebe']))
 # x.testConnections()
 
-# x.send_post('Pinguin Party',"This group is for planning and having a party!")
+x.send_post('Pinguin Party',"This group is for planning and having a party!")
