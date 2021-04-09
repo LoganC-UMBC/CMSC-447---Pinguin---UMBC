@@ -22,9 +22,9 @@ def dict_generate():
                 # make a collection of all cards for this list
                 cards.append(all_cards[k].name)
             # assign said collection of cards to this list
-            dict_list[all_lists[j]] = cards
+            dict_list[all_lists[j].name] = cards
         
-        dict_board[all_boards[i]] = dict_list
+        dict_board[all_boards[i].name] = dict_list
 
     #print(dict_board)
     return dict_board
