@@ -39,8 +39,6 @@ class Login_Window(QMainWindow):
         
         
         
-        #self.layout.addWidget(self.entry_area)
-        self.setLayout(self.contents)
 
 
 
@@ -127,6 +125,7 @@ class Pinguin():
 
     def run(self):
         self.login_menu.show()
+        self.main_window.show()
 ###############################################################################  
 
 def main():
