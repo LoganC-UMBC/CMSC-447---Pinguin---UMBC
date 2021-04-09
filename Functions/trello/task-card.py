@@ -1,8 +1,33 @@
-dict_generate():
+# returns dictionary storing 
+def dict_generate():
+    dict_board = {}
+    dict_card = {}
     all_boards = ping_boards()
-    for i in all_boards:
-        
 
+    # iterate through all possible boards
+    for i in range(len(all_boards)):
+        print("BOARD NAME: ", all_boards[i].name)
+        all_lists = all_boards[i].list_lists()
+        # reset the dict list for a new board
+        dict_list = {}
+        # iterate through all of this boards lists
+        for j in range(len(all_lists)):
+            print("LIST NAME: ", all_lists[j].name)
+            all_cards = all_lists[j].list_cards()
+            # reset the cards list
+            cards = []
+            # iterate through all of this lists cards
+            for k in range(len(all_cards)):
+                print("CARD NAME: ", all_cards[k].name)
+                # make a collection of all cards for this list
+                cards.append(all_cards[k].name)
+            # assign said collection of cards to this list
+            dict_list[all_lists[j]] = cards
+        
+        dict_board[all_boards[i]] = dict_list
+
+    #print(dict_board)
+    return dict_board
 
 
 # returns all boards for this user
@@ -142,6 +167,7 @@ from trello.util import create_oauth_token
 import authorization
 import os
 
+"""
 # store our applications API key/secret
 os.environ["TRELLO_API_KEY"] = '2e0161c01eca7ad03bda843f811dac8b'
 os.environ["TRELLO_API_SECRET"] = 'd4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea'
@@ -150,6 +176,7 @@ user_token = create_oauth_token()
 print(user_token)
 print(user_token.get('oauth_token'))
 print(user_token.get('oauth_token_secret'))
+"""
 
 # These need to be replaced with each user's information
 # user: PinguinDevelopment447@gmail.com
@@ -157,8 +184,9 @@ print(user_token.get('oauth_token_secret'))
 client = TrelloClient(
     api_key = '2e0161c01eca7ad03bda843f811dac8b',
     api_secret = 'd4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea',
-    token = user_token.get('oauth_token'),
-    token_secret = user_token.get('oauth_token_secret')
+    token = '3e412495cb8cb892871070726e2d289a4dbf781f0a8deb37bd04a39dbebf62de'
+    #token = user_token.get('oauth_token'),
+    #token_secret = user_token.get('oauth_token_secret')
 )
 
 """
@@ -195,16 +223,19 @@ list_name = "To Do"
 card_name = "Added Card"
 card_description = "Added Description"
 # call create function
-ping_card_create(board_name, list_name, card_name, card_description)
+#ping_card_create(board_name, list_name, card_name, card_description)
 
 # call modify function
 #ping_card_modify(board_name, list_name, card_name)
 
 # find all boards
-print(ping_boards())
+#print(ping_boards())
 
 # find all lists for the specified board
-print(ping_lists(board_name))
+#print(ping_lists(board_name))
 
 # find all cards for the specified lsit
-print(ping_cards(board_name, list_name))
+#print(ping_cards(board_name, list_name))
+
+full_dict = dict_generate()
+print(full_dict)
