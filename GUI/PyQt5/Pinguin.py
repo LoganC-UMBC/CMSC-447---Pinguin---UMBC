@@ -136,6 +136,20 @@ class Groups_Tab(QWidget):
         self.right_groups_layout = QVBoxLayout()
         self.right_groups_widget.setLayout(self.right_groups_layout)
         
+        self.groups_buttons = QWidget()
+        self.groups_buttons_layout = QVBoxLayout()
+        self.groups_buttons.setLayout(self.groups_buttons_layout)
+        
+        self.create_groups_button = QPushButton("Create Group")
+        self.add_to_groups_button = QPushButton("Add to Group")
+        self.delete_groups_button = QPushButton("Delete Group")
+        
+        self.groups_buttons_layout.addWidget(self.create_groups_button)
+        self.groups_buttons_layout.addWidget(self.add_to_groups_button)
+        self.groups_buttons_layout.addWidget(self.delete_groups_button)
+        
+        self.right_groups_layout.addWidget(self.groups_buttons)
+
         
         
         
@@ -144,6 +158,7 @@ class Groups_Tab(QWidget):
         ################################################
         self.main_layout.addWidget(self.left_groups_widget)
         self.main_layout.addWidget(self.middle_groups_widget)
+        self.main_layout.addWidget(self.right_groups_widget)
         
     def getValueTree(self, val):
         print(val.data())
