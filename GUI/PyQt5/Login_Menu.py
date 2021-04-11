@@ -48,7 +48,13 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
     stylePopupOk = ("background-color: rgb(0, 255, 123); border-radius: 5px;")
 
    
-    
+    def __init__(self,login_signal):
+        super(QtWidgets.QMainWindow, self).__init__()
+        self.login_signal = login_signal
+
+    def login_success(self):
+        #print(self.login_signal)
+        self.login_signal.emit()
     
     def retranslateUi(self, login_window):
             _translate = QtCore.QCoreApplication.translate
@@ -106,6 +112,7 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
             
             showMessage(text)
             self.frame_error.setStyleSheet(self.stylePopupOk)
+            self.login_success()
     
     def set_up_ui(self, login_window):
         login_window.setObjectName("login_window")

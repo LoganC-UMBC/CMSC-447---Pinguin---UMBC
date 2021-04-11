@@ -4,10 +4,10 @@ from PyQt5.QtWidgets import QFrame, QLabel, QCheckBox, QTreeView, QTableWidget, 
 
 
 from PyQt5.QtGui import QIcon, QDesktopServices, QColor, QFont
-from PyQt5.QtCore import pyqtSlot, QSize, Qt, QRect, QMetaObject
+from PyQt5.QtCore import pyqtSlot, QSize, Qt, QRect, QMetaObject, pyqtSignal
 from PyQt5.Qt import QStandardItemModel, QStandardItem, QSizePolicy
 
-from Login_Menu import Ui_Login_Window
+from GUI.PyQt5.Login_Menu import Ui_Login_Window
 MAX_W = 1024
 MAX_H = 768
 
@@ -19,9 +19,9 @@ MAX_H = 768
 # Send a pop up to the user if the login is wrong 
 # When the login is successful the main menu should appear and the login window should hide
 class Login_Window(QMainWindow):
-    def __init__(self):
+    def __init__(self,login_signal):
         super(QMainWindow, self).__init__()
-        self.ui = Ui_Login_Window()
+        self.ui = Ui_Login_Window(login_signal)
         self.ui.set_up_ui(self)
         
         
@@ -453,17 +453,21 @@ class Task_Card_Widget(QWidget):
 # This is the driver class responsible for running the application
 # Default constructor will build the other UIs needed
 # To run the application use member function run 
-class Pinguin():
-    
+class Pinguin(QMainWindow):
+    login_signal = pyqtSignal()
     def __init__(self):
-        self.login_menu = Login_Window()
+        super(Pinguin,self).__init__()
+        self.login_signal.connect(self.login_success)
+        self.login_menu = Login_Window(self.login_signal)
         self.main_window = Main_Menu()
-        
-        
+
+    @pyqtSlot()
+    def login_success(self):
+        self.login_menu.hide()
+        self.main_window.show()
 
     def run(self):
-        #self.login_menu.show()
-        self.main_window.show()
+        self.login_menu.show()
 ###############################################################################  
 
 def main():
