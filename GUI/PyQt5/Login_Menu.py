@@ -7,6 +7,7 @@ Created on Mon Apr  5 21:03:37 2021
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 import sys
 
 class Ui_Login_Window(QtWidgets.QMainWindow):
@@ -61,7 +62,9 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
     
     
     
-    
+    def send_url(self):
+        QtCore.QUrl("")
+        
     
     
     def checkFields(self):
@@ -97,6 +100,7 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
             
         else:
             text = " Login OK. "
+            
             if self.checkBox_save_user.isChecked():
                 text = text + " | Saver user: OK "
             
@@ -318,16 +322,3 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
         #login_window.show()
         
         
-
-class Pinguin():
-    
-    def __init__(self):
-    
-        app = QtWidgets.QApplication(sys.argv)
-        login_window = QtWidgets.QMainWindow()
-        ui = Ui_Login_Window()
-        ui.set_up_ui(login_window)
-        login_window.show()
-        sys.exit(app.exec_())
-        
-#Pinguin()
