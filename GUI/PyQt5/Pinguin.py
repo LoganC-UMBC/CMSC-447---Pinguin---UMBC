@@ -8,8 +8,8 @@ from PyQt5.QtCore import pyqtSlot, QSize, Qt, QRect, QMetaObject, pyqtSignal
 from PyQt5.Qt import QStandardItemModel, QStandardItem, QSizePolicy
 
 from GUI.PyQt5.Login_Menu import Ui_Login_Window
-MAX_W = 1024
-MAX_H = 768
+MAX_W = 700
+MAX_H = 506
 
 # This is the login window that will appear first when the application is started.
 # We need two line edit objects and two push buttons .
@@ -83,88 +83,80 @@ class Groups_Tab(QWidget):
         super(QWidget, self).__init__()
         
         # Main layout
-        self.main_layout = QHBoxLayout()
+        self.main_layout = QGridLayout()
         self.setLayout(self.main_layout)
-        
-        ################################################
-        # left section holds tree view of groups
-        ################################################
-        self.left_groups_widget = QWidget()
-        self.left_groups_widget_layout = QVBoxLayout()
-        self.left_groups_widget.setLayout(self.left_groups_widget_layout)
-        
+
+#############################################################################################
+
+        self.groups_and_users_widget = QWidget()
+        self.groups_and_users_layout = QVBoxLayout()
+        self.groups_and_users_widget.setLayout(self.groups_and_users_layout)
+
         # Tree view object to see Groups and users in the group
         self.groups_tree = QTreeView()
-        
         self.groups_tree.setHeaderHidden(True)
         self.tree_model = QStandardItemModel()
         self.rootNode = self.tree_model.invisibleRootItem()
+        self.groups_tree_label = QLabel("Groups")
+
         # This would initially populate the list view with items 
         #self.updateTreeView()
         self.groups_tree.setModel(self.tree_model)
         self.groups_tree.expandAll()
         self.groups_tree.clicked.connect(self.getValueTree)
-        
-        self.left_groups_widget_layout.addWidget(self.groups_tree)
-        
-        
-        
-        ################################################
-        # mid section still debating on how to set up 
-        ################################################
-        self.middle_groups_widget = QWidget()
-        self.middle_groups_widget_layout = QVBoxLayout()
-        self.middle_groups_widget.setLayout(self.middle_groups_widget_layout)
-        
-        self.group_view_widget = QWidget()
-        self.group_view_widget_layout = QVBoxLayout()
-        self.group_view_widget.setLayout(self.group_view_widget_layout)
-        
-        self.group_description = QListView()
-        # self.group_description.setMaximumSize(200,200)
-        
-        self.group_view_widget_layout.addWidget(self.group_description)
-        
-        
-        self.middle_groups_widget_layout.addWidget(self.group_view_widget)
-        
-        
-        ################################################
-        # right section still don't know what to put here
-        ################################################
-        self.right_groups_widget = QWidget()
-        self.right_groups_layout = QVBoxLayout()
-        self.right_groups_widget.setLayout(self.right_groups_layout)
-        
-        self.groups_buttons = QWidget()
-        self.groups_buttons_layout = QVBoxLayout()
-        self.groups_buttons.setLayout(self.groups_buttons_layout)
-        
-        self.create_groups_button = QPushButton("Create Group")
-        self.add_to_groups_button = QPushButton("Add to Group")
-        self.delete_groups_button = QPushButton("Delete Group")
-        
-        self.groups_buttons_layout.addWidget(self.create_groups_button)
-        self.groups_buttons_layout.addWidget(self.add_to_groups_button)
-        self.groups_buttons_layout.addWidget(self.delete_groups_button)
-        
-        self.right_groups_layout.addWidget(self.groups_buttons)
+        self.groups_tree.setMaximumSize(300,400)
 
-        
-        
-        
-        ################################################
-        # Add everything to the main layout
-        ################################################
-        self.main_layout.addWidget(self.left_groups_widget)
-        self.main_layout.addWidget(self.middle_groups_widget)
-        self.main_layout.addWidget(self.right_groups_widget)
-        
+        self.group_description = QListView()
+        self.group_description.setMaximumWidth(300)
+        # self.group_description.setMaximumSize(200,200)
+
+        self.group_description_label = QLabel("Description")
+
+        self.set_group_button = QPushButton("Set current group")
+
+        self.groups_and_users_layout.addWidget(self.groups_tree_label)
+        self.groups_and_users_layout.addWidget(self.groups_tree)
+        self.groups_and_users_layout.addWidget(self.set_group_button)
+        self.groups_and_users_layout.addWidget(self.group_description_label)
+        self.groups_and_users_layout.addWidget(self.group_description)
+
+#############################################################################################
+
+        self.buttons_widget = QWidget()
+        self.buttons_layout = QGridLayout()
+        self.buttons_widget.setLayout(self.buttons_layout)
+
+        self.create_groups_button = QPushButton("Create Group")
+        self.create_groups_text = QTextEdit()
+        self.create_groups_text.setPlaceholderText("Enter your group's name...")
+        self.create_groups_text.setMaximumHeight(30)
+
+        self.invite_to_groups_button = QPushButton("Invite users to Group")
+        self.invite_text = QTextEdit()
+        self.invite_text.setPlaceholderText("email1@example.com, email2@example.com, ...")
+        self.invite_text.setMaximumHeight(100)
+
+        self.delete_groups_label = QLabel("This will show current group's name")
+        self.delete_groups_label.setFont(QFont('Calibri',13))
+        self.delete_groups_label.setStyleSheet("QLabel { background-color : white; color : red; }")
+        self.delete_groups_button = QPushButton("Delete Group")
+
+        self.buttons_layout.addWidget(self.create_groups_button,0,0)
+        self.buttons_layout.addWidget(self.create_groups_text,0,1)
+        self.buttons_layout.addWidget(self.invite_to_groups_button,1,0)
+        self.buttons_layout.addWidget(self.invite_text,1,1)
+        self.buttons_layout.addWidget(self.delete_groups_button,2,0)
+        self.buttons_layout.addWidget(self.delete_groups_label,2,1)
+
+#############################################################################################
+
+        self.main_layout.addWidget(self.groups_and_users_widget,0,0)
+        self.main_layout.addWidget(self.buttons_widget,0,1)
+
     def getValueTree(self, val):
         print(val.data())
         print(val.row())
         print(val.column())
-        
         
 class Forums_Tab(QWidget):
     
