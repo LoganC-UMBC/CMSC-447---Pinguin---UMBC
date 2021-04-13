@@ -142,9 +142,11 @@ def ping_card_delete(board_name, list_name, card_name):
     if k == None:
         return False
 
-    # store all lists for a board
+    # store all lists for this board
     board_lists = ping_lists(board_name)
+    # store all cards for this list
     card_list = board_lists[j].list_cards()
+    # delete this card
     card_list[k].delete()
     print("Successful Deletion")
     return True
@@ -158,6 +160,35 @@ def ping_card_modify(board_name, list_name, card_name):
     """
     print("Modify")
 
+# move a task card to a specified list
+def ping_card_move(board_name, list_name, card_name, new_list_name):
+    # store the boards index
+    i = board_index(board_name)
+    if i == None:
+        return False
+    # store the lists index
+    j = list_index(board_name, list_name, i)
+    if j == None:
+        return False
+    # store the new lists index
+    new_list_index = list_index(board_name, new_list_name, i)
+    if new_list_index == None:
+        return False
+    # store the cards index
+    k = card_index(board_name, list_name, card_name, i, j)
+    if k == None:
+        return False 
+
+    # store all lists for this board
+    board_lists = ping_lists(board_name)
+    # store all cards for this list
+    card_list = board_lists[j].list_cards()
+    print(board_lists[new_list_index].name)
+    
+    # change the list this card is under
+    card_list[k].change_list(board_lists[new_list_index].id)
+    print("Card Movement Successful")
+    return True
 
 # Using: https://pypi.org/project/py-trello/
 # https://github.com/sarumont/py-trello
@@ -167,16 +198,16 @@ from trello.util import create_oauth_token
 import authorization
 import os
 
-"""
+
 # store our applications API key/secret
 os.environ["TRELLO_API_KEY"] = '2e0161c01eca7ad03bda843f811dac8b'
 os.environ["TRELLO_API_SECRET"] = 'd4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea'
-# get the users tokens
+# get the users unique tokens
 user_token = create_oauth_token()
-print(user_token)
-print(user_token.get('oauth_token'))
-print(user_token.get('oauth_token_secret'))
-"""
+#print(user_token)
+#print(user_token.get('oauth_token'))
+#print(user_token.get('oauth_token_secret'))
+
 
 # These need to be replaced with each user's information
 # user: PinguinDevelopment447@gmail.com
@@ -184,33 +215,10 @@ print(user_token.get('oauth_token_secret'))
 client = TrelloClient(
     api_key = '2e0161c01eca7ad03bda843f811dac8b',
     api_secret = 'd4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea',
-    token = '3e412495cb8cb892871070726e2d289a4dbf781f0a8deb37bd04a39dbebf62de'
-    #token = user_token.get('oauth_token'),
-    #token_secret = user_token.get('oauth_token_secret')
+    #token = '3e412495cb8cb892871070726e2d289a4dbf781f0a8deb37bd04a39dbebf62de'
+    token = user_token.get('oauth_token'),
+    token_secret = user_token.get('oauth_token_secret')
 )
-
-"""
-JUST SOME SAMPLE CODE TO FIGURE OUT HOW IT WORKS
-"""
-"""
-# store all the boards for this client
-all_boards = client.list_boards()
-# store the first board
-board = client.list_boards()[0]
-print(board)
-print(board.list_lists())
-print(board.list_lists()[0].id)
-
-# grab the ID of the first list within the board
-list_id = board.list_lists()[0].id
-# store a list of all boards
-all_boards = client.list_boards()
-# get a list of cards in this list
-my_card_list = board.get_list(list_id)
-
-for card in my_card_list.list_cards():
-    print(card.name)
-"""
 
 board_name = "Base Board"
 list_name = "To Do"
@@ -239,3 +247,10 @@ card_description = "Added Description"
 
 full_dict = dict_generate()
 print(full_dict)
+
+board_name = "Base Board"
+list_name = "To Do"
+card_name = "To Do Base Card"
+new_list_name = "Done"
+# move a card to a different list
+ping_card_move(board_name, list_name, card_name, new_list_name)
