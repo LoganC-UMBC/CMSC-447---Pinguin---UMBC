@@ -8,7 +8,7 @@ Created on Mon Apr  5 21:03:37 2021
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt
-from PinguinDB import PinguinDB
+from Database.PinguinDB import PinguinDB
 
 import sys
 

@@ -7,8 +7,8 @@ from PyQt5.QtGui import QIcon, QDesktopServices, QColor, QFont
 from PyQt5.QtCore import pyqtSlot, QSize, Qt, QRect, QMetaObject, pyqtSignal
 from PyQt5.Qt import QStandardItemModel, QStandardItem, QSizePolicy
 
-from PinguinDB import PinguinDB
-from Login_Menu import Ui_Login_Window
+from Database.PinguinDB import PinguinDB
+from GUI.PyQt5.Login_Menu import Ui_Login_Window
 MAX_W = 700
 MAX_H = 506
 

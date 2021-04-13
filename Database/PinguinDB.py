@@ -16,7 +16,7 @@ Created on Thu Apr  1 23:46:40 2021
 import pymongo, datetime, time
 
 from bson.objectid import ObjectId
-from class_user import User
+from Database.class_user import User
 from random import seed, randint
 from coolname import generate_slug
 
@@ -233,11 +233,13 @@ class PinguinDB:
             invites = self.create_emails(6)
             self.create_group(group_name, "Test Description", invites)
 
+"""
 x = PinguinDB()
 
 x.login("s99@umbc.edu","princess")
 x.create_emails(2)
 x.create_many_groups(3)
+"""
 
 #x.create_many_accounts(1,1)
 
