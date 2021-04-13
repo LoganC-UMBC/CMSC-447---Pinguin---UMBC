@@ -7,10 +7,15 @@ Created on Mon Apr  5 21:03:37 2021
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt
+from PinguinDB import PinguinDB
 
 import sys
 
 class Ui_Login_Window(QtWidgets.QMainWindow):
+    
+    
+    
     #
     # STYLES
     #
@@ -51,6 +56,7 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
     def __init__(self,login_signal):
         super(QtWidgets.QMainWindow, self).__init__()
         self.login_signal = login_signal
+        self.db = PinguinDB()
 
     def login_success(self):
         #print(self.login_signal)
@@ -58,16 +64,79 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
     
     def retranslateUi(self, login_window):
             _translate = QtCore.QCoreApplication.translate
-            login_window.setWindowTitle(_translate("login_window", "Login"))
+            login_window.setWindowTitle(_translate("login_window", "Pinguin"))
             self.label_error.setText(_translate("login_window", "Error"))
             self.lineEdit_user.setPlaceholderText(_translate("login_window", "USER"))
             self.lineEdit_password.setPlaceholderText(_translate("login_window", "PASSWORD"))
             self.checkBox_save_user.setText(_translate("login_window", "SAVE USER"))
             self.pushButton_login.setText(_translate("login_window", "Login"))
+            self.pushButton_create.setText(_translate("login_window", "Create Account"))
         #   self.label_credits.setText(_translate("login_window", "Created by: Wanderson M. Pimenta"))
     
+    @pyqtSlot()
+    def create_account(self):
+        self.acct_window = QtWidgets.QMainWindow(self)
+        self.acct_window.resize(300,300)
+        self.acct_window.setWindowTitle("Pinguin")
+        self.acct_window.setWindowIcon(QtGui.QIcon("447logoicon.ico"))
+        
+        self.acct_widget = QtWidgets.QWidget()
+        self.acct_layout = QtWidgets.QVBoxLayout()
+        self.acct_widget.setLayout(self.acct_layout)
+        
+        self.acct_label = QtWidgets.QLabel("Create Account")
+        self.acct_label.setAlignment(Qt.AlignCenter)
+        
+        self.acct_id_edit = QtWidgets.QLineEdit()
+        self.acct_id_edit.setPlaceholderText("user@gmail.com")
+        
+        self.acct_name_edit = QtWidgets.QLineEdit()
+        self.acct_name_edit.setPlaceholderText("Enter First Name")
+        
+        self.acct_pass_edit = QtWidgets.QLineEdit()
+        self.acct_pass_edit.setPlaceholderText("Enter Password")
+        
+        self.acct_confirm_pass_edit = QtWidgets.QLineEdit()
+        self.acct_confirm_pass_edit.setPlaceholderText("Confirm Password")
+        
+        self.acct_buttons_widget = QtWidgets.QWidget()
+        self.acct_buttons_layout = QtWidgets.QHBoxLayout()
+        self.acct_buttons_widget.setLayout(self.acct_buttons_layout)
+        
+        self.acct_accept_button = QtWidgets.QPushButton("Create")
+        self.acct_accept_button.clicked.connect(self.create_account_accept)
+        
+        self.acct_cancel_button = QtWidgets.QPushButton("Cancel")
+        self.acct_cancel_button.clicked.connect(self.create_account_cancel)
+        
+        self.acct_buttons_layout.addWidget(self.acct_accept_button)
+        self.acct_buttons_layout.addWidget(self.acct_cancel_button)
+        
+        self.acct_layout.addWidget(self.acct_label)
+        self.acct_layout.addWidget(self.acct_id_edit)
+        self.acct_layout.addWidget(self.acct_name_edit)
+        self.acct_layout.addWidget(self.acct_pass_edit)
+        self.acct_layout.addWidget(self.acct_confirm_pass_edit)
+        self.acct_layout.addWidget(self.acct_buttons_widget)
+        
+        self.acct_window.setCentralWidget(self.acct_widget)
+        
+        self.acct_window.show()
+        
     
+    @pyqtSlot()
+    def create_account_accept(self):
+        if(self.acct_pass_edit.text() != self.acct_confirm_pass_edit):
+            print("non-matching passwords")
+        else:
+            self.acct_window.close()
     
+    @pyqtSlot()
+    def create_account_cancel(self):
+        
+        self.acct_window.close()
+        
+        
     def send_url(self):
         QtCore.QUrl("")
         
@@ -105,14 +174,18 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
             self.frame_error.setStyleSheet(self.stylePopupError)
             
         else:
-            text = " Login OK. "
-            
+            text = " Check User/Password. "
+            if(self.db.login(self.lineEdit_user.text(), self.lineEdit_password.text())):
+                self.login_success()
+                
             if self.checkBox_save_user.isChecked():
                 text = text + " | Saver user: OK "
             
-            showMessage(text)
-            self.frame_error.setStyleSheet(self.stylePopupOk)
-            self.login_success()
+            else:
+                showMessage(text)
+                self.frame_error.setStyleSheet(self.stylePopupOk)
+            
+            
     
     def set_up_ui(self, login_window):
         login_window.setObjectName("login_window")
@@ -207,7 +280,12 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
         self.login_area.setFrameShadow(QtWidgets.QFrame.Raised)
         self.login_area.setObjectName("login_area")
         
-        # self.login_area_title = QtWidgets.QFrame(self.login_area)
+        self.login_area_title = QtWidgets.QLabel("Pinguin", self.login_widget)
+        self.login_area_title_font = QtGui.QFont('Trebuchet MS')
+        self.login_area_title_font.setPointSize(40)
+        self.login_area_title.setFont(self.login_area_title_font)
+        self.login_area_title.setAlignment(QtCore.Qt.AlignCenter)
+        self.login_area_title.setGeometry(150,45,200,100)
         # self.login_area_title.setGeometry(45, -200, 360, 200)
         # self.login_area_title.setStyleSheet("background-image: url(PinguinTitle.png);\n""background-repeat: no-repeat;\n""background-position: center;")
         # self.login_area_title.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -267,8 +345,11 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
 "    background-color: rgb(255, 255, 0);\n"
 "}")
         self.checkBox_save_user.setObjectName("checkBox_save_user")
+        
         self.pushButton_login = QtWidgets.QPushButton(self.login_area)
         self.pushButton_login.setGeometry(QtCore.QRect(85, 425, 280, 50))
+        self.pushButton_login.setDefault(True)
+        QtCore.QTimer.singleShot(0, self.pushButton_login.setFocus)
         self.pushButton_login.setStyleSheet("QPushButton {    \n"
 "    background-color: rgb(50, 50, 50);\n"
 "    border: 2px solid rgb(60, 60, 60);\n"
@@ -290,7 +371,28 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
         self.verticalLayout.addWidget(self.content)
         
         #added
-        #self.verticalLayout.addWidget(self.login_area_title)
+        self.pushButton_create = QtWidgets.QPushButton(self.login_area)
+        self.pushButton_create.setGeometry(QtCore.QRect(85,480, 280, 50))
+        self.pushButton_create.setDefault(True)
+        QtCore.QTimer.singleShot(0, self.pushButton_create.setFocus)
+        self.pushButton_create.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(250, 230, 0);\n"
+"    border: 2px solid rgb(255, 165, 24);    \n"
+"    color: rgb(35, 35, 35);\n"
+"}")
+        self.pushButton_create.setObjectName("pushButton_create")
+        self.pushButton_create.clicked.connect(self.create_account)
+        
+        
         
         self.bottom = QtWidgets.QFrame(self.login_widget)
         self.bottom.setMaximumSize(QtCore.QSize(16777215, 35))
