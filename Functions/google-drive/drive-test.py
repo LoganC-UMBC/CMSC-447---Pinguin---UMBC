@@ -14,8 +14,8 @@ new_title
 
 #to create doc and upload to user drive
 
-file= drive.CreateFile({'title:' user_title})
-file.SetContentString(user_content)
+file= drive.CreateFile({'title': 'Just Testing.txt'})
+file.SetContentString("user content goes here")
 file.Upload()
 
 
