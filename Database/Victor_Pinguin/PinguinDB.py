@@ -199,8 +199,7 @@ class PinguinDB:
         self.calendars[group].insert_one(calendarPost)
 
     def retrieve_calendar_posts(self, group, date, time):  
-        print(type(date.month))
-       # print(self.calendars[group].find_one())
+
         if time == "month":
             for x in self.calendars[group].find({'month':date.month}):
                 print("flag1")
