@@ -183,8 +183,6 @@ def ping_card_move(board_name, list_name, card_name, new_list_name):
     board_lists = ping_lists(board_name)
     # store all cards for this list
     card_list = board_lists[j].list_cards()
-    print(board_lists[new_list_index].name)
-    
     # change the list this card is under
     card_list[k].change_list(board_lists[new_list_index].id)
     print("Card Movement Successful")
@@ -195,19 +193,27 @@ def ping_card_move(board_name, list_name, card_name, new_list_name):
 # PDF documentation: https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwji5eCS7OXvAhX-M1kFHeVGADMQFjAAegQIBxAD&url=https%3A%2F%2Freadthedocs.org%2Fprojects%2Fpy-trello-dev%2Fdownloads%2Fpdf%2Flatest%2F&usg=AOvVaw1-vlt-k1FXhBt1uslG60E7
 from trello import TrelloClient
 from trello.util import create_oauth_token
-import authorization
+from ping_authorization import *
 import os
 
 
 # store our applications API key/secret
 os.environ["TRELLO_API_KEY"] = '2e0161c01eca7ad03bda843f811dac8b'
 os.environ["TRELLO_API_SECRET"] = 'd4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea'
+"""
 # get the users unique tokens
 user_token = create_oauth_token()
-#print(user_token)
-#print(user_token.get('oauth_token'))
-#print(user_token.get('oauth_token_secret'))
+print(user_token)
+print(user_token.get('oauth_token'))
+print(user_token.get('oauth_token_secret'))
+"""
 
+ping_oauth_link()
+# CHANGE THE INPUT TO THE GUI'S RECIEVED PIN
+provided_pin = input("Enter your pin: ")
+user_token = ping_oauth_pin(provided_pin)
+print(user_token.get('oauth_token'))
+print(user_token.get('oauth_token_secret'))
 
 # These need to be replaced with each user's information
 # user: PinguinDevelopment447@gmail.com
@@ -215,7 +221,8 @@ user_token = create_oauth_token()
 client = TrelloClient(
     api_key = '2e0161c01eca7ad03bda843f811dac8b',
     api_secret = 'd4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea',
-    #token = '3e412495cb8cb892871070726e2d289a4dbf781f0a8deb37bd04a39dbebf62de'
+    #token = '3e1c54bc5ae2f18fe2e449c102c49b40400de0b39e2aca401dfc7a028c1ed33e',
+    #token_secret = '298b5e59c4c09cff9666ba32fd381c5f'
     token = user_token.get('oauth_token'),
     token_secret = user_token.get('oauth_token_secret')
 )
