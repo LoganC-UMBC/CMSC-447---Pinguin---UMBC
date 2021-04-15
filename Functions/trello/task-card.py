@@ -1,8 +1,8 @@
 # returns dictionary storing 
-def dict_generate():
+def dict_generate(client):
     dict_board = {}
     dict_card = {}
-    all_boards = ping_boards()
+    all_boards = ping_boards(client)
 
     # iterate through all possible boards
     for i in range(len(all_boards)):
@@ -31,30 +31,30 @@ def dict_generate():
 
 
 # returns all boards for this user
-def ping_boards():
+def ping_boards(client):
     print("ping_boards")
     return client.list_boards()
 
 # returns all lists under a board
-def ping_lists(board_name):
+def ping_lists(client, board_name):
     print("ping_lists")
     # store the index for the specified board
-    i = board_index(board_name)
+    i = board_index(client, board_name)
     
-    all_boards = ping_boards()
+    all_boards = ping_boards(client)
     # return all lists for a board
     return all_boards[i].list_lists()
 
 # returns all cards under a list
-def ping_cards(board_name, list_name):
+def ping_cards(client, board_name, list_name):
     print("ping_cards")
     # store all boards for this client
-    all_boards = ping_boards()
+    all_boards = ping_boards(client)
 
     # store the index for the specified board
-    i = board_index(board_name)
+    i = board_index(client, board_name)
     # store the index for the specified list
-    j = list_index(board_name, list_name, i)
+    j = list_index(client, board_name, list_name, i)
 
     # store all lists under a board
     board_lists = all_boards[i].list_lists()
@@ -62,9 +62,9 @@ def ping_cards(board_name, list_name):
     return board_lists[j].list_cards()
 
 # returns the index of the desired board
-def board_index(board_name):
+def board_index(client, board_name):
     # store all boards for this client
-    all_boards = ping_boards()
+    all_boards = ping_boards(client)
 
     # locate the proper board
     for i in range(len(all_boards)):
@@ -74,9 +74,9 @@ def board_index(board_name):
     return None
 
 # returns the index of the desired list
-def list_index(board_name, list_name, i):
+def list_index(client, board_name, list_name, i):
     # store all boards for this client
-    all_boards = ping_boards()
+    all_boards = ping_boards(client)
     # store all lists for this board
     board_lists = all_boards[i].list_lists()
 
@@ -88,10 +88,10 @@ def list_index(board_name, list_name, i):
     return None
 
 # returns the index of the desired card
-def card_index(board_name, list_name, card_name, i, j):
+def card_index(client, board_name, list_name, card_name, i, j):
     print("card_index")
     # store all boards for this client
-    all_boards = ping_boards()
+    all_boards = ping_boards(client)
 
     # store all lists for this board
     board_lists = all_boards[i].list_lists()
@@ -104,19 +104,19 @@ def card_index(board_name, list_name, card_name, i, j):
     return None
 
 # create a task card
-def ping_card_create(board_name, list_name, card_name, card_description):
+def ping_card_create(client, board_name, list_name, card_name, card_description):
     
     # store the boards index
-    i = board_index(board_name)
+    i = board_index(client, board_name)
     if i == None:
         return False
     # store the lists index
-    j = list_index(board_name, list_name, i)
+    j = list_index(client, board_name, list_name, i)
     if j == None:
         return False
 
     # store all lists for a board
-    board_lists = ping_lists(board_name)
+    board_lists = ping_lists(client, board_name)
     # add card to the desired list
     board_lists[j].add_card(card_name, desc=card_description)
     print(board_lists[j])
@@ -126,24 +126,24 @@ def ping_card_create(board_name, list_name, card_name, card_description):
 # delete a task card
 # returns True if the task card has been deleted
 # returns False if the task card cannot be deleted
-def ping_card_delete(board_name, list_name, card_name):
+def ping_card_delete(client, board_name, list_name, card_name):
     print("Delete")
 
     # store the boards index
-    i = board_index(board_name)
+    i = board_index(client, board_name)
     if i == None:
         return False
     # store the lists index
-    j = list_index(board_name, list_name, i)
+    j = list_index(client, board_name, list_name, i)
     if j == None:
         return False
     # store the cards index
-    k = card_index(board_name, list_name, card_name, i, j)
+    k = card_index(client, board_name, list_name, card_name, i, j)
     if k == None:
         return False
 
     # store all lists for this board
-    board_lists = ping_lists(board_name)
+    board_lists = ping_lists(client, board_name)
     # store all cards for this list
     card_list = board_lists[j].list_cards()
     # delete this card
@@ -152,7 +152,7 @@ def ping_card_delete(board_name, list_name, card_name):
     return True
 
 # modify a task card's contents
-def ping_card_modify(board_name, list_name, card_name):
+def ping_card_modify(client, board_name, list_name, card_name):
     """
     board_name = ""
     list_name = ""
@@ -161,32 +161,43 @@ def ping_card_modify(board_name, list_name, card_name):
     print("Modify")
 
 # move a task card to a specified list
-def ping_card_move(board_name, list_name, card_name, new_list_name):
+def ping_card_move(client, board_name, list_name, card_name, new_list_name):
     # store the boards index
-    i = board_index(board_name)
+    i = board_index(client, board_name)
     if i == None:
         return False
     # store the lists index
-    j = list_index(board_name, list_name, i)
+    j = list_index(client, board_name, list_name, i)
     if j == None:
         return False
     # store the new lists index
-    new_list_index = list_index(board_name, new_list_name, i)
+    new_list_index = list_index(client, board_name, new_list_name, i)
     if new_list_index == None:
         return False
     # store the cards index
-    k = card_index(board_name, list_name, card_name, i, j)
+    k = card_index(client, board_name, list_name, card_name, i, j)
     if k == None:
         return False 
 
     # store all lists for this board
-    board_lists = ping_lists(board_name)
+    board_lists = ping_lists(client, board_name)
     # store all cards for this list
     card_list = board_lists[j].list_cards()
     # change the list this card is under
     card_list[k].change_list(board_lists[new_list_index].id)
     print("Card Movement Successful")
     return True
+
+def set_client(token, token_secret):
+    client = TrelloClient(
+    api_key = '2e0161c01eca7ad03bda843f811dac8b',
+    api_secret = 'd4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea',
+    #token = '3e1c54bc5ae2f18fe2e449c102c49b40400de0b39e2aca401dfc7a028c1ed33e',
+    #token_secret = '298b5e59c4c09cff9666ba32fd381c5f'
+    token = user_token.get('oauth_token'),
+    token_secret = user_token.get('oauth_token_secret')
+    )
+    return client
 
 # Using: https://pypi.org/project/py-trello/
 # https://github.com/sarumont/py-trello
@@ -218,41 +229,34 @@ print(user_token.get('oauth_token_secret'))
 # These need to be replaced with each user's information
 # user: PinguinDevelopment447@gmail.com
 # pass: Piw2amhhPy7DFng
-client = TrelloClient(
-    api_key = '2e0161c01eca7ad03bda843f811dac8b',
-    api_secret = 'd4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea',
-    #token = '3e1c54bc5ae2f18fe2e449c102c49b40400de0b39e2aca401dfc7a028c1ed33e',
-    #token_secret = '298b5e59c4c09cff9666ba32fd381c5f'
-    token = user_token.get('oauth_token'),
-    token_secret = user_token.get('oauth_token_secret')
-)
+client = set_client(user_token.get('oauth_token'), user_token.get('oauth_token_secret'))
 
 board_name = "Base Board"
 list_name = "To Do"
 card_name = "Added Card"
 # call delete function
-#ping_card_delete(board_name, list_name, card_name)
+#ping_card_delete(client, board_name, list_name, card_name)
 
 board_name = "Base Board"
 list_name = "To Do"
 card_name = "Added Card"
 card_description = "Added Description"
 # call create function
-#ping_card_create(board_name, list_name, card_name, card_description)
+#ping_card_create(client, board_name, list_name, card_name, card_description)
 
 # call modify function
-#ping_card_modify(board_name, list_name, card_name)
+#ping_card_modify(client, board_name, list_name, card_name)
 
 # find all boards
-#print(ping_boards())
+#print(ping_boards(client))
 
 # find all lists for the specified board
-#print(ping_lists(board_name))
+#print(ping_lists(client, board_name))
 
 # find all cards for the specified lsit
-#print(ping_cards(board_name, list_name))
+#print(ping_cards(client, board_name, list_name))
 
-full_dict = dict_generate()
+full_dict = dict_generate(client)
 print(full_dict)
 
 board_name = "Base Board"
@@ -260,4 +264,4 @@ list_name = "To Do"
 card_name = "To Do Base Card"
 new_list_name = "Done"
 # move a card to a different list
-ping_card_move(board_name, list_name, card_name, new_list_name)
+ping_card_move(client, board_name, list_name, card_name, new_list_name)
