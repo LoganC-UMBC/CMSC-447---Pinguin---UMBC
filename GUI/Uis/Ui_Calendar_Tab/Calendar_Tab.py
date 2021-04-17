@@ -11,16 +11,16 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_calendar_tab(object):
-    def setupUi(self, calendar_tab):
-        calendar_tab.setObjectName("calendar_tab")
-        calendar_tab.resize(700, 506)
-        calendar_tab.setMinimumSize(QtCore.QSize(700, 506))
-        calendar_tab.setMaximumSize(QtCore.QSize(700, 506))
-        calendar_tab.setStyleSheet("QWidget#calendar_tab{background-color: rgb(100,100,100);}")
-        self.gridLayout = QtWidgets.QGridLayout(calendar_tab)
+class Ui_Calendar_Tab(object):
+    def setupUi(self, Calendar_Tab):
+        Calendar_Tab.setObjectName("Calendar_Tab")
+        Calendar_Tab.resize(700, 506)
+        Calendar_Tab.setMinimumSize(QtCore.QSize(700, 506))
+        Calendar_Tab.setMaximumSize(QtCore.QSize(700, 506))
+        Calendar_Tab.setStyleSheet("QWidget#Calendar_Tab{background-color: rgb(100,100,100);}")
+        self.gridLayout = QtWidgets.QGridLayout(Calendar_Tab)
         self.gridLayout.setObjectName("gridLayout")
-        self.widget_2 = QtWidgets.QWidget(calendar_tab)
+        self.widget_2 = QtWidgets.QWidget(Calendar_Tab)
         self.widget_2.setObjectName("widget_2")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_2)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -51,7 +51,7 @@ class Ui_calendar_tab(object):
         self.todays_events_list.setObjectName("todays_events_list")
         self.verticalLayout_2.addWidget(self.todays_events_list)
         self.gridLayout.addWidget(self.widget_2, 1, 1, 1, 1)
-        self.widget = QtWidgets.QWidget(calendar_tab)
+        self.widget = QtWidgets.QWidget(Calendar_Tab)
         self.widget.setObjectName("widget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.widget)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -80,7 +80,7 @@ class Ui_calendar_tab(object):
         self.month_events_list.setObjectName("month_events_list")
         self.verticalLayout.addWidget(self.month_events_list)
         self.gridLayout.addWidget(self.widget, 3, 1, 1, 1)
-        self.widget_5 = QtWidgets.QWidget(calendar_tab)
+        self.widget_5 = QtWidgets.QWidget(Calendar_Tab)
         self.widget_5.setObjectName("widget_5")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.widget_5)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
@@ -154,7 +154,7 @@ class Ui_calendar_tab(object):
         self.add_event_button.setObjectName("add_event_button")
         self.verticalLayout_4.addWidget(self.add_event_button)
         self.gridLayout.addWidget(self.widget_5, 2, 0, 2, 1)
-        self.widget_6 = QtWidgets.QWidget(calendar_tab)
+        self.widget_6 = QtWidgets.QWidget(Calendar_Tab)
         self.widget_6.setObjectName("widget_6")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.widget_6)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
@@ -172,25 +172,25 @@ class Ui_calendar_tab(object):
         self.verticalLayout_5.addWidget(self.calendar)
         self.gridLayout.addWidget(self.widget_6, 1, 0, 1, 1)
 
-        self.retranslateUi(calendar_tab)
-        QtCore.QMetaObject.connectSlotsByName(calendar_tab)
+        self.retranslateUi(Calendar_Tab)
+        QtCore.QMetaObject.connectSlotsByName(Calendar_Tab)
 
-    def retranslateUi(self, calendar_tab):
+    def retranslateUi(self, Calendar_Tab):
         _translate = QtCore.QCoreApplication.translate
-        calendar_tab.setWindowTitle(_translate("calendar_tab", "Calender"))
-        self.todays_label.setText(_translate("calendar_tab", "Todays  Events"))
-        self.month_label.setText(_translate("calendar_tab", "This Months Events"))
-        self.create_event_label.setText(_translate("calendar_tab", "Create A New Event"))
-        self.event_name_edit.setPlaceholderText(_translate("calendar_tab", "Enter a title for Event"))
-        self.event_edit.setPlaceholderText(_translate("calendar_tab", "Enter a description of the event"))
-        self.add_event_button.setText(_translate("calendar_tab", "Add Event"))
+        Calendar_Tab.setWindowTitle(_translate("Calendar_Tab", "Calender"))
+        self.todays_label.setText(_translate("Calendar_Tab", "Todays  Events"))
+        self.month_label.setText(_translate("Calendar_Tab", "This Months Events"))
+        self.create_event_label.setText(_translate("Calendar_Tab", "Create A New Event"))
+        self.event_name_edit.setPlaceholderText(_translate("Calendar_Tab", "Enter a title for Event"))
+        self.event_edit.setPlaceholderText(_translate("Calendar_Tab", "Enter a description of the event"))
+        self.add_event_button.setText(_translate("Calendar_Tab", "Add Event"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    calendar_tab = QtWidgets.QWidget()
-    ui = Ui_calendar_tab()
-    ui.setupUi(calendar_tab)
-    calendar_tab.show()
+    Calendar_Tab = QtWidgets.QWidget()
+    ui = Ui_Calendar_Tab()
+    ui.setupUi(Calendar_Tab)
+    Calendar_Tab.show()
     sys.exit(app.exec_())

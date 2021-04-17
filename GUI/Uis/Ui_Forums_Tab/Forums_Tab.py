@@ -9,9 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtCore import pyqtSignal, pyqtSlot
 
 class Ui_Forums_Tab(object):
+    def __init__(self,send_message_signal):
+        self.send_message_signal = send_message_signal
+
     def setupUi(self, Forums_Tab):
         Forums_Tab.setObjectName("Forums_Tab")
         Forums_Tab.resize(700, 506)
@@ -75,6 +78,8 @@ class Ui_Forums_Tab(object):
         self.listWidget_2.raise_()
         self.textEdit.raise_()
 
+        self.pushButton.clicked.connect(self.send_message)
+
         self.retranslateUi(Forums_Tab)
         QtCore.QMetaObject.connectSlotsByName(Forums_Tab)
 
@@ -83,6 +88,8 @@ class Ui_Forums_Tab(object):
         Forums_Tab.setWindowTitle(_translate("Forums_Tab", "Forums_Tab"))
         self.pushButton.setText(_translate("Forums_Tab", "Send Message"))
 
+    def send_message(self):
+        self.send_message_signal.emit()
 
 if __name__ == "__main__":
     import sys

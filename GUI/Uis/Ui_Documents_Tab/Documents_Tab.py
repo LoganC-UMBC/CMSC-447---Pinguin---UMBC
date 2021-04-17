@@ -9,9 +9,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtCore import pyqtSignal, pyqtSlot
 
 class Ui_Documents_Tab(object):
+    def __init__(self,create_doc_signal,delete_doc_signal,share_doc_signal):
+        self.create_doc_signal = create_doc_signal
+        self.delete_doc_signal = delete_doc_signal
+        self.share_doc_signal = share_doc_signal
+
     def setupUi(self, Documents_Tab):
         Documents_Tab.setObjectName("Documents_Tab")
         Documents_Tab.resize(700, 506)
@@ -201,6 +206,10 @@ class Ui_Documents_Tab(object):
         self.doc_list.setObjectName("doc_list")
         self.verticalLayout_2.addWidget(self.doc_list)
 
+        self.create_button.clicked.connect(self.create_doc)
+        self.delete_button.clicked.connect(self.delete_doc)
+        self.share_button.clicked.connect(self.share_doc)
+
         self.retranslateUi(Documents_Tab)
         QtCore.QMetaObject.connectSlotsByName(Documents_Tab)
 
@@ -216,6 +225,14 @@ class Ui_Documents_Tab(object):
         self.delete_button.setText(_translate("Documents_Tab", "Delete A Doc"))
         self.doc_label.setText(_translate("Documents_Tab", "Viewing Documents for Group:"))
 
+    def create_doc(self):
+        self.create_doc_signal.emit()
+
+    def share_doc(self):
+        self.share_doc_signal.emit()
+
+    def delete_doc(self):
+        self.delete_doc_signal.emit()
 
 if __name__ == "__main__":
     import sys

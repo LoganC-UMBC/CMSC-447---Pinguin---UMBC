@@ -9,9 +9,16 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import pyqtSignal, pyqtSlot
 
 
 class Ui_Groups_Tab(object):
+    def __init__(self,create_group_signal, accept_invite_signal, delete_invite_signal):
+        #super(QtWidgets.QMainWindow, self).__init__()
+        self.create_group_signal = create_group_signal
+        self.accept_invite_signal = accept_invite_signal
+        self.delete_invite_signal = delete_invite_signal
+
     def setupUi(self, Groups_Tab):
         Groups_Tab.setObjectName("Groups_Tab")
         Groups_Tab.resize(700, 506)
@@ -100,12 +107,16 @@ class Ui_Groups_Tab(object):
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.accept_invit_button = QtWidgets.QPushButton(self.widget)
-        self.accept_invit_button.setObjectName("accept_invit_button")
-        self.horizontalLayout_2.addWidget(self.accept_invit_button)
+        self.accept_invite_button = QtWidgets.QPushButton(self.widget)
+        self.accept_invite_button.setObjectName("accept_invite_button")
+        self.horizontalLayout_2.addWidget(self.accept_invite_button)
         self.delete_invite_button = QtWidgets.QPushButton(self.widget)
         self.delete_invite_button.setObjectName("delete_invite_button")
         self.horizontalLayout_2.addWidget(self.delete_invite_button)
+
+        self.create_group_button.clicked.connect(self.create_group)
+        self.accept_invite_button.clicked.connect(self.accept_invite)
+        self.delete_invite_button.clicked.connect(self.delete_invite)
 
         self.retranslateUi(Groups_Tab)
         QtCore.QMetaObject.connectSlotsByName(Groups_Tab)
@@ -122,9 +133,17 @@ class Ui_Groups_Tab(object):
         self.group_add_description.setPlaceholderText(_translate("Groups_Tab", "Enter a description for your new group. "))
         self.group_add_name.setPlaceholderText(_translate("Groups_Tab", "Enter your group\'s name..."))
         self.group_description.setPlaceholderText(_translate("Groups_Tab", "Description of selected group."))
-        self.accept_invit_button.setText(_translate("Groups_Tab", "Accept Invite"))
+        self.accept_invite_button.setText(_translate("Groups_Tab", "Accept Invite"))
         self.delete_invite_button.setText(_translate("Groups_Tab", "Delete Invite"))
 
+    def create_group(self):
+        self.create_group_signal.emit()
+
+    def accept_invite(self):
+        self.accept_invite_signal.emit()
+
+    def delete_invite(self):
+        self.delete_invite_signal.emit()
 
 if __name__ == "__main__":
     import sys

@@ -14,11 +14,11 @@ from GUI.PyQt5.Login_Menu import Ui_Login_Window
 from GUI.Uis.Ui_Calendar_Tab.Calendar_Tab import Ui_Calendar_Tab
 from GUI.Uis.Ui_Documents_Tab.Documents_Tab import Ui_Documents_Tab
 from GUI.Uis.Ui_Forums_Tab.Forums_Tab import Ui_Forums_Tab
-from GUI.Uis.Ui_Groups_Tab.Groups_tab import Ui_Groups_Tab
-from GUI.Uis.Ui_Tasks_Tab.Tasks import Ui_Tasks_Tab
+from GUI.Uis.Ui_Groups_Tab.Groups_Tab import Ui_Groups_Tab
+from GUI.Uis.Ui_Tasks_Tab.Tasks_Tab import Ui_Tasks_Tab
 
 MAX_W = 700
-MAX_H = 700
+MAX_H = 520
 
 DB = PinguinDB()
 
@@ -79,17 +79,47 @@ class Main_TabWidget(QTabWidget):
 # Each tab needed to be deisgned to hold the appropiate widgets
 class Groups_Tab(QWidget):
 
+	create_group_signal = pyqtSignal()
+	accept_invite_signal = pyqtSignal()
+	delete_invite_signal = pyqtSignal()
+
 	def __init__(self):
 		super(QWidget, self).__init__()
-		self.ui = Ui_Groups_Tab()
+
+		self.create_group_signal.connect(self.create_group)
+		self.accept_invite_signal.connect(self.accept_invite)
+		self.delete_invite_signal.connect(self.delete_invite)
+
+		self.ui = Ui_Groups_Tab(self.create_group_signal,self.accept_invite_signal,self.delete_invite_signal)
 		self.ui.setupUi(self)
+
+	@pyqtSlot()
+	def create_group(self):
+		print("create")
+
+	@pyqtSlot()
+	def accept_invite(self):
+		print("accept")
+
+	@pyqtSlot()
+	def delete_invite(self):
+		print("delete")
 
 class Forums_Tab(QWidget):
 
+	send_message_singal = pyqtSignal()
+
 	def __init__(self):
 		super(QWidget, self).__init__()
-		self.ui = Ui_Forums_Tab()
+
+		self.send_message_singal.connect(self.send_message)
+
+		self.ui = Ui_Forums_Tab(self.send_message_singal)
 		self.ui.setupUi(self)
+
+	@pyqtSlot()
+	def send_message(self):
+		print("send message")
 
 class Calendar_Tab(QWidget):
 
@@ -213,10 +243,31 @@ class Tasks_Tab(QWidget):
 
 class Documents_Tab(QWidget):
 
+	create_doc_signal = pyqtSignal()
+	delete_doc_signal = pyqtSignal()
+	share_doc_signal = pyqtSignal()
+
 	def __init__(self):
 		super(QWidget, self).__init__()
-		self.ui = Ui_Documents_Tab()
+
+		self.create_doc_signal.connect(self.create_doc)
+		self.delete_doc_signal.connect(self.delete_doc)
+		self.share_doc_signal.connect(self.share_doc)
+
+		self.ui = Ui_Documents_Tab(self.create_doc_signal, self.delete_doc_signal, self.share_doc_signal)
 		self.ui.setupUi(self)
+
+	@pyqtSlot()
+	def create_doc(self):
+		print("create doc")
+
+	@pyqtSlot()
+	def delete_doc(self):
+		print("delete doc")
+
+	@pyqtSlot()
+	def share_doc(self):
+		print("share doc")
 
 class StandardItem(QStandardItem):
 	def __init__(self, txt='', font_size=12, set_bold=False, color=QColor(0, 0, 0)):
