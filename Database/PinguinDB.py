@@ -1,7 +1,7 @@
 import pymongo, datetime, time, hashlib
 
 from bson.objectid import ObjectId
-from utils.class_user import User
+from Database.utils.class_user import User
 from random import seed, randint
 
 

@@ -9,8 +9,8 @@ from PyQt5.QtCore import pyqtSlot, QSize, Qt, QRect, QMetaObject, pyqtSignal
 from PyQt5.Qt import QStandardItemModel, QStandardItem, QSizePolicy
 
 from Database.PinguinDB import PinguinDB
-from GUI.PyQt5.Login_Menu import Ui_Login_Window
 
+from GUI.Uis.Login_Menu import Ui_Login_Window
 from GUI.Uis.Ui_Calendar_Tab.Calendar_Tab import Ui_Calendar_Tab
 from GUI.Uis.Ui_Documents_Tab.Documents_Tab import Ui_Documents_Tab
 from GUI.Uis.Ui_Forums_Tab.Forums_Tab import Ui_Forums_Tab
@@ -33,7 +33,7 @@ DB = PinguinDB()
 class Login_Window(QMainWindow):
 	def __init__(self, login_signal):
 		super(QMainWindow, self).__init__()
-		self.ui = Ui_Login_Window(login_signal)
+		self.ui = Ui_Login_Window(DB,login_signal)
 		self.ui.set_up_ui(self)
 
 

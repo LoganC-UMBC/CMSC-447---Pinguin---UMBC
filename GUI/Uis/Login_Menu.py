@@ -53,10 +53,10 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
     stylePopupOk = ("background-color: rgb(0, 255, 123); border-radius: 5px;")
 
    
-    def __init__(self,login_signal):
+    def __init__(self,DB,login_signal):
         super(QtWidgets.QMainWindow, self).__init__()
         self.login_signal = login_signal
-        self.db = PinguinDB()
+        self.DB = DB
 
     def login_success(self):
         #print(self.login_signal)
@@ -175,7 +175,7 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
             
         else:
             text = " Check User/Password. "
-            if(self.db.login(self.lineEdit_user.text(), self.lineEdit_password.text())):
+            if(self.DB.login(self.lineEdit_user.text(), self.lineEdit_password.text())):
                 self.login_success()
                 
             if self.checkBox_save_user.isChecked():
