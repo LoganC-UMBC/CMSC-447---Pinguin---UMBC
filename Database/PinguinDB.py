@@ -55,6 +55,14 @@ class PinguinDB:
             print('login unsucessful')
             return 0
 
+    def current_user(self):
+        userList = []
+        userList.append(self.user._id)
+        userList.append(self.user.user_id)
+        userList.append(self.user.name)
+
+        return userList
+        
     #def change_group(self, group_name):
         #if(self.users.find_one({"groups":group_name})):
             #self.user
