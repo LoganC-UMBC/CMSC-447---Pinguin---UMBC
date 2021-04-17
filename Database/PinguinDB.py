@@ -1,27 +1,11 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr  6 14:44:20 2021
-
-@author: Sam
-"""
-
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Apr  1 23:46:40 2021
-
-@author: Sam
-"""
-
-import pymongo, datetime, time
+import pymongo, datetime, time, hashlib
 
 from bson.objectid import ObjectId
-from Database.class_user import User
+from utils.class_user import User
 from random import seed, randint
-from coolname import generate_slug
 
 
-import names
+
 
 
 class PinguinDB:
@@ -31,15 +15,16 @@ class PinguinDB:
         self.user = User()
         self.client = pymongo.MongoClient("mongodb+srv://PinguinAdmin:D47b5PIrtJxIhnuV@pinguin-cluster.vvukk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
         #self.client = pymongo.MongoClient("mongodb+srv://guest:kYmIc3X8vSHcNTfy@pinguin-cluster.vvukk.mongodb.net/Pinguin?retryWrites=true&w=majority")
-        self.db = self.client.Pinguin
-        self.groups = self.client.Groups
-        self.users = self.client.Users
+        
+        self.groups = self.client.Groups.Pinguin
+        self.users = self.client.Users.Pinguin
         self.invites = self.client.Invites
         self.forums = self.client.Forums
         self.calendars = self.client.Calendar
         self.documents = self.client.Documents
         self.tasks = self.client.Tasks
         
+        self.db = self.client.Pinguin
         self.usersOld = self.db.Users
         self.groupsOld = self.db.Groups
        
@@ -47,32 +32,41 @@ class PinguinDB:
     
     
     # changes default user credentials
-    def change_user(self, user_id, name, pword, _id):
+    def change_user(self, user_id, name, pword, _id, groups):
         self.user.user_id = user_id
         self.user.name = name
         self.user.pword = pword
         self.user._id = _id
+        self.user.groups = groups
         return 1
     
     # will check 
     def login(self, user_id, pword):
-        if(self.usersOld.count_documents({'user_id': user_id} and {'pass':pword})):
+        m = hashlib.sha256(pword.encode())
+        if(self.users.count_documents({'user_id': user_id} and {'pass':m.hexdigest()})):
+            user_doc =  self.users.find_one({'user_id':user_id} and {'pass':m.hexdigest()})
+            self.change_user(user_doc['user_id'], user_doc['name'], user_doc['pass'], user_doc['_id'], user_doc['groups'])
             print("login successful")
-            user_doc =  self.usersOld.find_one({'user_id':user_id} and {'pass':pword})
-            self.change_user(user_doc['user_id'], user_doc['name'], user_doc['pass'], user_doc['_id'])
+            
+            if(len(self.user.groups) >= 1):
+                self.user.defaultGroup = self.user.groups[0]
             return 1
         else:
             print('login unsucessful')
             return 0
 
-
+    #def change_group(self, group_name):
+        #if(self.users.find_one({"groups":group_name})):
+            #self.user
 
     def create_account(self, user_id, pword, name):
-        if(self.usersOld.find_one('user')):
+        if(self.users.find_one({"user_id":user_id})):
+            print('User already exists')
             return 0
         else:
             self.user.user_id = user_id
-            self.user.pword = pword
+            m = hashlib.sha256(pword.encode())
+            self.user.pword = m.hexdigest()
             self.user.name = name
             
             user_account = {"user_id": self.user.user_id,
@@ -81,23 +75,27 @@ class PinguinDB:
                             "role":"user",
                             "groups":[]}
             
-            self.usersOld.insert_one(user_account)
+            self.users.insert_one(user_account)
             
-            self.user._id = self.usersOld.find_one({"user_id":self.user.user_id}).get("_id")
+            self.user._id = self.users.find_one({"user_id":self.user.user_id}).get("_id")
             
             return 1
         
-    def create_group(self, name, description, invites):
+    def create_group(self, name, description):
+        if(self.groups.find_one({"name":name})):
+            print('Group of that name already exists')
+            return 0
+        else:
+            #invites_split = invites.split(",")
+            #"invites": invites_split,
+            group_post = {"name": name,
+                          "owner":self.user.name,
+                          "description":description,  
+                          "members":[self.user.user_id]}
         
-        invites_split = invites.split(",")
-        
-        group_post = {"name": name,
-                      "owner":self.user.name,
-                      "description":description,
-                      "invites": invites_split,
-                      "members":[self.user.user_id]}
-        
-        self.db.Groups.insert_one(group_post)
+            self.groups.insert_one(group_post)
+
+            self.forums[name]
 
 
     def testConnections(self):
@@ -106,22 +104,11 @@ class PinguinDB:
 
 
     def get_groups(self):
-        if (self.user.name != 'guest'):
-            return 0
-
-
-        else:
-            docs = self.users.find_one({'_id':self.user.user_id})
-            if(docs != None):    
-                group_count = 0
-            #print(docs)
-            # for groups in docs[0]['groups']:
-            #     group_count += 1
-            #     print(groups)
-                
-            # for key in cursor:
-            #     for data in key :
-            #         print(key[data])
+        groupList = []
+        for x in self.groups.find():
+            groupList.append(x)
+            print(x)
+        return groupList
 
     # Refresh handlers
 
@@ -182,9 +169,38 @@ class PinguinDB:
                 'date':datetime.datetime.utcnow()
                 }
         
-        self.db.Forums.insert_one(post)
+        self.forums[group].insert_one(post)
         return 1
     
+    def retrieve_all_posts(self, group):
+        for x in self.forums[group].find():
+            print(x)
+
+    def calendar_add(self, group, description, date):
+        
+        calendarPost = {'author':self.user.name,
+                        'group':group,
+                        'day':date.day,
+                        'month':date.month,
+                        'year':date.year,
+                        'description':description
+                        }
+        self.calendars[group].insert_one(calendarPost)
+
+    def retrieve_calendar_posts(self, group, date, time):  
+
+        if time == "month":
+            for x in self.calendars[group].find({'month':date.month}):
+                print("flag1")
+                print(x)
+        elif time == "year":
+            for x in self.calendars[group].find({'year':date.year}):
+                print(x)
+        elif time == "day":
+            for x in self.calendars[group].find({'day':date.day}):
+                print(x)
+        #not done, needs to diferentiate between month and year
+
     def receive_posts(self):
         return 
     
@@ -233,24 +249,7 @@ class PinguinDB:
             invites = self.create_emails(6)
             self.create_group(group_name, "Test Description", invites)
 
-"""
-x = PinguinDB()
 
-x.login("s99@umbc.edu","princess")
-x.create_emails(2)
-x.create_many_groups(3)
-"""
 
-#x.create_many_accounts(1,1)
 
-#x.get_groups()
-#x.create_account("s99@umbc.edu","princess","sam")
-# x.change_login('penny', 'PinguinTizeMeCapn')
-# x.group_create('Pinguin Party',['polly', 'poppy','piety','perry','phoebe'] )
-# print(x.db.Groups.count_documents({}))
-# x.change_login('sam', 'princess')
-# print(x.user.name)
-# print(x.send_invites(['penny', 'polly', 'poppy','piety','perry','phoebe']))
-# x.testConnections()
 
-#x.send_post('Pinguin Party',"This group is for planning and having a party!")
