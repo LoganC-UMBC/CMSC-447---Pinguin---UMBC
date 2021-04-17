@@ -10,11 +10,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSignal, pyqtSlot
+from Database.PinguinDB import PinguinDB
 
 
 class Ui_Groups_Tab(object):
-    def __init__(self,create_group_signal, accept_invite_signal, delete_invite_signal):
-        #super(QtWidgets.QMainWindow, self).__init__()
+    def __init__(self,DB,create_group_signal, accept_invite_signal, delete_invite_signal):
+        self.DB = DB
         self.create_group_signal = create_group_signal
         self.accept_invite_signal = accept_invite_signal
         self.delete_invite_signal = delete_invite_signal

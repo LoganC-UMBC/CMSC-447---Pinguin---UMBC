@@ -18,7 +18,7 @@ from GUI.Uis.Ui_Groups_Tab.Groups_Tab import Ui_Groups_Tab
 from GUI.Uis.Ui_Tasks_Tab.Tasks_Tab import Ui_Tasks_Tab
 
 MAX_W = 700
-MAX_H = 520
+MAX_H = 515
 
 DB = PinguinDB()
 
@@ -90,7 +90,7 @@ class Groups_Tab(QWidget):
 		self.accept_invite_signal.connect(self.accept_invite)
 		self.delete_invite_signal.connect(self.delete_invite)
 
-		self.ui = Ui_Groups_Tab(self.create_group_signal,self.accept_invite_signal,self.delete_invite_signal)
+		self.ui = Ui_Groups_Tab(DB,self.create_group_signal,self.accept_invite_signal,self.delete_invite_signal)
 		self.ui.setupUi(self)
 
 	@pyqtSlot()
@@ -114,7 +114,7 @@ class Forums_Tab(QWidget):
 
 		self.send_message_singal.connect(self.send_message)
 
-		self.ui = Ui_Forums_Tab(self.send_message_singal)
+		self.ui = Ui_Forums_Tab(DB,self.send_message_singal)
 		self.ui.setupUi(self)
 
 	@pyqtSlot()
@@ -125,14 +125,14 @@ class Calendar_Tab(QWidget):
 
 	def __init__(self):
 		super(QWidget, self).__init__()
-		self.ui = Ui_Calendar_Tab()
+		self.ui = Ui_Calendar_Tab(DB)
 		self.ui.setupUi(self)
 
 class Tasks_Tab(QWidget):
 
 	def __init__(self):
 		super(QWidget, self).__init__()
-		self.ui = Ui_Tasks_Tab()
+		self.ui = Ui_Tasks_Tab(DB)
 		self.ui.setupUi(self)
 
 	@pyqtSlot()
@@ -254,12 +254,12 @@ class Documents_Tab(QWidget):
 		self.delete_doc_signal.connect(self.delete_doc)
 		self.share_doc_signal.connect(self.share_doc)
 
-		self.ui = Ui_Documents_Tab(self.create_doc_signal, self.delete_doc_signal, self.share_doc_signal)
+		self.ui = Ui_Documents_Tab(DB,self.create_doc_signal, self.delete_doc_signal, self.share_doc_signal)
 		self.ui.setupUi(self)
 
 	@pyqtSlot()
 	def create_doc(self):
-		print("create doc")
+		print("create")
 
 	@pyqtSlot()
 	def delete_doc(self):

@@ -9,9 +9,13 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtCore import pyqtSignal, pyqtSlot
+from Database.PinguinDB import PinguinDB
 
 class Ui_Tasks_Tab(object):
+    def __init__(self,DB):
+        self.DB = DB
+
     def setupUi(self, Tasks_Tab):
         Tasks_Tab.setObjectName("Tasks_Tab")
         Tasks_Tab.resize(700, 506)

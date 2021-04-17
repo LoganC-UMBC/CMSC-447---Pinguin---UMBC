@@ -10,9 +10,11 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSignal, pyqtSlot
+from Database.PinguinDB import PinguinDB
 
 class Ui_Documents_Tab(object):
-    def __init__(self,create_doc_signal,delete_doc_signal,share_doc_signal):
+    def __init__(self,DB,create_doc_signal,delete_doc_signal,share_doc_signal):
+        self.DB = DB
         self.create_doc_signal = create_doc_signal
         self.delete_doc_signal = delete_doc_signal
         self.share_doc_signal = share_doc_signal

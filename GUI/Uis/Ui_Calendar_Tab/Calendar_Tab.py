@@ -9,9 +9,13 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtCore import pyqtSignal, pyqtSlot
+from Database.PinguinDB import PinguinDB
 
 class Ui_Calendar_Tab(object):
+    def __init__(self,DB):
+        self.DB = DB
+
     def setupUi(self, Calendar_Tab):
         Calendar_Tab.setObjectName("Calendar_Tab")
         Calendar_Tab.resize(700, 506)

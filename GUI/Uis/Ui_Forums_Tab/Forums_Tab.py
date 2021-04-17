@@ -10,9 +10,11 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSignal, pyqtSlot
+from Database.PinguinDB import PinguinDB
 
 class Ui_Forums_Tab(object):
-    def __init__(self,send_message_signal):
+    def __init__(self,DB,send_message_signal):
+        self.DB = DB
         self.send_message_signal = send_message_signal
 
     def setupUi(self, Forums_Tab):
