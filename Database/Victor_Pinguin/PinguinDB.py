@@ -104,22 +104,11 @@ class PinguinDB:
 
 
     def get_groups(self):
-        if (self.user.name != 'guest'):
-            return 0
-
-
-        else:
-            docs = self.users.find_one({'_id':self.user.user_id})
-            if(docs != None):    
-                group_count = 0
-            #print(docs)
-            # for groups in docs[0]['groups']:
-            #     group_count += 1
-            #     print(groups)
-                
-            # for key in cursor:
-            #     for data in key :
-            #         print(key[data])
+        groupList = []
+        for x in self.groups.find():
+            groupList.append(x)
+            print(x)
+        return groupList
 
     # Refresh handlers
 
