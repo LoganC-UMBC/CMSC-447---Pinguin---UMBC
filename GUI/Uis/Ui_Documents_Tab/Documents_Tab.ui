@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Tasks_Tab</class>
+ <class>Documents_Tab</class>
  <widget class="QWidget" name="Documents_Tab">
   <property name="geometry">
    <rect>
@@ -179,7 +179,7 @@ background-color: rgb(50, 50, 50);
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_4">
+        <widget class="QPushButton" name="share_button">
          <property name="minimumSize">
           <size>
            <width>75</width>
@@ -314,7 +314,7 @@ color: rgb(200, 200, 200);
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">QLabel{color: orange;}</string>
+          <string notr="true">QLabel{color: white;}</string>
          </property>
          <property name="text">
           <string>Viewing Documents for Group:</string>

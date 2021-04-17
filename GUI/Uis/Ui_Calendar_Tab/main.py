@@ -8,9 +8,9 @@ from PySide2.QtCore import QFile
 from PySide2.QtUiTools import QUiLoader
 
 
-class Calendar_Tab(QWidget):
+class Calender(QWidget):
     def __init__(self):
-        super(Calendar_Tab, self).__init__()
+        super(Calender, self).__init__()
         self.load_ui()
 
     def load_ui(self):
@@ -23,6 +23,6 @@ class Calendar_Tab(QWidget):
 
 if __name__ == "__main__":
     app = QApplication([])
-    widget = Calendar_Tab()
+    widget = Calender()
     widget.show()
     sys.exit(app.exec_())

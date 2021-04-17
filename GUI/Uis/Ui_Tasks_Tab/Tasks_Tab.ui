@@ -36,14 +36,14 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="board_name_edit">
       <property name="placeholderText">
        <string>Name of board</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="board_add_button">
       <property name="styleSheet">
        <string notr="true">QPushButton {
  border-radius: 5px;
@@ -66,7 +66,7 @@ color: rgb(200, 200, 200);
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="board_delete_button">
       <property name="text">
        <string>Delete Board</string>
       </property>
@@ -74,7 +74,7 @@ color: rgb(200, 200, 200);
     </item>
    </layout>
   </widget>
-  <widget class="QTreeView" name="treeView">
+  <widget class="QTreeView" name="trello_tree">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -85,8 +85,6 @@ color: rgb(200, 200, 200);
    </property>
    <property name="styleSheet">
     <string notr="true">QTreeView#treeView{border:0;
-background-color:rgb(35, 35, 35);
-color:rgb(255,255,255);
 }</string>
    </property>
   </widget>
@@ -101,21 +99,21 @@ color:rgb(255,255,255);
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
-     <widget class="QLineEdit" name="lineEdit_2">
+     <widget class="QLineEdit" name="list_name_edit">
       <property name="placeholderText">
        <string>Name of list</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="add_list_button">
       <property name="text">
        <string>Add List</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="list_delete_button">
       <property name="text">
        <string>Delete List</string>
       </property>
@@ -134,35 +132,35 @@ color:rgb(255,255,255);
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
-     <widget class="QLineEdit" name="lineEdit_6">
+     <widget class="QLineEdit" name="board_from_edit">
       <property name="placeholderText">
        <string>Board(From)</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit_3">
+     <widget class="QLineEdit" name="list_from_edit">
       <property name="placeholderText">
        <string>List(From)</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit_4">
+     <widget class="QLineEdit" name="card_move_name_edit">
       <property name="placeholderText">
        <string>Card</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit_5">
+     <widget class="QLineEdit" name="card_to_edit">
       <property name="placeholderText">
        <string>List(To)</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="move_card_button">
       <property name="text">
        <string>Move Card</string>
       </property>
@@ -170,33 +168,33 @@ color:rgb(255,255,255);
     </item>
    </layout>
   </widget>
-  <widget class="QPushButton" name="pushButton_6">
+  <widget class="QPushButton" name="edit_description_button">
    <property name="geometry">
     <rect>
      <x>160</x>
      <y>390</y>
-     <width>75</width>
+     <width>81</width>
      <height>24</height>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>Edit Description</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_7">
+  <widget class="QPushButton" name="delete_card_button">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>284</x>
      <y>390</y>
-     <width>75</width>
+     <width>81</width>
      <height>24</height>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>Delete Card</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_7">
+  <widget class="QLineEdit" name="card_add_board_edit">
    <property name="geometry">
     <rect>
      <x>440</x>
@@ -209,7 +207,7 @@ color:rgb(255,255,255);
     <string>Board</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_8">
+  <widget class="QLineEdit" name="card_add_list_edit">
    <property name="geometry">
     <rect>
      <x>560</x>
@@ -222,7 +220,7 @@ color:rgb(255,255,255);
     <string>List</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="plainTextEdit_2">
+  <widget class="QPlainTextEdit" name="card_add_description">
    <property name="geometry">
     <rect>
      <x>440</x>
@@ -235,7 +233,7 @@ color:rgb(255,255,255);
     <string>Description of card.</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_8">
+  <widget class="QPushButton" name="create_card_button">
    <property name="geometry">
     <rect>
      <x>520</x>
@@ -245,7 +243,7 @@ color:rgb(255,255,255);
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>Create Card</string>
    </property>
   </widget>
   <widget class="QPlainTextEdit" name="plainTextEdit_3">
@@ -264,8 +262,8 @@ color:rgb(255,255,255);
   <widget class="Line" name="line">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>190</y>
+     <x>140</x>
+     <y>180</y>
      <width>531</width>
      <height>20</height>
     </rect>
@@ -274,7 +272,7 @@ color:rgb(255,255,255);
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_9">
+  <widget class="QLineEdit" name="card_add_name_edit">
    <property name="geometry">
     <rect>
      <x>500</x>
