@@ -18,7 +18,7 @@ from GUI.Uis.Ui_Groups_Tab.Groups_tab import Ui_Groups_Tab
 from GUI.Uis.Ui_Tasks_Tab.Tasks import Ui_Tasks_Tab
 
 MAX_W = 700
-MAX_H = 506
+MAX_H = 700
 
 DB = PinguinDB()
 
