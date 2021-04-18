@@ -114,8 +114,9 @@ class PinguinDB:
     def get_groups(self):
         groupList = []
         for x in self.groups.find():
-            groupList.append(x)
-            print(x)
+            if x.get("name") in self.user.groups:
+                groupList.append(x)
+                print(x)
         return groupList
 
     # Refresh handlers
