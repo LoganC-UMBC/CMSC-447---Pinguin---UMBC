@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Tasks_Tab</class>
+ <widget class="QWidget" name="Tasks_Tab">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>700</width>
+    <height>506</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>700</width>
+    <height>506</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>700</width>
+    <height>506</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Tasks_Tab</string>
+  </property>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>50</y>
+     <width>271</width>
+     <height>42</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QLineEdit" name="board_name_edit">
+      <property name="placeholderText">
+       <string>Name of board</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="board_add_button">
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+ border-radius: 5px;
+background-position: center;
+background-color: rgb(60, 60, 60);
+color:rgb(200,200,200);
+}
+QPushButton:hover {
+background-color: rgb(50, 50, 50);
+ color: rgb(200, 200, 200);
+}
+QPushButton:pressed {
+background-color: rgb(35, 35, 35);
+color: rgb(200, 200, 200);
+}</string>
+      </property>
+      <property name="text">
+       <string>Add Board</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="board_delete_button">
+      <property name="text">
+       <string>Delete Board</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QTreeView" name="trello_tree">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>50</y>
+     <width>131</width>
+     <height>421</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QTreeView#treeView{border:0;
+}</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="widget_2" native="true">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>50</y>
+     <width>271</width>
+     <height>42</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QLineEdit" name="list_name_edit">
+      <property name="placeholderText">
+       <string>Name of list</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="add_list_button">
+      <property name="text">
+       <string>Add List</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="list_delete_button">
+      <property name="text">
+       <string>Delete List</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="widget_3" native="true">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>120</y>
+     <width>551</width>
+     <height>42</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <item>
+     <widget class="QLineEdit" name="board_from_edit">
+      <property name="placeholderText">
+       <string>Board(From)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="list_from_edit">
+      <property name="placeholderText">
+       <string>List(From)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="card_move_name_edit">
+      <property name="placeholderText">
+       <string>Card</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="card_to_edit">
+      <property name="placeholderText">
+       <string>List(To)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="move_card_button">
+      <property name="text">
+       <string>Move Card</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="edit_description_button">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>390</y>
+     <width>81</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Edit Description</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="delete_card_button">
+   <property name="geometry">
+    <rect>
+     <x>284</x>
+     <y>390</y>
+     <width>81</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Delete Card</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="card_add_board_edit">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>240</y>
+     <width>113</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Board</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="card_add_list_edit">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>240</y>
+     <width>113</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>List</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="card_add_description">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>280</y>
+     <width>231</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Description of card.</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="create_card_button">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>390</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Create Card</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="plainTextEdit_3">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>240</y>
+     <width>231</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Description of selected card.</string>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>180</y>
+     <width>531</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="card_add_name_edit">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>210</y>
+     <width>113</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Name of card</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

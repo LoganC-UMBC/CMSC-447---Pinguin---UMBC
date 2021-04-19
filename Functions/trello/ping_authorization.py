@@ -17,7 +17,7 @@ def ping_oauth_link(expiration=None, scope=None, key=None, secret=None, name=Non
     authorize_url = 'https://trello.com/1/OAuthAuthorizeToken'
     access_token_url = 'https://trello.com/1/OAuthGetAccessToken'
 
-    expiration = expiration or os.environ.get('TRELLO_EXPIRATION', "30days")
+    expiration = expiration or os.environ.get('TRELLO_EXPIRATION', "never")
     scope = scope or os.environ.get('TRELLO_SCOPE', 'read,write')
     trello_key = key or os.environ['TRELLO_API_KEY']
     trello_secret = secret or os.environ['TRELLO_API_SECRET']
@@ -50,20 +50,27 @@ def ping_oauth_link(expiration=None, scope=None, key=None, secret=None, name=Non
         name=name
     ))
 
-def ping_oauth_pin(provided_pin):
-    # After the user has granted access to you, the consumer, the provider will
-    # redirect you to whatever URL you have told them to redirect to. You can
-    # usually define this in the oauth_callback argument as well.
+    #print(authorize_url + "?oauth_token=" + resource_owner_key + "&scope=" + scope + "&expiration=" + expiration + "&name=" + name)
+    return authorize_url + "?oauth_token=" + resource_owner_key + "&scope=" + scope + "&expiration=" + expiration + "&name=" + name
 
-    # Python 3 compatibility (raw_input was renamed to input)
-    try:
-        inputFunc = raw_input
-    except NameError:
-        inputFunc = input
+def ping_oauth_pin(provided_pin, expiration=None, scope=None, key=None, secret=None, name=None, output=True):
 
-    oauth_verifier = inputFunc('What is the PIN? ')
-    # just set the pin to whatever we get from the GUI
-    #oauth_verifier = provided_pin
+    request_token_url = 'https://trello.com/1/OAuthGetRequestToken'
+    authorize_url = 'https://trello.com/1/OAuthAuthorizeToken'
+    access_token_url = 'https://trello.com/1/OAuthGetAccessToken'
+
+    expiration = expiration or os.environ.get('TRELLO_EXPIRATION', "never")
+    scope = scope or os.environ.get('TRELLO_SCOPE', 'read,write')
+    trello_key = key or os.environ['TRELLO_API_KEY']
+    trello_secret = secret or os.environ['TRELLO_API_SECRET']
+    name = name or os.environ.get('TRELLO_NAME', 'py-trello')
+
+    session = OAuth1Session(client_key=trello_key, client_secret=trello_secret)
+    response = session.fetch_request_token(request_token_url)
+    resource_owner_key, resource_owner_secret = response.get('oauth_token'), response.get('oauth_token_secret')
+    
+    # just set the pin to whatever pin is provided to us
+    oauth_verifier = provided_pin
 
     # Step 3: Once the consumer has redirected the user back to the oauth_callback
     # URL you can request the access token the user has approved. You use the
