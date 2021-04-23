@@ -3,7 +3,6 @@ from __future__ import with_statement, print_function, absolute_import
 import os
 from requests_oauthlib import OAuth1Session
 
-
 def ping_oauth_link(expiration=None, scope=None, key=None, secret=None, name=None, output=True):
     """
     Script to obtain an OAuth token from Trello.
