@@ -3,7 +3,7 @@
 # PDF documentation: https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwji5eCS7OXvAhX-M1kFHeVGADMQFjAAegQIBxAD&url=https%3A%2F%2Freadthedocs.org%2Fprojects%2Fpy-trello-dev%2Fdownloads%2Fpdf%2Flatest%2F&usg=AOvVaw1-vlt-k1FXhBt1uslG60E7
 from trello import TrelloClient
 from trello.util import create_oauth_token
-from Functions.trello_api.ping_authorization import *
+from Application.Functions.trello_api.ping_authorization import *
 import os
 import os.path
 from os import path

@@ -9,11 +9,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt
 from Database.PinguinDB import PinguinDB
-from GUI.trello_pin_window import *
+from Application.GUI.trello_pin_window import *
 
 from trello import TrelloClient
 from trello.util import create_oauth_token
-from Functions.trello_api.ping_authorization import *
+from Application.Functions.trello_api.ping_authorization import *
 import os
 import os.path
 from os import path
@@ -315,7 +315,7 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
         login_window.setFont(login_font)
 
         login_window.setWindowTitle("Pinguin")
-        login_window.setWindowIcon(QtGui.QIcon("447logoicon.ico"))
+        login_window.setWindowIcon(QtGui.QIcon("Application/GUI/Images/447logoicon.ico"))
         login_window.setStyleSheet("color: rgb(200, 200, 200);\n"
                                    "background-color: rgb(100,100,100);")
 

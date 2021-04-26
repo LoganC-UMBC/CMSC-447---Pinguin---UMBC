@@ -8,10 +8,10 @@ from PyQt5.QtGui import QIcon, QDesktopServices, QColor, QFont
 from PyQt5.QtCore import pyqtSlot, QSize, Qt, QRect, QMetaObject, pyqtSignal
 from PyQt5.Qt import QStandardItemModel, QStandardItem, QSizePolicy
 
-from GUI.main_window import Main_Window
-from GUI.login_window import Ui_Login_Window
-from Database.PinguinDB import PinguinDB
-from Functions.trello_api.task_card import Trello
+from Application.GUI.main_window import Main_Window
+from Application.GUI.login_window import Ui_Login_Window
+from Application.Database.PinguinDB import PinguinDB
+from Application.Functions.trello_api.task_card import Trello
 
 
 MAX_W = 700

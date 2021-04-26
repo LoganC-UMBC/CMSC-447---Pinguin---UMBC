@@ -1,4 +1,4 @@
-from invite_menu.invites_menu import Ui_invites_menu
+from Application.GUI.Uis.Invite_Menu_Ui.invites_menu import Ui_invites_menu
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class invites_menu_ext(Ui_invites_menu):
