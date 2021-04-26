@@ -9,6 +9,15 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt
 from Database.PinguinDB import PinguinDB
+from GUI.trello_pin_window import *
+
+from trello import TrelloClient
+from trello.util import create_oauth_token
+from Functions.trello_api.ping_authorization import *
+import os
+import os.path
+from os import path
+import ast
 
 import sys
 
@@ -50,10 +59,11 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
     stylePopupError = ("background-color: rgb(255, 85, 127); border-radius: 5px;")
     stylePopupOk = ("background-color: rgb(0, 255, 123); border-radius: 5px;")
 
-    def __init__(self, login_signal,db):
+    def __init__(self, login_signal,db, trello):
         super(QtWidgets.QMainWindow, self).__init__()
         self.login_signal = login_signal
         self.db = db
+        self.trello = trello
 
     def login_success(self):
         # print(self.login_signal)
@@ -123,18 +133,92 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
 
     @pyqtSlot()
     def create_account_accept(self):
-        if (self.acct_pass_edit.text() != self.acct_confirm_pass_edit):
-            print("non-matching passwords")
+        email = self.acct_id_edit.text()
+        name = self.acct_name_edit.text()
+        password = self.acct_pass_edit.text()
+        confirm_password = self.acct_confirm_pass_edit.text()
+
+        if email == '':
+            error_text = "Missing an email"
+
+        elif name == '':
+            error_text = "Missing first name"
+
+        elif password == '':
+            error_text = "Missing a password"
+
+        elif confirm_password == '':
+            error_text = "Confirm your password"
+
+        elif email != '' and name+password+confirm_password == '':
+            error_text = "Missing name / password / confirm password"
+
+        elif name != '' and email+password+confirm_password == '':
+            error_text = "Missing email / password /confirm password"
+
+        elif password != '' and email+name+confirm_password == '':
+            error_text = "Missing email / name / confirm password"
+
+        elif confirm_password != '' and email+name+password == '':
+            error_text = "Missing email / name / password"
+
+        elif email != '' and name != '' and password+confirm_password == '':
+            error_text = "Missing password / confirm password"
+
+        elif email != '' and password != '' and name+confirm_password == '':
+            error_text = "Missing name / confirm password"
+
+        elif email != '' and confirm_password != '' and name+password == '':
+            error_text = "Missing name / password"
+
+        elif name != '' and password != '' and email+confirm_password == '':
+            error_text = "Missing email / confirm password"
+
+        elif name != '' and confirm_password != '' and email+password == '':
+            error_text = "Missing email / password"
+
+        elif password != '' and confirm_password != '' and email+name == '':
+            error_text = "Missing email / name"
+
+        elif email != '' and name != '' and password != '' and confirm_password == '':
+            error_text = "Missing confirm password"
+
+        elif email != '' and name != '' and confirm_password != '' and password == '':
+            error_text = "Missing password"
+
+        elif name != '' and password != '' and confirm_password != '' and email == '':
+            error_text = "Missing email"
+
+        elif email != '' and password != '' and confirm_password != '' and name == '':
+            error_text = "Missing name"
+
+        elif password != confirm_password:
+            error_text = "Non-matching passwords"
         else:
-            self.acct_window.close()
+            if self.db.create_account(email, password, name):
+                self.trello_pin_window(email)
+            else:
+                error_text = "Email already exists"
 
     @pyqtSlot()
     def create_account_cancel(self):
-
         self.acct_window.close()
 
-    def send_url(self):
-        QtCore.QUrl("")
+    def trello_pin_window(self, email):
+        self.acct_trello_widget = QtWidgets.QWidget()
+        self.acct_trello_window_ui = trello_pin_window_ext(self.trello, email, self.acct_window)
+
+        self.acct_trello_window_ui.setupUi(self.acct_trello_widget)
+        self.acct_window.setCentralWidget(self.acct_trello_widget)
+
+
+
+    def enter_trello_pin(self):
+        print("heheheheheheh")
+        print(self.acct_trello_window_ui.trello_pin_edit.text())
+
+    def send_url(self, url):
+        QtGui.QDesktopServices.openUrl(url)
 
     def checkFields(self):
         textUser = ""
@@ -177,6 +261,49 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
             else:
                 showMessage(text)
                 self.frame_error.setStyleSheet(self.stylePopupOk)
+
+    def action_setup(self, email):
+        # if the config file already exists, use the existing tokens
+        if path.exists("pinguin.config"):
+            file = open("pinguin.config", "r")
+            contents = file.read()
+            # convert the file contents to a dictionary
+            conf_dict = ast.literal_eval(contents)
+
+            client = TrelloClient(
+                api_key='2e0161c01eca7ad03bda843f811dac8b',
+                api_secret='d4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea',
+                # token = '3e1c54bc5ae2f18fe2e449c102c49b40400de0b39e2aca401dfc7a028c1ed33e',
+                # token_secret = '298b5e59c4c09cff9666ba32fd381c5f'
+                token=conf_dict["token"],
+                token_secret=conf_dict["token_secret"]
+            )
+            self.client = client
+        else:
+
+            # CHANGE THE INPUT TO THE GUI'S RECIEVED PIN
+            provided_pin = input("Enter your pin: ")
+            ping_token = ping_oauth_pin(provided_pin)
+
+            user_token = ping_token.get('oauth_token')
+            user_token_secret = ping_token.get('oauth_token_secret')
+
+            client = TrelloClient(
+                api_key='2e0161c01eca7ad03bda843f811dac8b',
+                api_secret='d4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea',
+                # token = '3e1c54bc5ae2f18fe2e449c102c49b40400de0b39e2aca401dfc7a028c1ed33e',
+                # token_secret = '298b5e59c4c09cff9666ba32fd381c5f'
+                token=user_token,
+                token_secret=user_token_secret
+            )
+
+            file = open("pinguin.config", "w")
+            conf_dict = {"id": email, "token": user_token, "token_secret": user_token_secret}
+
+            file.write(str(conf_dict))
+            file.close()
+
+            self.client = client
 
     def set_up_ui(self, login_window):
         login_window.setObjectName("login_window")

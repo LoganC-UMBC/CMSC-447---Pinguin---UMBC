@@ -30,7 +30,7 @@ def ping_oauth_link(expiration=None, scope=None, key=None, secret=None, name=Non
     response = session.fetch_request_token(request_token_url)
     resource_owner_key, resource_owner_secret = response.get('oauth_token'), response.get('oauth_token_secret')
 
-    if output:
+    """if output:
         print("Request Token:")
         print("    - oauth_token        = %s" % resource_owner_key)
         print("    - oauth_token_secret = %s" % resource_owner_secret)
@@ -47,7 +47,7 @@ def ping_oauth_link(expiration=None, scope=None, key=None, secret=None, name=Non
         expiration=expiration,
         scope=scope,
         name=name
-    ))
+    ))"""
 
     #print(authorize_url + "?oauth_token=" + resource_owner_key + "&scope=" + scope + "&expiration=" + expiration + "&name=" + name)
     return authorize_url + "?oauth_token=" + resource_owner_key + "&scope=" + scope + "&expiration=" + expiration + "&name=" + name
@@ -81,14 +81,14 @@ def ping_oauth_pin(provided_pin, expiration=None, scope=None, key=None, secret=N
                             verifier=oauth_verifier)
     access_token = session.fetch_access_token(access_token_url)
 
-    if output:
+    """if output:
         print("Access Token:")
         print("    - oauth_token        = %s" % access_token['oauth_token'])
         print("    - oauth_token_secret = %s" % access_token['oauth_token_secret'])
         print("")
         print("You may now access protected resources using the access tokens above.")
         print("")
-
+"""
     return access_token
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

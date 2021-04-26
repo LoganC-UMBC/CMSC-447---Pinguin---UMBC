@@ -701,11 +701,11 @@ class Ui_main_window(object):
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.documents_tab), _translate("main_window", "Documents"))
 
 
-if __name__ == "__main__":
+"""if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     main_window = QtWidgets.QMainWindow()
     ui = Ui_main_window()
     ui.setupUi(main_window)
     main_window.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec_())"""

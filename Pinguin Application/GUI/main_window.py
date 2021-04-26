@@ -30,7 +30,6 @@ class Main_Window(Ui_main_window):
 
         self.user_id = self.db.user.user_id
         self.trello = Trello()
-        self.trello.action_setup(self.user_id)
 
 
     def setupUi(self, main_window):
@@ -234,7 +233,7 @@ class Main_Window(Ui_main_window):
 
             # creating group with or without invites
             if group_invites[0] == '':
-                self.db.create_group(group_name,None)
+                self.db.create_group(group_name,group_description)
 
             else:
                 # need this function to have group invites
@@ -315,6 +314,7 @@ class Main_Window(Ui_main_window):
     # populate the group tree widget from db
     # will need a timer or refresh button
     def populate_groups_tree(self):
+        print(self.db.user.user_id)
         groups = self.db.get_groups()
         for group in groups:
             new_group = StandardItem(group['name'], "group", group['description'])

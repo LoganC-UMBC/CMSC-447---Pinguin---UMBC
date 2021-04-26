@@ -11,6 +11,7 @@ from PyQt5.Qt import QStandardItemModel, QStandardItem, QSizePolicy
 from GUI.main_window import Main_Window
 from GUI.login_window import Ui_Login_Window
 from Database.PinguinDB import PinguinDB
+from Functions.trello_api.task_card import Trello
 
 
 MAX_W = 700
@@ -27,16 +28,16 @@ DB = PinguinDB()
 # Send a pop up to the user if the login is wrong
 # When the login is successful the main menu should appear and the login window should hide
 class Login_Window(QMainWindow):
-	def __init__(self, login_signal, db):
+	def __init__(self, login_signal, db, trello):
 		super(QMainWindow, self).__init__()
-		self.ui = Ui_Login_Window(login_signal, db)
+		self.ui = Ui_Login_Window(login_signal, db, trello)
 		self.ui.set_up_ui(self)
 
 
 # This is the main menu window that appears after login is successful
 # The default constructor will setup and instance of a Main Window set with the appropiate tabs
 class Main_Menu(QMainWindow):
-	def __init__(self, db):
+	def __init__(self, db, trello):
 		super(QMainWindow, self).__init__()
 		self.ui = Main_Window(db)
 		self.ui.setupUi(self)
@@ -53,9 +54,10 @@ class Pinguin(QMainWindow):
 	def __init__(self):
 		super().__init__()
 		self.db = DB
+		self.trello = Trello()
 		self.login_signal.connect(self.login_success)
-		self.login_menu = Login_Window(self.login_signal, self.db)
-		self.main_window = Main_Menu(self.db)
+		self.login_menu = Login_Window(self.login_signal, self.db, self.trello)
+		self.main_window = Main_Menu(self.db, self.trello)
 
 	@pyqtSlot()
 	def login_success(self):

@@ -1,4 +1,17 @@
+# Using: https://pypi.org/project/py-trello/
+# https://github.com/sarumont/py-trello
+# PDF documentation: https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwji5eCS7OXvAhX-M1kFHeVGADMQFjAAegQIBxAD&url=https%3A%2F%2Freadthedocs.org%2Fprojects%2Fpy-trello-dev%2Fdownloads%2Fpdf%2Flatest%2F&usg=AOvVaw1-vlt-k1FXhBt1uslG60E7
+from trello import TrelloClient
+from trello.util import create_oauth_token
+from Functions.trello_api.ping_authorization import *
+import os
+import os.path
+from os import path
+import ast
 
+# store our applications API key/secret
+os.environ["TRELLO_API_KEY"] = '2e0161c01eca7ad03bda843f811dac8b'
+os.environ["TRELLO_API_SECRET"] = 'd4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea'
 
 class Trello():
     def __init__(self):
@@ -272,70 +285,3 @@ class Trello():
             file.close()
 
             self.client = client
-
-
-# Using: https://pypi.org/project/py-trello/
-# https://github.com/sarumont/py-trello
-# PDF documentation: https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwji5eCS7OXvAhX-M1kFHeVGADMQFjAAegQIBxAD&url=https%3A%2F%2Freadthedocs.org%2Fprojects%2Fpy-trello-dev%2Fdownloads%2Fpdf%2Flatest%2F&usg=AOvVaw1-vlt-k1FXhBt1uslG60E7
-from trello import TrelloClient
-from trello.util import create_oauth_token
-from Functions.trello_api.ping_authorization import *
-import os
-import os.path
-from os import path
-import ast
-
-# store our applications API key/secret
-os.environ["TRELLO_API_KEY"] = '2e0161c01eca7ad03bda843f811dac8b'
-os.environ["TRELLO_API_SECRET"] = 'd4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea'
-
-#email = "s99@umbc.edu"
-#client = action_setup(email)
-
-board_name = "Base Board"
-list_name = "To Do"
-card_name = "Added Card"
-# call delete function
-#ping_card_delete(client, board_name, list_name, card_name)
-
-board_name = "Base Board"
-list_name = "To Do"
-card_name = "Added Card"
-card_description = "Added Description"
-# call create function
-# ping_card_create(client, board_name, list_name, card_name, card_description)
-
-# call modify function
-# ping_card_modify(client, board_name, list_name, card_name)
-
-# find all boards
-# print(ping_boards(client))
-
-# find all lists for the specified board
-# print(ping_lists(client, board_name))
-
-# find all cards for the specified lsit
-# print(ping_cards(client, board_name, list_name))
-
-# full_dict = dict_generate(client)
-# print(full_dict)
-
-board_name = "Base Board"
-list_name = "To Do"
-card_name = "To Do Base Card"
-new_list_name = "Done"
-# move a card to a different list
-# ping_card_move(client, board_name, list_name, card_name, new_list_name)
-
-board_name = "Base Board"
-list_name = "Project Resources"
-card_name = "Resources Base Card"
-new_description = "THIS IS MY NEW DESCRIPTION."
-# ping_card_modify(client, board_name, list_name, card_name, new_description)
-
-board_name = "Base Board"
-list_name = "NEW LIST"
-# ping_list_create(client, board_name, list_name)
-
-board_name = "NEW BOARD"
-# ping_board_create(client, board_name)
