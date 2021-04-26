@@ -66,7 +66,6 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
         self.trello = trello
 
     def login_success(self):
-        # print(self.login_signal)
         self.login_signal.emit()
 
     def retranslateUi(self, login_window):
@@ -214,7 +213,6 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
 
 
     def enter_trello_pin(self):
-        print("heheheheheheh")
         print(self.acct_trello_window_ui.trello_pin_edit.text())
 
     def send_url(self, url):

@@ -39,7 +39,7 @@ class Login_Window(QMainWindow):
 class Main_Menu(QMainWindow):
 	def __init__(self, db, trello):
 		super(QMainWindow, self).__init__()
-		self.ui = Main_Window(db)
+		self.ui = Main_Window(db, trello)
 		self.ui.setupUi(self)
 
 
@@ -62,6 +62,8 @@ class Pinguin(QMainWindow):
 	@pyqtSlot()
 	def login_success(self):
 		self.login_menu.hide()
+		if self.trello.client == None:
+			self.trello.action_setup(self.db.user.user_id)
 		self.main_window.ui.populate_groups_tree()
 		self.main_window.show()
 

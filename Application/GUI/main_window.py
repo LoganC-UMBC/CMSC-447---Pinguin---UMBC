@@ -21,7 +21,7 @@ import datetime
 ########################################################################################################################
 class Main_Window(Ui_main_window):
 
-    def __init__(self, db):
+    def __init__(self, db, trello):
         super().__init__()
         self.db = db
         self.user = self.db.user
@@ -29,7 +29,7 @@ class Main_Window(Ui_main_window):
         self.current_group = None
 
         self.user_id = self.db.user.user_id
-        self.trello = Trello()
+        self.trello = trello
 
 
     def setupUi(self, main_window):
@@ -314,7 +314,6 @@ class Main_Window(Ui_main_window):
     # populate the group tree widget from db
     # will need a timer or refresh button
     def populate_groups_tree(self):
-        print(self.db.user.user_id)
         groups = self.db.get_groups()
         for group in groups:
             new_group = StandardItem(group['name'], "group", group['description'])
@@ -717,6 +716,7 @@ class Main_Window(Ui_main_window):
     # would be better to run as something else lol
     def set_trello_tree(self):
         boards = self.trello.ping_boards()
+
         for board in boards:
             new_board = StandardItem(board.name, "board")
 
