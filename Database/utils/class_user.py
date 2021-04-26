@@ -5,3 +5,5 @@ class User:
         self.name = 'guest'
         self.pword = 'Pinguin'
         self._id = ''
+        self.groups = []
+        self.currentGroup = ''
