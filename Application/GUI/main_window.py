@@ -197,6 +197,7 @@ class Main_Window(Ui_main_window):
         print("refreshing")
         self.populate_groups_tree(self.groups_model, self.groups_node)
         self.populate_groups_tree(self.forum_model, self.forum_node)
+        #self.get_group_documents()
 
     def widgets_group_change(self):
         pass
@@ -210,7 +211,9 @@ class Main_Window(Ui_main_window):
     def error_frame_hide(self, error_frame):
         error_frame.setVisible(False)
 
-
+    def set_current_group(self, group_id):
+        self.current_group = group_id
+        self.user.currentGroup = ObjectId(group_id)
 ########################################################################################################################
 #                                               Groups Tab                                                             #
 ########################################################################################################################
@@ -314,15 +317,18 @@ class Main_Window(Ui_main_window):
     # connected to groups_tree
     # get description of group from either the group item or member item and output to screen
     # i guess anything that is connected to a tree widget passes the index selected automatically
+    # set current group -added
     def view_group_description(self, index):
         self.group_description_view.clear()
         item = self.groups_model.itemFromIndex(index)
 
         if item.role == "group":
             self.group_description_view.insertPlainText(item.description)
+            self.set_current_group(item.group_id)
 
         elif item.role == "member" or item.role == "owner":
             self.group_description_view.insertPlainText(item.parent().description)
+            self.set_current_group(item.parent().group_id)
 
 
     # populate the group tree widget from db
@@ -373,8 +379,8 @@ class Main_Window(Ui_main_window):
             self.error_frame_show(self.forums_error_frame)
 
         else:
-            self.db.send_post(self.current_group)
-            self.populate_forum_view(self.current_group)
+            self.db.send_post(self.db.user.currentGroup)
+            self.populate_forum_view()
             # self.forum_view.insertPlainText((owner+"("+time+"): "+message)+"\n")
 
 
@@ -383,10 +389,9 @@ class Main_Window(Ui_main_window):
         index = self.forum_tree.currentIndex()
 
         if (self.forum_model.parent(index).data() == None):
+            self.set_current_group(self.forum_model.itemFromIndex(index).group_id)
             self.group_in_label.setText(index.data())
-            self.current_group =  self.forum_model.itemFromIndex(index).group_id
-            self.db.user.current_group = ObjectId(self.forum_model.itemFromIndex(index).group_id)
-            self.populate_forum_view(self.db.user.current_group)
+            self.populate_forum_view()
 
         elif index == None:
             self.group_in_label.setText("No Group selected")
@@ -395,13 +400,13 @@ class Main_Window(Ui_main_window):
     # probably should be from self.current_group
     # time format not included in the message
     # formatting between messages not included
-    def populate_forum_view(self, group):
+    def populate_forum_view(self):
         self.forum_view.clear()
-        print("here")
-        messages = self.db.retrieve_all_posts(group)
-        print("messages: "+messages)
+        print("populating_forum_view")
+        messages = self.db.retrieve_all_posts()
         for message in messages:
-            self.forum_view.insertPlainText(message['author']+ ":  " +message['message']+"\n")
+            user = self.db.user_lookup(message['author'])['user_name']
+            self.forum_view.insertPlainText(user + ":  " + message['message']+"\n")
 
 ########################################################################################################################
 #                                               Calendar Tab                                                           #
@@ -892,8 +897,11 @@ class Main_Window(Ui_main_window):
                 pass
 
     def get_group_documents(self):
-        documents = self.db.retrieve_docs()
-        print(documents)
+        if self.current_group != None:
+            documents = self.db.retrieve_docs()
+            print("hehehuioehoiuh")
+        else:
+            print("not in a group")
 
 # QListWidgetItem for groups list
 # may not be needed

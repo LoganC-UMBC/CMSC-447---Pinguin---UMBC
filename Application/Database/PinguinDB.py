@@ -214,13 +214,14 @@ class PinguinDB:
                 'message': message,
                 'date': datetime.datetime.utcnow()
                 }
-
-        self.forums[self.user.currentGroup].insert_one(post)
+        groupFind = self.groups.find_one({'_id': self.user.currentGroup}).get("group_name")
+        self.forums[groupFind].insert_one(post)
         return 1
 
-    def retrieve_all_posts(self, group):
+    def retrieve_all_posts(self):
         postList = []
-        for x in self.forums[self.user.currentGroup].find():
+        groupFind = self.groups.find_one({'_id': self.user.currentGroup}).get("group_name")
+        for x in self.forums[groupFind].find():
             print(x)
             postList.append(x)
         return postList
@@ -234,22 +235,25 @@ class PinguinDB:
                         'year': date.year,
                         'description': description
                         }
-        self.calendars[self.user.currentGroup].insert_one(calendarPost)
+
+        groupFind = self.groups.find_one({'_id': self.user.currentGroup}).get("group_name")
+        self.calendars[groupFind].insert_one(calendarPost)
 
         return 1
 
     def retrieve_calendar_posts(self, date, time):
         calendarList = []
+        groupFind = self.groups.find_one({'_id': self.user.currentGroup}).get("group_name")
         if time == "month":
-            for x in self.calendars[self.user.currentGroup].find({'month': date.month}):
+            for x in self.calendars[groupFind].find({'month': date.month}):
                 print(x)
                 calendarList.append[x]
         elif time == "year":
-            for x in self.calendars[self.user.currentGroup].find({'year': date.year}):
+            for x in self.calendars[groupFind].find({'year': date.year}):
                 print(x)
                 calendarList.append[x]
         elif time == "day":
-            for x in self.calendars[self.user.currentGroup].find({'day': date.day}):
+            for x in self.calendars[groupFind].find({'day': date.day}):
                 print(x)
                 calendarList.append[x]
 
@@ -263,13 +267,14 @@ class PinguinDB:
             'title': title,
             'doc': link
         }
-
-        self.documents[self.user.currentGroup].insert_one(post)
+        groupFind = self.groups.find_one({'_id': self.user.currentGroup}).get("group_name")
+        self.documents[groupFind].insert_one(post)
         return 1
 
     def retrieve_docs(self):
         docList = []
-        for x in self.documents[self.user.currentGroup].find():
+        groupFind = self.groups.find_one({'_id': self.user.currentGroup}).get("group_name")
+        for x in self.documents[groupFind].find():
             docList.append(x)
         return docList
 
@@ -331,3 +336,4 @@ class PinguinDB:
             group_name = generate_slug(3)
             invites = self.create_emails(6)
             self.create_group(group_name, "Test Description", invites)
+
