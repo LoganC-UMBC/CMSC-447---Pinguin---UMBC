@@ -138,7 +138,7 @@ class Main_Window(Ui_main_window):
         # now to get the timer started
         self.widgets_timer = QtCore.QTimer()
         self.widgets_timer.timeout.connect(self.widgets_refresh)
-        self.widgets_timer.start(10000)
+        self.widgets_timer.start(30000)
 ########################################################################################################################
 #                                               connecting all buttons function                                        #
 ########################################################################################################################
@@ -199,8 +199,6 @@ class Main_Window(Ui_main_window):
         self.populate_groups_tree(self.forum_tree, self.forum_model, self.forum_node)
         self.get_group_documents()
 
-    def widgets_group_change(self):
-        pass
 
     # error displaying func - don't really need but wth
     def error_frame_show(self, error_frame):
