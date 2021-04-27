@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Documents_Tab</class>
+ <widget class="QWidget" name="Documents_Tab">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>700</width>
+    <height>506</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>700</width>
+    <height>506</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>700</width>
+    <height>506</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Ui_Tasks_Tab</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#Tasks_Tab{background-color: rgb(100,100,100);}</string>
+  </property>
+  <widget class="QWidget" name="widget_4" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>300</y>
+     <width>701</width>
+     <height>156</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QWidget" name="widget_3" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLineEdit" name="create_edit">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{border:0;}
+QLineEdit{
+border-radius: 5px;
+background-position: center;
+background-color: rgb(60, 60, 60);
+}
+QLineEdit{
+background-color: rgb(50, 50, 50);
+ color: rgb(200, 200, 200);
+}</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="placeholderText">
+          <string>Title of New Document</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="create_button">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+ border-radius: 5px;
+background-position: center;
+background-color: rgb(60, 60, 60);
+color:rgb(200,200,200);
+}
+QPushButton:hover {
+background-color: rgb(50, 50, 50);
+ color: rgb(200, 200, 200);
+}
+QPushButton:pressed {
+background-color: rgb(35, 35, 35);
+color: rgb(200, 200, 200);
+}</string>
+         </property>
+         <property name="text">
+          <string>Create A Doc</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="widget" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLineEdit" name="share_name_edit">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{border:0;}
+QLineEdit{
+border-radius: 5px;
+background-position: center;
+background-color: rgb(60, 60, 60);
+}
+QLineEdit{
+background-color: rgb(50, 50, 50);
+ color: rgb(200, 200, 200);
+}</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="placeholderText">
+          <string>Name to Save Link By</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="share_link_edit">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{border:0;}
+QLineEdit{
+border-radius: 5px;
+background-position: center;
+background-color: rgb(60, 60, 60);
+}
+QLineEdit{
+background-color: rgb(50, 50, 50);
+ color: rgb(200, 200, 200);
+}</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="placeholderText">
+          <string>Link you want to save</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="share_button">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+ border-radius: 5px;
+background-position: center;
+background-color: rgb(60, 60, 60);
+color:rgb(200,200,200);
+}
+QPushButton:hover {
+background-color: rgb(50, 50, 50);
+ color: rgb(200, 200, 200);
+}
+QPushButton:pressed {
+background-color: rgb(35, 35, 35);
+color: rgb(200, 200, 200);
+}</string>
+         </property>
+         <property name="text">
+          <string>Share Link</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="widget_2" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLineEdit" name="delete_edit">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{border:0;}
+QLineEdit{
+border-radius: 5px;
+background-position: center;
+background-color: rgb(60, 60, 60);
+}
+QLineEdit{
+background-color: rgb(50, 50, 50);
+ color: rgb(200, 200, 200);
+}</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="placeholderText">
+          <string>Name of the document</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="delete_button">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+ border-radius: 5px;
+background-position: center;
+background-color: rgb(60, 60, 60);
+color:rgb(200,200,200);
+}
+QPushButton:hover {
+background-color: rgb(50, 50, 50);
+ color: rgb(200, 200, 200);
+}
+QPushButton:pressed {
+background-color: rgb(35, 35, 35);
+color: rgb(200, 200, 200);
+}</string>
+         </property>
+         <property name="text">
+          <string>Delete A Doc</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="widget_5" native="true">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>681</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QWidget" name="widget_6" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item alignment="Qt::AlignRight|Qt::AlignVCenter">
+        <widget class="QLabel" name="doc_label">
+         <property name="font">
+          <font>
+           <pointsize>13</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel{color: white;}</string>
+         </property>
+         <property name="text">
+          <string>Viewing Documents for Group:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="group_label">
+         <property name="minimumSize">
+          <size>
+           <width>285</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>13</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel{color:orange;}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QListWidget" name="doc_list">
+      <property name="styleSheet">
+       <string notr="true">QListWidget{border:0;}
+QListWidget{
+border-radius: 5px;
+background-position: center;
+background-color: rgb(60, 60, 60);
+}
+QListWidget{
+background-color: rgb(50, 50, 50);
+ color: rgb(200, 200, 200);
+}</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
