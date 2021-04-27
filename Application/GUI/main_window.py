@@ -168,6 +168,7 @@ class Main_Window(Ui_main_window):
     # connecting all calendar tab buttons
     def connect_calendar_buttons(self):
         self.add_event_button.clicked.connect(self.add_event)
+        self.calendar.clicked.connect(self.calendar_buttons)
 
 
     # connecting all task tab buttons
@@ -417,10 +418,14 @@ class Main_Window(Ui_main_window):
 
         # might need to add date edit checker
         else:
-
             pass
 
+    def calendar_buttons(self):
+        self.set_date_edit()
 
+    def set_date_edit(self):
+        # print(self.calendar.selectedDate())
+        self.date_edit.setDate(self.calendar.selectedDate())
 
 
 ########################################################################################################################
@@ -868,6 +873,10 @@ class Main_Window(Ui_main_window):
             else:
                 pass
 
+    def get_group_documents(self):
+        self.db.user.current_group = self.current_group
+        documents = self.db.retrieve_docs()
+        print(documents)
 
 # QListWidgetItem for groups list
 # may not be needed
