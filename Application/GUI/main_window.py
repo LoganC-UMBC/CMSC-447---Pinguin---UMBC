@@ -195,9 +195,9 @@ class Main_Window(Ui_main_window):
 
     def widgets_refresh(self):
         print("refreshing")
-        self.populate_groups_tree(self.groups_model, self.groups_node)
-        self.populate_groups_tree(self.forum_model, self.forum_node)
-        #self.get_group_documents()
+        self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
+        self.populate_groups_tree(self.forum_tree, self.forum_model, self.forum_node)
+        self.get_group_documents()
 
     def widgets_group_change(self):
         pass
@@ -250,7 +250,11 @@ class Main_Window(Ui_main_window):
             # creating group with or without invites
             if group_invites[0] == '':
                 self.db.create_group(group_name,group_description)
-                self.populate_groups_tree()
+                self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
+
+                # set up single trello board for group
+                # self.trello.ping_board_create(group_name)
+                # need to share it
 
             else:
                 # need this function to have group invites
@@ -333,14 +337,18 @@ class Main_Window(Ui_main_window):
 
     # populate the group tree widget from db
     # realized i can repurpose this to also update the forums groups section
-    def populate_groups_tree(self,model, node):
+    def populate_groups_tree(self,tree, model, node):
         model.clear()
         node = model.invisibleRootItem()
+        tree.setModel(model)
+        tree.expandAll()
+
         groups = self.db.get_groups()
 
         for group in groups:
             new_group = StandardItem(group['group_name'], "group", group['description'],str(group['_id']))
-            group_owner = StandardItem(str(group['owner']), "owner")
+            owner = self.db.user_lookup(group['owner'])
+            group_owner = StandardItem(owner['user_name'], "owner")
             new_group.appendRow(group_owner)
             members = group['members']
             members.remove(group['owner'])
@@ -379,7 +387,8 @@ class Main_Window(Ui_main_window):
             self.error_frame_show(self.forums_error_frame)
 
         else:
-            self.db.send_post(self.db.user.currentGroup)
+            self.message_edit.clear()
+            self.db.send_post(message)
             self.populate_forum_view()
             # self.forum_view.insertPlainText((owner+"("+time+"): "+message)+"\n")
 
@@ -729,7 +738,9 @@ class Main_Window(Ui_main_window):
         else:
             # add task card to trello and add to tree view
             # or add to trello and use an update function
-
+            # self.trello.ping_card_create(board_name, list_name, card_name, task_description)
+            self.set_trello_tree()
+            """
             new_board = StandardItem(board_name,"board")
             new_list = StandardItem(list_name, "list")
             new_card = StandardItem(card_name,"card", task_description)
@@ -738,7 +749,7 @@ class Main_Window(Ui_main_window):
             new_board.appendRow(new_list)
             self.trello_node.appendRow(new_board)
 
-
+            """
     # get all trello boards, lists, and task cards to insert
     # pretty sure n^3 is what is making it run slow, not the connection to trello
     # would be better to run as something else lol
@@ -884,7 +895,7 @@ class Main_Window(Ui_main_window):
 
         elif doc_type == "share":
             self.db.document_add(doc_name, doc_url)
-            self.document_list.addItem(DocListItem(doc_name, doc_url))
+            self.get_group_documents()
 
 
     # if a document is double clicked on the url will be opened
@@ -896,12 +907,21 @@ class Main_Window(Ui_main_window):
             else:
                 pass
 
+
+    # get all documents from db
     def get_group_documents(self):
+        self.document_list.clear()
         if self.current_group != None:
             documents = self.db.retrieve_docs()
-            print("hehehuioehoiuh")
+            self.populate_docs_list(documents)
         else:
             print("not in a group")
+
+    def populate_docs_list(self, documents):
+        for doc in documents:
+            new_doc = DocListItem(doc['title'], doc['doc'])
+            self.document_list.addItem(new_doc)
+
 
 # QListWidgetItem for groups list
 # may not be needed
