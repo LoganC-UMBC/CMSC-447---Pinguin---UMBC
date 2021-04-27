@@ -257,9 +257,13 @@ class Main_Window(Ui_main_window):
                 # need to share it
 
             else:
-                # need this function to have group invites
-                # self.db.create_group(group_name,group_invites)
-                pass
+                #self.db.create_group(group_name, group_description)
+                for member in group_invites:
+                    member = member.strip()
+                    member_doc = self.db.user_lookup_by_email(member)
+                    if member_doc:
+                        print("Sending invites")
+                        self.db.send_invite(member_doc['_id'])
 
 
     # invite member button function

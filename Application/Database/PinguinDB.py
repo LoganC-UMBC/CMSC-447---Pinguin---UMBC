@@ -285,6 +285,13 @@ class PinguinDB:
         else:
             return 0
 
+    def user_lookup_by_email(self, email):
+        if (self.users.find_one({'user_id': email})):
+            userFind = self.users.find_one({'user_id': email})
+            return userFind
+        else:
+            return 0
+
     def group_lookup(self, group_id):
         if (self.groups.find_one({'_id': group_id})):
             groupFind = self.groups.find_one({'_id': group_id})
