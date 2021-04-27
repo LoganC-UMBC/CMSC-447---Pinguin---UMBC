@@ -64,7 +64,6 @@ class Pinguin(QMainWindow):
 		self.login_menu.hide()
 		if self.trello.client == None:
 			self.trello.action_setup(self.db.user.user_id)
-		self.main_window.ui.populate_groups_tree()
 		self.main_window.show()
 
 	def run(self):
