@@ -2,12 +2,14 @@ from Application.GUI.Uis.Invite_Menu_Ui.invites_menu import Ui_invites_menu
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class invites_menu_ext(Ui_invites_menu):
-    def __init__(self, signal):
+    def __init__(self, signal, main_window):
         super().__init__()
         self.signal = signal
+        self.main_window = main_window
 
     def setupUi(self, invites_menu):
         super().setupUi(invites_menu)
+        self.invites_menu = invites_menu
 
 
         self.invites_error_frame.hide()
@@ -33,11 +35,12 @@ class invites_menu_ext(Ui_invites_menu):
 
         else:
             print("here2")
-            #signal.emit()
+            self.main_window.send_invites(emails)
+            self.cancel()
 
 
     def cancel(self):
-        invites_menu.close()
+        self.invites_menu.close()
 
 
 """

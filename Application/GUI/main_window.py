@@ -5,15 +5,24 @@ from bson.objectid import ObjectId
 # GUI library
 from PyQt5 import QtCore, QtGui, QtWidgets, Qt
 
+#pydrive
+
+from pydrive.auth import GoogleAuth
+
 # Still haven't used drive
-from Application.Functions.google_drive.drive_test import *
+from Application.Functions.Google_Drive.gDrive import *
+
+#Google Calendar
+from Application.Functions.Google_Calendar.gcalendar import *
 
 # client for trello
 from Application.Functions.trello_api.task_card import *
 
+from Application.Functions.google_client import *
+
 
 # invites menu for a group, needs fixing to work properly
-from Application.GUI.Uis.Invite_Menu_Ui.invites_menu import *
+from Application.GUI.invites_menu_ext import *
 
 import datetime
 
@@ -24,6 +33,7 @@ class Main_Window(Ui_main_window):
 
     def __init__(self, db, trello):
         super().__init__()
+
         self.db = db
         self.user = self.db.user
         self.invites_signal = QtCore.pyqtSignal()
@@ -31,10 +41,15 @@ class Main_Window(Ui_main_window):
         self.user_id = self.db.user.user_id
         self.trello = trello
 
+        # not working
+        #self.auth = GoogleAuth()
+        #self.google_client = GoogleClient(self.auth)
+
 
     def setupUi(self, main_window):
         super().setupUi(main_window)
 
+        #self.invites_menu = QtWidgets.QWidget()
 ########################################################################################################################
 #                                                         Menu bar setup                                               #
 ########################################################################################################################
@@ -250,27 +265,36 @@ class Main_Window(Ui_main_window):
                 self.db.create_group(group_name,group_description)
                 self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
 
+                #calendar add
+                #self.google_client.google_calendar.CreateCalendar(group_name,'America/Los_Angeles')
+                print("oh me oh my")
+
                 # set up single trello board for group
                 # self.trello.ping_board_create(group_name)
                 # need to share it
 
             else:
                 #self.db.create_group(group_name, group_description)
-                for member in group_invites:
-                    member = member.strip()
-                    member_doc = self.db.user_lookup_by_email(member)
-                    if member_doc:
-                        print("Sending invites")
-                        self.db.send_invite(member_doc['_id'])
-
+                self.send_invites(group_invites)
 
     # invite member button function
     # -currently not working
     def invite_members(self):
-        invites_menu = QtWidgets.QWidget()
-        invites_menu_ui = invites_menu_ext(self.invites_signal)
-        invites_menu_ui.setupUi(invites_menu)
-        invites_menu.show()
+        index = self.groups_tree.currentIndex()
+
+        if index.data() == None:
+            error_text = "No group selected"
+            self.groups_error_label.setText(error_text)
+            self.error_frame_show(self.groups_error_frame)
+
+        else:
+            self.invites_menu = QtWidgets.QWidget()
+            self.invites_menu_ui = invites_menu_ext(self.invites_signal, self)
+            self.invites_menu_ui.setupUi(self.invites_menu)
+            #self.invites_signal.connect(lambda: self.send_invites(self.invites_menu.send_invites_edit))
+
+            self.invites_menu.show()
+
 
 
     # delete group button function
@@ -360,6 +384,13 @@ class Main_Window(Ui_main_window):
 
             node.appendRow(new_group)
 
+    def send_invites(self, group_invites):
+        for member in group_invites:
+            member = member.strip()
+            member_doc = self.db.user_lookup_by_email(member)
+            if member_doc:
+                print("Sending invites")
+                self.db.send_invite(member_doc['_id'])
 
 
 ########################################################################################################################
@@ -893,6 +924,7 @@ class Main_Window(Ui_main_window):
     def add_link(self, doc_name, doc_type, doc_url=None):
         if doc_type == "create":
             # add doc to database
+            create()
             self.document_list.addItem(DocListItem(doc_name))
 
         elif doc_type == "share":
