@@ -136,3 +136,41 @@ class GoogleCalendar(object):
         :type param:str
         """
         self.auth.service2.events().delete(calendarId, eventId).execute()
+
+        #returns list of events
+    def getMonthEvents(self, monthBegin, monthEnd):
+        """
+        monthBegin and monthEnd has to be in this format for GoogleCalendar to pull informaiton
+        '2021-01-01'
+
+        the only things that would need to change are year and month day should always be the first of the current month and first of the next month.
+
+        """
+        dateStart = startTime + 'T00:00:00' + 'Z' # 'Z' indicates UTC time
+        dateEnd = endTime + 'T00:00:00' + 'Z' # 'Z' indicates UTC time
+
+
+        months_events = eventsself.auth.service2.events().list(calendarId='primary', timeMin=dateStart, timeMax=dateEnd, singleEvents=True, timeZone='America/New_York', orderBy='startTime').execute()
+
+        events = months_events.get('items', [])
+
+        return events
+
+        """
+        example call
+
+            #for event in events:
+            #    start = event['start'].get('dateTime', event['start'].get('date'))
+            #    print(start,'\n', event['summary'],'\n',event['description'],'\n')
+
+        event is an indexed dictionary entry
+        link is to a overview of what the dictionary contains
+
+        https://developers.google.com/calendar/v3/reference/events
+
+        what's printed to console based on a test calendar entry
+        2021-04-17T20:30:00-04:00
+        Test 1
+        Test 1
+
+        """
