@@ -69,8 +69,23 @@ class Pinguin(QMainWindow):
 		if self.trello.client == None:
 			self.trello.action_setup(self.db.user.user_id)
 
-		self.auth = GoogleAuth()
-		#self.auth.SaveCredentialsFile("mycred.txt") #saves credentials to a file
+		auth = GoogleAuth()
+		# gauth.LocalWebserverAuth()
+
+		# Try to load saved client credentials
+		auth.LoadCredentialsFile("Credentials.json")
+		if auth.credentials is None:
+			# Authenticate if they're not there
+			auth.LocalWebserverAuth()
+		elif auth.access_token_expired:
+			# Refresh them if expired
+			auth.Refresh()
+		else:
+			# Initialize the saved creds
+			auth.Authorize()
+		# Save the current credentials to a file
+		auth.SaveCredentialsFile("Credentials.json")
+
 		self.main_window.ui.google_client = GoogleClient(self.auth)
 		self.main_window.show()
 

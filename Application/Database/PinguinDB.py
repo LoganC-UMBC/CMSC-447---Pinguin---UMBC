@@ -107,7 +107,7 @@ class PinguinDB:
             return 1
 
     # Create a group
-    def create_group(self, name, description):
+    def create_group(self, name, description,calendar_id):
         if (self.groups.find_one({"group_name": name})):
             print('Group of that name already exists')
             return 0
@@ -117,7 +117,8 @@ class PinguinDB:
                           "owner": self.user._id,
                           "description": description,
                           "members": [self.user._id],
-                          "invites": []}
+                          "invites": [],
+                          "calendar_id": calendar_id}
 
             self.groups.insert_one(group_post)
 
