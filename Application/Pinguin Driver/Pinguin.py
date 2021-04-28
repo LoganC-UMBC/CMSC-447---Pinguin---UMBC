@@ -68,7 +68,7 @@ class Pinguin(QMainWindow):
 		self.login_menu.hide()
 		if self.trello.client == None:
 			self.trello.action_setup(self.db.user.user_id)
-
+		"""
 		auth = GoogleAuth()
 		# gauth.LocalWebserverAuth()
 
@@ -87,6 +87,8 @@ class Pinguin(QMainWindow):
 		auth.SaveCredentialsFile("Credentials.json")
 
 		self.main_window.ui.google_client = GoogleClient(self.auth)
+		"""
+		self.main_window.ui.widgets_refresh()
 		self.main_window.show()
 
 	def run(self):

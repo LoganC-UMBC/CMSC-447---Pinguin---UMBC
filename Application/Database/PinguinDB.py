@@ -65,9 +65,9 @@ class PinguinDB:
         userList.append(self.user._id)
         userList.append(self.user.user_id)
         userList.append(self.user.user_name)
-        print(userList[0])
-        print(userList[1])
-        print(userList[2])
+        #print(userList[0])
+        #print(userList[1])
+        #print(userList[2])
         return userList
 
     # Changes the current group to another group the user is in
@@ -75,7 +75,7 @@ class PinguinDB:
 
         if (group_id in self.user.groups):
             self.user.currentGroup = group
-            print(self.user.currentGroup)
+            #print(self.user.currentGroup)
             return 1
         else:
             print("User is not a member of given group")
@@ -107,7 +107,7 @@ class PinguinDB:
             return 1
 
     # Create a group
-    def create_group(self, name, description,calendar_id):
+    def create_group(self, name, description):
         if (self.groups.find_one({"group_name": name})):
             print('Group of that name already exists')
             return 0
@@ -117,8 +117,7 @@ class PinguinDB:
                           "owner": self.user._id,
                           "description": description,
                           "members": [self.user._id],
-                          "invites": [],
-                          "calendar_id": calendar_id}
+                          "invites": []}
 
             self.groups.insert_one(group_post)
 
@@ -142,7 +141,7 @@ class PinguinDB:
         for x in self.groups.find():
             if x.get("_id") in self.user.groups:
                 groupList.append(x)
-                print(x)
+                #print(x)
         return groupList
 
     def refresh_tasks(self):
@@ -223,7 +222,7 @@ class PinguinDB:
         postList = []
         groupFind = self.groups.find_one({'_id': self.user.currentGroup}).get("group_name")
         for x in self.forums[groupFind].find():
-            print(x)
+            #print(x)
             postList.append(x)
         return postList
 

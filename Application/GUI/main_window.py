@@ -38,6 +38,7 @@ class Main_Window(Ui_main_window):
         self.user = self.db.user
         self.invites_signal = QtCore.pyqtSignal()
         self.current_group = None
+        self.current_group_name = None
         self.user_id = self.db.user.user_id
         self.trello = trello
 
@@ -150,7 +151,7 @@ class Main_Window(Ui_main_window):
 
         # call to populate widgets with users information
         # groups tree, invites, forum, calendar events, trello, and group documents
-        self.widgets_refresh()
+        #self.widgets_refresh()
         # now to get the timer started
         self.widgets_timer = QtCore.QTimer()
         self.widgets_timer.timeout.connect(self.widgets_refresh)
@@ -214,6 +215,7 @@ class Main_Window(Ui_main_window):
         self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
         self.populate_groups_tree(self.forum_tree, self.forum_model, self.forum_node)
         self.get_group_documents()
+        self.set_trello_tree()
 
 
     # error displaying func - don't really need but wth
@@ -228,6 +230,7 @@ class Main_Window(Ui_main_window):
     def set_current_group(self, group_id):
         self.current_group = group_id
         self.user.currentGroup = ObjectId(group_id)
+        self.current_group_name = self.db.group_lookup(self.user.currentGroup)['group_name']
 ########################################################################################################################
 #                                               Groups Tab                                                             #
 ########################################################################################################################
@@ -263,9 +266,10 @@ class Main_Window(Ui_main_window):
 
             # creating group with or without invites
             if group_invites[0] == '':
-                calendar_id = self.google_client.google_calendar.CreateCalendar(group_name, 'America/New_York')
-                print("calendar id: ", calendar_id)
-                self.db.create_group(group_name,group_description, calendar_id)
+                #calendar_id = self.google_client.google_calendar.CreateCalendar(group_name, 'America/New_York')
+                #print("calendar id: ", calendar_id)
+                self.db.create_group(group_name, group_description)
+                self.trello.ping_board_create(group_name)
                 self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
 
                 #calendar add
@@ -793,21 +797,27 @@ class Main_Window(Ui_main_window):
     # pretty sure n^3 is what is making it run slow, not the connection to trello
     # would be better to run as something else lol
     def set_trello_tree(self):
-        boards = self.trello.ping_boards()
+        self.trello_model.clear()
+        self.trello_node = self.trello_model.invisibleRootItem()
+        self.trello_tree.setModel(self.trello_model)
+        self.trello_tree.expandAll()
 
-        for board in boards:
-            new_board = StandardItem(board.name, "board")
+        if self.current_group != None:
+            board = StandardItem(self.current_group_name, "board")
+            lists = self.trello.ping_lists(self.current_group_name)
+            print(lists)
 
-            lists = self.trello.ping_lists(board.name)
             for list in lists:
                 new_list = StandardItem(list.name, "list")
 
-                cards = self.trello.ping_cards(board.name, list.name)
-                for card in cards:
+                for card in self.trello.ping_cards(self.current_group_name, list.name):
                     new_card = StandardItem(card.name, "card", card.desc)
                     new_list.appendRow(new_card)
-                new_board.appendRow(new_list)
-            self.trello_node.appendRow(new_board)
+                board.appendRow(new_list)
+            self.trello_node.appendRow(board)
+
+        else:
+            print("No group selected")
 
 
     # when a user clicks on a task card this function runs
