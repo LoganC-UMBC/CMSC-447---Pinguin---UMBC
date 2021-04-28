@@ -7,11 +7,6 @@ class Google_Drive(object):
     def __init__(self, auth):
         self.drive = GoogleDrive(auth)
 
-    def authenticate (self):
-        #gauth.LocalWebserverAuth() # Creates local webserver and auto handles authentication.
-        #gauth.SaveCredentialsFile("mycred.txt") #saves credentials to a file
-        pass
-
     #create file
     def create(self, user_title):
 

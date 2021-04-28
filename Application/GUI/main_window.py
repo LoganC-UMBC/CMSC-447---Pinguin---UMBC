@@ -31,7 +31,7 @@ import datetime
 ########################################################################################################################
 class Main_Window(Ui_main_window):
 
-    def __init__(self, db, trello):
+    def __init__(self, db, trello, google):
         super().__init__()
 
         self.db = db
@@ -42,8 +42,9 @@ class Main_Window(Ui_main_window):
         self.trello = trello
 
         # not working
-        #self.auth = GoogleAuth()
-        #self.google_client = GoogleClient(self.auth)
+        self.google_client = google
+        print(self.google_client)
+
 
 
     def setupUi(self, main_window):
@@ -266,7 +267,7 @@ class Main_Window(Ui_main_window):
                 self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
 
                 #calendar add
-                #self.google_client.google_calendar.CreateCalendar(group_name,'America/Los_Angeles')
+                #self.google_client.google_calendar.CreateCalendar(group_name, 'America/New_York')
                 print("oh me oh my")
 
                 # set up single trello board for group
@@ -308,12 +309,15 @@ class Main_Window(Ui_main_window):
             self.error_frame_show(self.groups_error_frame)
 
         elif (self.groups_model.parent(index).data() == None):
+            item = self.groups_model.itemFromIndex(index)
+            # self.db.remove_group(item.group_id)
             self.groups_node.removeRow(index.row())
 
 
     # return all invites the user has
     # not yet working
     def get_invite(self):
+
         return
 
 
@@ -829,13 +833,15 @@ class Main_Window(Ui_main_window):
         # get data from edits
         doc_name = self.doc_create_edit.text()
 
-        # clear edits
-        self.doc_create_edit.clear()
-
         # list of all docs that match the name edit data
         docs = self.document_list.findItems(doc_name, QtCore.Qt.MatchExactly)
 
-        if doc_name == "":
+        if self.current_group == None:
+            error_text = "You are not in a group"
+            self.docs_error_label.setText(error_text)
+            self.error_frame_show(self.docs_error_frame)
+
+        elif doc_name == "":
             error_text = "Enter a name for the new document"
             self.docs_error_label.setText(error_text)
             self.error_frame_show(self.docs_error_frame)
@@ -847,6 +853,8 @@ class Main_Window(Ui_main_window):
                 self.error_frame_show(self.docs_error_frame)
 
             else:
+                # clear edits
+                self.doc_create_edit.clear()
                 self.add_link(doc_name, "create")
 
 
@@ -858,14 +866,15 @@ class Main_Window(Ui_main_window):
         doc_name = self.doc_share_name_edit.text()
         doc_link = self.doc_share_link_edit.text()
 
-        # clear edits
-        self.doc_share_name_edit.clear()
-        self.doc_share_link_edit.clear()
-
         # list of all docs that match the name edit data
         docs = self.document_list.findItems(doc_name, QtCore.Qt.MatchExactly)
 
-        if doc_name + doc_link == "":
+        if self.current_group == None:
+            error_text = "You are not in a group"
+            self.docs_error_label.setText(error_text)
+            self.error_frame_show(self.docs_error_frame)
+
+        elif doc_name + doc_link == "":
             error_text = "Enter a name and a link to share."
             self.docs_error_label.setText(error_text)
             self.error_frame_show(self.docs_error_frame)
@@ -887,6 +896,9 @@ class Main_Window(Ui_main_window):
                 self.error_frame_show(self.docs_error_frame)
 
             else:
+                # clear edits
+                self.doc_share_name_edit.clear()
+                self.doc_share_link_edit.clear()
                 self.add_link(doc_name, "share", doc_link)
 
 
@@ -896,13 +908,15 @@ class Main_Window(Ui_main_window):
         # get data from edits
         doc_name = self.doc_delete_edit.text()
 
-        # clear edits
-        self.doc_delete_edit.clear()
-
         # list of all docs that match the name edit data
         docs = self.document_list.findItems(doc_name, QtCore.Qt.MatchExactly)
 
-        if doc_name == "":
+        if self.current_group == None:
+            error_text = "You are not in a group"
+            self.docs_error_label.setText(error_text)
+            self.error_frame_show(self.docs_error_frame)
+
+        elif doc_name == "":
             error_text = "Enter the name of a doc you want to delete"
             self.docs_error_label.setText(error_text)
             self.error_frame_show(self.docs_error_frame)
@@ -915,20 +929,23 @@ class Main_Window(Ui_main_window):
                 self.error_frame_show(self.docs_error_frame)
 
             else:
+                # clear edits
+                self.doc_delete_edit.clear()
+
                 for doc in docs:
                     self.document_list.takeItem(self.document_list.row(doc))
-
+                    print(doc)
 
     # helper function to insert a document to the list widget
     # not yet connected to the database
     def add_link(self, doc_name, doc_type, doc_url=None):
         if doc_type == "create":
             # add doc to database
-            create()
-            self.document_list.addItem(DocListItem(doc_name))
+            self.google_client.google_drive.create(doc_name)
+            self.document_list.addItem(DocListItem(doc_name),"doc")
 
         elif doc_type == "share":
-            self.db.document_add(doc_name, doc_url)
+            self.db.document_add(doc_name, "link", doc_url)
             self.get_group_documents()
 
 
@@ -953,7 +970,7 @@ class Main_Window(Ui_main_window):
 
     def populate_docs_list(self, documents):
         for doc in documents:
-            new_doc = DocListItem(doc['title'], doc['doc'])
+            new_doc = DocListItem(doc['title'], doc['type'], doc['doc'])
             self.document_list.addItem(new_doc)
 
 
@@ -967,8 +984,9 @@ class GroupsListItem(Qt.QListWidgetItem):
 # Extension of QListWidgetItem to include link for document
 # Used for insertion in the documents tab QListWidget self.document_list
 class DocListItem(Qt.QListWidgetItem):
-    def __init__(self, text,url=None):
+    def __init__(self, text, type=None, url=None):
         super().__init__(text)
+        self.type = type
         self.url = QtCore.QUrl(url)
 
 # A QStandardItem for tree widgets

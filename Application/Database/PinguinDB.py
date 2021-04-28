@@ -259,12 +259,13 @@ class PinguinDB:
 
         return calendarList
 
-    def document_add(self, title, link):
+    def document_add(self, title, type, link):
 
         post = {
             'author': self.user.user_name,
             'group': self.user.currentGroup,
             'title': title,
+            'type' : type,
             'doc': link
         }
         groupFind = self.groups.find_one({'_id': self.user.currentGroup}).get("group_name")

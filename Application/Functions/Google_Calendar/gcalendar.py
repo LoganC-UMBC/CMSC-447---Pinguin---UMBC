@@ -174,3 +174,9 @@ class Google_Calendar(object):
         Test 1
 
         """
+
+
+"""auth = GoogleAuth()
+auth.LocalWebserverAuth()
+c = Google_Calendar(auth)
+c.CreateCalendar('new calendar', 'America/New_York')"""

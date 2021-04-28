@@ -12,6 +12,8 @@ from Application.GUI.main_window import Main_Window
 from Application.GUI.login_window import Ui_Login_Window
 from Application.Database.PinguinDB import PinguinDB
 from Application.Functions.trello_api.task_card import Trello
+from Application.Functions.google_client import *
+from pydrive.auth import GoogleAuth
 
 
 MAX_W = 700
@@ -37,9 +39,9 @@ class Login_Window(QMainWindow):
 # This is the main menu window that appears after login is successful
 # The default constructor will setup and instance of a Main Window set with the appropiate tabs
 class Main_Menu(QMainWindow):
-	def __init__(self, db, trello):
+	def __init__(self, db, trello, google):
 		super(QMainWindow, self).__init__()
-		self.ui = Main_Window(db, trello)
+		self.ui = Main_Window(db, trello, google)
 		self.ui.setupUi(self)
 
 
@@ -55,15 +57,21 @@ class Pinguin(QMainWindow):
 		super().__init__()
 		self.db = DB
 		self.trello = Trello()
+		self.auth = None
+		self.google_client = None
 		self.login_signal.connect(self.login_success)
 		self.login_menu = Login_Window(self.login_signal, self.db, self.trello)
-		self.main_window = Main_Menu(self.db, self.trello)
+		self.main_window = Main_Menu(self.db, self.trello, self.google_client)
 
 	@pyqtSlot()
 	def login_success(self):
 		self.login_menu.hide()
 		if self.trello.client == None:
 			self.trello.action_setup(self.db.user.user_id)
+
+		self.auth = GoogleAuth()
+		#self.auth.SaveCredentialsFile("mycred.txt") #saves credentials to a file
+		self.main_window.ui.google_client = GoogleClient(self.auth)
 		self.main_window.show()
 
 	def run(self):
