@@ -213,9 +213,15 @@ class Main_Window(Ui_main_window):
     def widgets_refresh(self):
         print("refreshing")
         self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
+        print("damn fool1")
         self.populate_groups_tree(self.forum_tree, self.forum_model, self.forum_node)
+        print("damn fool2")
         self.get_group_documents()
+        print("damn fool3")
         self.set_trello_tree()
+        print("damn fool4")
+        self.get_invites()
+        print("end of refresh")
 
 
     # error displaying func - don't really need but wth
@@ -272,16 +278,13 @@ class Main_Window(Ui_main_window):
                 self.trello.ping_board_create(group_name)
                 self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
 
-                #calendar add
-
-                print("oh me oh my")
-
                 # set up single trello board for group
-                # self.trello.ping_board_create(group_name)
-                # need to share it
+                self.trello.ping_board_create(group_name)
 
             else:
-                #self.db.create_group(group_name, group_description)
+                self.db.create_group(group_name, group_description)
+                self.trello.ping_board_create(group_name)
+                self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
                 self.send_invites(group_invites)
 
     # invite member button function
@@ -322,18 +325,29 @@ class Main_Window(Ui_main_window):
 
     # return all invites the user has
     # not yet working
-    def get_invite(self):
+    def get_invites(self):
+        self.invites_list.clear()
+        invites = self.db.user_lookup(self.user._id)['invites']
+        if len(invites) != 0:
+            for group in invites:
+                #print(group)
+                invite_group = self.db.group_lookup(group['group_id'])
+                group_name = invite_group['group_name']
+                invite = InvitesListItem(group_name, group['sender'], group['group_id'])
+                self.invites_list.addItem(invite)
 
-        return
 
 
     # accept invite button function
     # accept an invite to a group
     # currently not connected to the db
     def accept_invite(self):
-        if self.invites_list.currentItem() != None:
-            invite = self.invites_list.takeItem(self.invites_list.row(self.invites_list.currentItem()))
-            self.groups_node.appendRow(StandardItem(invite.text()))
+        invite = self.invites_list.selectedItems()
+        if len(invite) == 1:
+            self.db.invite_accept(invite[0].group_id)
+            """invite = self.invites_list.takeItem(self.invites_list.row(self.invites_list.currentItem()))
+            self.groups_node.appendRow(StandardItem(invite.text()))"""
+            print("Wheew made it out")
 
         else:
             error_text = "No invite selected to accept"
@@ -382,15 +396,16 @@ class Main_Window(Ui_main_window):
         groups = self.db.get_groups()
 
         for group in groups:
-            new_group = StandardItem(group['group_name'], "group", group['description'],str(group['_id']))
+            new_group = StandardItem(group['group_name'], "group", group['description'], str(group['_id']))
             owner = self.db.user_lookup(group['owner'])
-            group_owner = StandardItem(owner['user_name'], "owner")
+            group_owner = StandardItem(owner['user_name'], "owner", None, str(group['owner']))
             new_group.appendRow(group_owner)
             members = group['members']
             members.remove(group['owner'])
 
             for member in members:
-                new_group.appendRow(StandardItem(member, 'member'))
+                member_name = self.db.user_lookup(member)
+                new_group.appendRow(StandardItem(member_name['user_name'], 'member', None, str(member)))
 
             node.appendRow(new_group)
 
@@ -520,10 +535,9 @@ class Main_Window(Ui_main_window):
 
         elif list_name != "":
             if len(duplicate) == 0:
-                print("here")
-                # self.top_level.appendRow(new list)
-                # update group trello board
-                pass
+                self.add_list_edit.clear()
+                self.trello.ping_list_create(self.current_group_name, list_name)
+
             else:
                 error_text = "List " + list_name + " already exists"
                 self.tasks_error_label.setText(error_text)
@@ -542,7 +556,12 @@ class Main_Window(Ui_main_window):
             self.error_frame_show(self.tasks_error_frame)
 
         elif list_name != "" and len(duplicate) == 1:
-            print("task card exists")
+            pass
+
+        else:
+            error_text = list_name + " doesn't exist"
+            self.tasks_error_label.setText(error_text)
+            self.error_frame_show(self.tasks_error_frame)
 
 
     # move a card to another list
@@ -632,11 +651,8 @@ class Main_Window(Ui_main_window):
             error_text = "Missing board(from)"
             self.tasks_error_label.setText(error_text)
             self.error_frame_show(self.tasks_error_frame)
-
         else:
-            # trello call to switch cards
-            # call to update trello tree
-            pass
+            self.trello.ping_card_move(self.current_group_name, list_from, card_from, list_to)
 
 
     # change a cards description
@@ -779,20 +795,12 @@ class Main_Window(Ui_main_window):
             self.error_frame_show(self.tasks_error_frame)
 
         else:
-            # add task card to trello and add to tree view
-            # or add to trello and use an update function
-            # self.trello.ping_card_create(board_name, list_name, card_name, task_description)
+            # add task card to trello
+            # update function
+            self.trello.ping_card_create(self.current_group_name, list_name, card_name, task_description)
             self.set_trello_tree()
-            """
-            new_board = StandardItem(board_name,"board")
-            new_list = StandardItem(list_name, "list")
-            new_card = StandardItem(card_name,"card", task_description)
 
-            new_list.appendRow(new_card)
-            new_board.appendRow(new_list)
-            self.trello_node.appendRow(new_board)
 
-            """
     # get all trello boards, lists, and task cards to insert
     # pretty sure n^3 is what is making it run slow, not the connection to trello
     # would be better to run as something else lol
@@ -801,7 +809,6 @@ class Main_Window(Ui_main_window):
         self.trello_node = self.trello_model.invisibleRootItem()
         self.trello_tree.setModel(self.trello_model)
         self.trello_tree.expandAll()
-
         if self.current_group != None:
             board = StandardItem(self.current_group_name, "board")
             lists = self.trello.ping_lists(self.current_group_name)
@@ -1000,6 +1007,12 @@ class DocListItem(Qt.QListWidgetItem):
         super().__init__(text)
         self.type = type
         self.url = QtCore.QUrl(url)
+
+class InvitesListItem(Qt.QListWidgetItem):
+    def __init__(self, group_name, inviter, group_id=None):
+        super().__init__(group_name)
+        self.inviter = inviter
+        self.group_id = group_id
 
 # A QStandardItem for tree widgets
 class StandardItem(QtGui.QStandardItem):

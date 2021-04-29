@@ -91,6 +91,7 @@ class Pinguin(QMainWindow):
 		self.main_window.ui.widgets_refresh()
 		self.main_window.show()
 
+
 	def run(self):
 		self.login_menu.show()
 

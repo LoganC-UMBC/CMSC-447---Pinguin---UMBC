@@ -180,7 +180,6 @@ class PinguinDB:
 
     # Forums Window
     def invite_accept(self, group_id):
-
         # remove the invite
 
         inviteList = self.users.find_one({"_id": self.user._id}).get("invites")
