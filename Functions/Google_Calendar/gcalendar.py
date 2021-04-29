@@ -17,7 +17,7 @@ class GoogleCalendar(object):
 
 
 
-    def __init__(auth=None):
+    def __init__(self, auth=None):
         """gives access to the Google Account given
 
         :param auth: authorized GoogleAuth instance.
