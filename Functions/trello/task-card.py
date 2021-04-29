@@ -178,6 +178,22 @@ def ping_list_create(client, board_name, list_name):
     all_boards[i].add_list(list_name)
     return True
 
+def ping_list_delete(client, board_name, list_name):
+    # store the boards index
+    i = board_index(client, board_name)
+    if i == None:
+        return None
+    # store the lists index
+    j = list_index(client, board_name, list_name, i)
+    if j == None:
+        return None
+
+    # store all lists for this board
+    board_lists = ping_lists(client, board_name)
+    # delete the board
+    board_lists[j].close()
+    return True
+
 # create a board
 def ping_board_create(client, board_name):
     # make a board with the provided name
@@ -347,3 +363,7 @@ list_name = "NEW LIST"
 
 board_name = "NEW BOARD"
 #ping_board_create(client, board_name)
+
+board_name = "Base Board"
+list_name = "This List"
+#ping_list_delete(client, board_name, list_name)
