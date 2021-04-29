@@ -81,6 +81,11 @@ class PinguinDB:
             print("User is not a member of given group")
             return 0
 
+    def get_calendar_id(self,group_id):
+        if(self.groups.find_one({"_id":group_id})):
+            group = self.groups.find_one({"_id":group_id})
+            return group['calendar_id']
+
     # Create a new account with the entered details
     def create_account(self, user_id, pword, name):
         # Rejects the request if an account with that email already exists
@@ -107,7 +112,7 @@ class PinguinDB:
             return 1
 
     # Create a group
-    def create_group(self, name, description):
+    def create_group(self, name, description, calendar_id):
         if (self.groups.find_one({"group_name": name})):
             print('Group of that name already exists')
             return 0
@@ -117,7 +122,8 @@ class PinguinDB:
                           "owner": self.user._id,
                           "description": description,
                           "members": [self.user._id],
-                          "invites": []}
+                          "invites": [],
+                          "calendar_id": calendar_id}
 
             self.groups.insert_one(group_post)
 
@@ -144,22 +150,6 @@ class PinguinDB:
                 #print(x)
         return groupList
 
-    def refresh_tasks(self):
-        return
-
-    # going to need to figure out to send these back in order
-    def refresh_forum(self):
-
-        return
-
-    def refresh_calendar(self):
-        return
-
-    def refresh_group_invites(self):
-        return
-
-    def refresh_all(self):
-        return
 
     def send_invite(self, reciever_id):
 

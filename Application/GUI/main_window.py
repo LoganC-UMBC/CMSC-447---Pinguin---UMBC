@@ -39,6 +39,7 @@ class Main_Window(Ui_main_window):
         self.invites_signal = QtCore.pyqtSignal()
         self.current_group = None
         self.current_group_name = None
+        self.current_calendar_id = None
         self.user_id = self.db.user.user_id
         self.trello = trello
 
@@ -206,6 +207,7 @@ class Main_Window(Ui_main_window):
         self.current_group = group_id
         self.user.currentGroup = ObjectId(group_id)
         self.current_group_name = self.db.group_lookup(self.user.currentGroup)['group_name']
+        self.current_calendar_id = self.db.group_lookup(self.user.currentGroup)['calendar_id']
 ########################################################################################################################
 #                                               Groups Tab                                                             #
 ########################################################################################################################
@@ -243,7 +245,15 @@ class Main_Window(Ui_main_window):
             if group_invites[0] == '':
                 calendar_id = self.google_client.google_calendar.CreateCalendar(group_name, 'America/New_York')
                 print("calendar id: ", calendar_id)
-                self.db.create_group(group_name, group_description)
+                self.db.create_group(group_name, group_description, calendar_id)
+                groups = self.db.get_groups()
+                for group in groups:
+                    if group['group_name'] == group_name:
+                        print("got it")
+                        id = group['calendar_id']
+                        print(id)
+                        #self.db.get_calendar_id()
+
                 self.trello.ping_board_create(group_name)
                 self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
 
@@ -253,7 +263,7 @@ class Main_Window(Ui_main_window):
             else:
                 calendar_id = self.google_client.google_calendar.CreateCalendar(group_name, 'America/New_York')
                 print("calendar id: ", calendar_id)
-                self.db.create_group(group_name, group_description)
+                self.db.create_group(group_name, group_description, calendar_id)
                 self.trello.ping_board_create(group_name)
                 self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
                 self.send_invites(group_invites)
@@ -367,7 +377,7 @@ class Main_Window(Ui_main_window):
         groups = self.db.get_groups()
 
         for group in groups:
-            new_group = StandardItem(group['group_name'], "group", group['description'], str(group['_id']))
+            new_group = StandardItem(group['group_name'], "group", group['description'], str(group['_id']),group['calendar_id'])
             owner = self.db.user_lookup(group['owner'])
             group_owner = StandardItem(owner['user_name'], "owner", None, str(group['owner']))
             new_group.appendRow(group_owner)
@@ -456,8 +466,8 @@ class Main_Window(Ui_main_window):
 
     # Yet to be worked on, only parsing for empty strings
     def add_event(self):
-        start_time = "12:00AM"
-        end_time = "11:59PM"
+        start_time = "12:00:00"
+        end_time = "23:59:00"
         event_date = self.date_edit.date()
         event_year = event_date.year()
         event_month = event_date.month()
@@ -481,9 +491,13 @@ class Main_Window(Ui_main_window):
             self.calendar_error_label.setText(error_text)
             self.error_frame_show(self.calendar_error_frame)
 
+        elif self.current_calendar_id == None:
+            error_text = "No group selected"
+            self.calendar_error_label.setText(error_text)
+            self.error_frame_show(self.calendar_error_frame)
         # might need to add date edit checker
         else:
-            pass
+            start_time(str(event_year)+"-"+str(event_month)+"-"+str(event_day)+"T"+start_time+"z")
 
     def calendar_buttons(self):
         self.set_date_edit()
@@ -492,13 +506,15 @@ class Main_Window(Ui_main_window):
         # print(self.calendar.selectedDate())
         self.date_edit.setDate(self.calendar.selectedDate())
 
+    def get_months_events(self):
+        pass
+
 
 ########################################################################################################################
 #                                               Tasks Tab                                                              #
 ########################################################################################################################
 
     # add a list to the trello client
-    # not yet connected to trello
     def add_list(self):
         list_name = self.add_list_edit.text()
         duplicate = self.trello_model.findItems(list_name, QtCore.Qt.MatchExactly)
@@ -523,6 +539,7 @@ class Main_Window(Ui_main_window):
             self.tasks_error_label.setText(error_text)
             self.error_frame_show(self.tasks_error_frame)
 
+
     # delete a list to the trello client
     # not yet connected to trello
     def delete_list(self):
@@ -544,7 +561,6 @@ class Main_Window(Ui_main_window):
 
 
     # move a card to another list
-    # not yet connected to trello
     def move_card(self):
         list_from = self.list_move_from_edit.text()
         card_from = self.card_move_edit.text()
@@ -601,7 +617,6 @@ class Main_Window(Ui_main_window):
 
 
     # change a cards description
-    # not yet connected to trello
     def edit_description(self):
         index = self.trello_tree.currentIndex()
 
@@ -622,15 +637,10 @@ class Main_Window(Ui_main_window):
                     self.edit_task_description_button.setText("Save Description")
 
                 elif self.edit_task_description_button.text() == "Save Description":
+                    item = self.trello_model.itemFromIndex(index)
+                    self.trello.ping_card_modify(self.current_group_name, item.parent().text(), item.text(),self.task_card_view.toPlainText())
                     self.task_card_view.setReadOnly(True)
                     self.edit_task_description_button.setText("Edit Description")
-
-
-
-    # save new description to task card
-    # not yet connected to trello client
-    def save_description(self):
-        pass
 
 
     # delete a task card from a list
@@ -882,7 +892,7 @@ class Main_Window(Ui_main_window):
         if doc_type == "create":
             # add doc to database
             self.google_client.google_drive.create(doc_name)
-            self.document_list.addItem(DocListItem(doc_name),"doc")
+            #self.document_list.addItem(DocListItem(doc_name),"doc")
 
         elif doc_type == "share":
             self.db.document_add(doc_name, "link", doc_url)
@@ -937,11 +947,12 @@ class InvitesListItem(Qt.QListWidgetItem):
 
 # A QStandardItem for tree widgets
 class StandardItem(QtGui.QStandardItem):
-    def __init__(self,  txt='', role=None, description=None, group_id=None, font_size=12, set_bold=False, color=Qt.QColor(0, 0, 0)):
+    def __init__(self,  txt='', role=None, description=None, group_id=None, calendar_id=None, font_size=12, set_bold=False, color=Qt.QColor(0, 0, 0)):
         super().__init__()
         self.role = role
         self.description = description
         self.group_id = group_id
+        self.calendar_id = calendar_id
         fnt = Qt.QFont('Open Sans', font_size)
         fnt.setBold(set_bold)
         self.setEditable(False)

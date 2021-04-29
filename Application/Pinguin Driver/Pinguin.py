@@ -78,10 +78,14 @@ class Pinguin(QMainWindow):
 			print("no creds")
 			# Authenticate if they're not there
 			self.auth.LocalWebserverAuth()
+
 		elif self.auth.access_token_expired:
 			print("creds expired")
 			# Refresh them if expired
 			self.auth.Refresh()
+
+			print("creds renewed")
+
 		else:
 			print("new creds")
 			# Initialize the saved creds

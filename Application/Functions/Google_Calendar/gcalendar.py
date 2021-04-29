@@ -74,7 +74,7 @@ class Google_Calendar(object):
 
         self.auth.service2.calendarList().insert(calendarId).execute()
 
-    def DeleteFromCalendarList(self, calendarID=None):
+    def DeleteFromCalendarList(self, calendarId=None):
 
         """deletes the calendar from the associated accounts calendar list
 

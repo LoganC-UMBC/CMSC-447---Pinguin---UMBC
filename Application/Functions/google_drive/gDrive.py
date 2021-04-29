@@ -13,6 +13,7 @@ class Google_Drive(object):
         user_file = self.drive.CreateFile({'title': user_title})
         print(user_file)
         user_file.Upload()
+        print(user_file)
 
 
     def trash_files(self, trash_file):

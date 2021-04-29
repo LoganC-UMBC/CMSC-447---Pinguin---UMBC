@@ -112,7 +112,7 @@ class Ui_main_window(object):
         self.horizontalLayout_12.addWidget(self.create_group_button)
         self.group_bar = QtWidgets.QFrame(self.groups_tab)
         self.group_bar.setEnabled(True)
-        self.group_bar.setGeometry(QtCore.QRect(10, 510, 801, 44))
+        self.group_bar.setGeometry(QtCore.QRect(0, 0, 801, 44))
         self.group_bar.setMinimumSize(QtCore.QSize(801, 44))
         self.group_bar.setMaximumSize(QtCore.QSize(801, 81))
         self.group_bar.setFrameShape(QtWidgets.QFrame.NoFrame)
