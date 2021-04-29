@@ -67,27 +67,30 @@ class Pinguin(QMainWindow):
 	def login_success(self):
 		self.login_menu.hide()
 		if self.trello.client == None:
-			self.trello.action_setup(self.db.user.user_id)
-		"""
-		auth = GoogleAuth()
-		# gauth.LocalWebserverAuth()
+			print(self.db.user.user_id)
+			self.trello.action_setup2(self.db.user.user_id)
 
+		self.auth = GoogleAuth()
 		# Try to load saved client credentials
-		auth.LoadCredentialsFile("Credentials.json")
-		if auth.credentials is None:
+		self.auth.LoadCredentialsFile("Credentials.json")
+
+		if self.auth.credentials is None:
+			print("no creds")
 			# Authenticate if they're not there
-			auth.LocalWebserverAuth()
-		elif auth.access_token_expired:
+			self.auth.LocalWebserverAuth()
+		elif self.auth.access_token_expired:
+			print("creds expired")
 			# Refresh them if expired
-			auth.Refresh()
+			self.auth.Refresh()
 		else:
+			print("new creds")
 			# Initialize the saved creds
-			auth.Authorize()
+			self.auth.Authorize()
 		# Save the current credentials to a file
-		auth.SaveCredentialsFile("Credentials.json")
+		self.auth.SaveCredentialsFile("Credentials.json")
 
 		self.main_window.ui.google_client = GoogleClient(self.auth)
-		"""
+		print("heresdasd")
 		self.main_window.ui.widgets_refresh()
 		self.main_window.show()
 

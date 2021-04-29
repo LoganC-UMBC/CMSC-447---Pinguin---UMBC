@@ -1,6 +1,7 @@
 from Application.GUI.Uis.Trello_Pin_Window_Ui.trello_pin_window_ui import *
 from Application.Functions.trello_api.ping_authorization import *
 from Application.Functions.trello_api.task_card import *
+import json
 
 os.environ["TRELLO_API_KEY"] = '2e0161c01eca7ad03bda843f811dac8b'
 os.environ["TRELLO_API_SECRET"] = 'd4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea'
@@ -44,9 +45,11 @@ class trello_pin_window_ext(Ui_trello_pin_window):
                 token_secret=user_token_secret
             )
 
-            file = open("pinguin.config", "w")
-            conf_dict = {"id": self.email, "token": user_token, "token_secret": user_token_secret}
-            file.write(str(conf_dict))
+            file = open("pinguin.json", "w")
+            accounts = json.load(file)
+            account = {self.email:{"token":user_token, "token_secret": user_token_secret}}
+            accounts.append(account)
             file.close()
+
             self.trello.client = client
             self.parent.close()

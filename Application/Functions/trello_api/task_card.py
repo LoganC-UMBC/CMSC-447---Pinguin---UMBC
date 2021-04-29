@@ -4,6 +4,7 @@
 from trello import TrelloClient
 from trello.util import create_oauth_token
 from Application.Functions.trello_api.ping_authorization import *
+import json
 import os
 import os.path
 from os import path
@@ -250,6 +251,7 @@ class Trello():
             contents = file.read()
             # convert the file contents to a dictionary
             conf_dict = ast.literal_eval(contents)
+            print(conf_dict)
 
             # if this email already has a configuration, use it
             if email in conf_dict.keys():
@@ -287,6 +289,52 @@ class Trello():
                 file.close()
 
             self.client = client
+        else:
+            print(ping_oauth_link())
+            # CHANGE THE INPUT TO THE GUI'S RECIEVED PIN
+            provided_pin = input("Enter your pin: ")
+            ping_token = ping_oauth_pin(provided_pin)
+
+            user_token = ping_token.get('oauth_token')
+            user_token_secret = ping_token.get('oauth_token_secret')
+
+            client = TrelloClient(
+                api_key='2e0161c01eca7ad03bda843f811dac8b',
+                api_secret='d4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea',
+                # token = '3e1c54bc5ae2f18fe2e449c102c49b40400de0b39e2aca401dfc7a028c1ed33e',
+                # token_secret = '298b5e59c4c09cff9666ba32fd381c5f'
+                token=user_token,
+                token_secret=user_token_secret
+            )
+
+            file = open("pinguin.config", "w")
+            conf_dict = {email: {"token": user_token, "token_secret": user_token_secret}}
+
+            file.write(str(conf_dict))
+            file.close()
+
+            self.client = client
+
+
+
+    def action_setup2(self, email):
+        # if the config file already exists, use the existing tokens
+        if path.exists("pinguin.json"):
+            file = open("pinguin.json", "r")
+            accounts = json.load(file)
+            print(accounts.keys())
+
+            # if this email already has a configuration, use it
+            if email in accounts.keys():
+                client = TrelloClient(
+                    api_key='2e0161c01eca7ad03bda843f811dac8b',
+                    api_secret='d4446e39644f0992f6db9859c77441754f0085ad5725d86699780d1ba86dfeea',
+                    # token = '3e1c54bc5ae2f18fe2e449c102c49b40400de0b39e2aca401dfc7a028c1ed33e',
+                    # token_secret = '298b5e59c4c09cff9666ba32fd381c5f'
+                    token=accounts[email]["token"],
+                    token_secret=accounts[email]["token_secret"]
+                )
+                self.client = client
         else:
             print(ping_oauth_link())
             # CHANGE THE INPUT TO THE GUI'S RECIEVED PIN

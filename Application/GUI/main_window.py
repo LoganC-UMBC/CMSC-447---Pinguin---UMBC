@@ -83,24 +83,8 @@ class Main_Window(Ui_main_window):
         self.forum_model = QtGui.QStandardItemModel()
         self.forum_node = self.forum_model.invisibleRootItem()
 
-        """# test data to work with
-        item = StandardItem("")
-        for i in range(10):
-            item = StandardItem("group"+str(i))
-            self.forum_node.appendRow(item)
-            for j in range(6):
-                item2 = StandardItem("member"+str(j))
-                item.appendRow(item2)
-        # end test data"""
-
         self.forum_tree.setModel(self.forum_model)
         self.forum_tree.expandAll()
-########################################################################################################################
-#                                                         adding test data for invites list                            #
-########################################################################################################################
-        """for i in range(10):
-            item = GroupsListItem("user"+str(i),"group"+str(i))
-            self.invites_list.addItem(item)"""
 
 ########################################################################################################################
 #                                                         trello tree model setup                                      #
@@ -108,21 +92,6 @@ class Main_Window(Ui_main_window):
         self.trello_tree.setHeaderHidden(True)
         self.trello_model = QtGui.QStandardItemModel()
         self.trello_node = self.trello_model.invisibleRootItem()
-
-        """board = StandardItem("Board")
-        list = StandardItem("list")
-        card = StandardItem("task card")
-
-        self.trello_node.appendRow(board)
-
-        for i in range(5):
-            list = StandardItem("list"+str(i))
-
-            for j in range(5):
-                card = StandardItem("task card"+str(j))
-                list.appendRow(card)
-            board.appendRow(list)
-        """
 
         self.trello_tree.setModel(self.trello_model)
         self.trello_tree.expandAll()
@@ -272,8 +241,8 @@ class Main_Window(Ui_main_window):
 
             # creating group with or without invites
             if group_invites[0] == '':
-                #calendar_id = self.google_client.google_calendar.CreateCalendar(group_name, 'America/New_York')
-                #print("calendar id: ", calendar_id)
+                calendar_id = self.google_client.google_calendar.CreateCalendar(group_name, 'America/New_York')
+                print("calendar id: ", calendar_id)
                 self.db.create_group(group_name, group_description)
                 self.trello.ping_board_create(group_name)
                 self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
@@ -282,6 +251,8 @@ class Main_Window(Ui_main_window):
                 self.trello.ping_board_create(group_name)
 
             else:
+                calendar_id = self.google_client.google_calendar.CreateCalendar(group_name, 'America/New_York')
+                print("calendar id: ", calendar_id)
                 self.db.create_group(group_name, group_description)
                 self.trello.ping_board_create(group_name)
                 self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
@@ -416,6 +387,10 @@ class Main_Window(Ui_main_window):
             if member_doc:
                 print("Sending invites")
                 self.db.send_invite(member_doc['_id'])
+                boards = self.trello.ping_boards()
+                for board in boards:
+                    if(board.name == self.current_group_name):
+                        self.trello.add_members(board.name,member_doc['user_id'])
 
 
 ########################################################################################################################
@@ -528,21 +503,25 @@ class Main_Window(Ui_main_window):
         list_name = self.add_list_edit.text()
         duplicate = self.trello_model.findItems(list_name, QtCore.Qt.MatchExactly)
 
-        if list_name == "":
-            error_text = "Missing a list name to add"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
-
-        elif list_name != "":
-            if len(duplicate) == 0:
-                self.add_list_edit.clear()
-                self.trello.ping_list_create(self.current_group_name, list_name)
-
-            else:
-                error_text = "List " + list_name + " already exists"
+        if self.current_group != None:
+            if list_name == "":
+                error_text = "Missing a list name to add"
                 self.tasks_error_label.setText(error_text)
                 self.error_frame_show(self.tasks_error_frame)
 
+            elif list_name != "":
+                if len(duplicate) == 0:
+                    self.add_list_edit.clear()
+                    self.trello.ping_list_create(self.current_group_name, list_name)
+
+                else:
+                    error_text = "List " + list_name + " already exists"
+                    self.tasks_error_label.setText(error_text)
+                    self.error_frame_show(self.tasks_error_frame)
+        else:
+            error_text = "No group selected"
+            self.tasks_error_label.setText(error_text)
+            self.error_frame_show(self.tasks_error_frame)
 
     # delete a list to the trello client
     # not yet connected to trello
@@ -567,92 +546,58 @@ class Main_Window(Ui_main_window):
     # move a card to another list
     # not yet connected to trello
     def move_card(self):
-        board_from = self.board_move_edit.text()
         list_from = self.list_move_from_edit.text()
         card_from = self.card_move_edit.text()
         list_to = self.list_move_to_edit.text()
 
-        if board_from+list_from+card_from+list_to == "":
-            error_text = "Missing board(from) / list(from) / task card / list(to)"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
+        if self.current_group != None:
 
-        elif board_from != "" and list_from+card_from+list_to == "":
-            error_text = "Missing list(from) / task card / list(to)"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
+            if list_from+card_from+list_to == "":
+                error_text = "Missing list(from) / task card / list(to)"
+                self.tasks_error_label.setText(error_text)
+                self.error_frame_show(self.tasks_error_frame)
 
-        elif list_from != "" and board_from+card_from+list_to == "":
-            error_text = "Missing board(from) / task card / list(to)"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
+            elif list_from != "" and card_from+list_to == "":
+                error_text = "Missing task card / list(to)"
+                self.tasks_error_label.setText(error_text)
+                self.error_frame_show(self.tasks_error_frame)
 
-        elif card_from != "" and board_from+list_from+list_to == "":
-            error_text = "Missing board(from) / list(from) / list(to) "
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
+            elif card_from != "" and list_from+list_to == "":
+                error_text = "Missing list(from) / list(to) "
+                self.tasks_error_label.setText(error_text)
+                self.error_frame_show(self.tasks_error_frame)
 
-        elif list_to != "" and board_from+list_from+card_from == "":
-            error_text = "Missing board(from) / list(from) / task card"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
+            elif list_to != "" and list_from+card_from == "":
+                error_text = "Missing list(from) / task card"
+                self.tasks_error_label.setText(error_text)
+                self.error_frame_show(self.tasks_error_frame)
 
-        elif board_from != "" and list_from != "" and card_from+list_to == "":
-            error_text = "Missing task card / list(to)"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
+            elif list_from != "" and card_from != "" and list_to == "":
+                error_text = "Missing list(to)"
+                self.tasks_error_label.setText(error_text)
+                self.error_frame_show(self.tasks_error_frame)
 
-        elif board_from != "" and card_from != "" and list_from+list_to == "":
-            error_text = "Missing list(from) / list (to)"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
+            elif list_from != "" and list_to != "" and card_from == "":
+                error_text = "Missing task card"
+                self.tasks_error_label.setText(error_text)
+                self.error_frame_show(self.tasks_error_frame)
 
-        elif board_from != "" and list_to != "" and list_from+card_from == "":
-            error_text = "Missing list(from) / task card"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
+            elif card_from != "" and list_to != "" and list_from == "":
+                error_text = "Missing list(from)"
+                self.tasks_error_label.setText(error_text)
+                self.error_frame_show(self.tasks_error_frame)
 
-        elif list_from != "" and card_from != "" and board_from+list_to == "":
-            error_text = "Missing board(from) / list(to)"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
+            else:
+                self.list_move_from_edit.clear()
+                self.card_move_edit.clear()
+                self.list_move_to_edit.clear()
 
-        elif list_from != "" and list_to != "" and board_from+card_from == "":
-            error_text = "Missing board(from) / task card"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
+                self.trello.ping_card_move(self.current_group_name, list_from, card_from, list_to)
 
-        elif card_from != "" and list_from != "" and board_from+list_to == "":
-            error_text = "Missing board(from) / list(to)"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
-
-        elif card_from != "" and list_to != "" and board_from+list_from == "":
-            error_text = "Missing board(from) / list(from)"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
-
-        elif board_from != "" and list_from != "" and card_from != "" and list_to == "":
-            error_text = "Missing list(to)"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
-
-        elif board_from != "" and list_from != "" and list_to != "" and card_from == "":
-            error_text = "Missing task card"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
-
-        elif board_from != "" and card_from != "" and list_to != "" and list_from == "":
-            error_text = "Missing list(from)"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
-
-        elif list_from != "" and card_from != "" and list_to != "" and board_from == "":
-            error_text = "Missing board(from)"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
         else:
-            self.trello.ping_card_move(self.current_group_name, list_from, card_from, list_to)
+            error_text = "No group selected"
+            self.tasks_error_label.setText(error_text)
+            self.error_frame_show(self.tasks_error_frame)
 
 
     # change a cards description
@@ -714,91 +659,67 @@ class Main_Window(Ui_main_window):
     # add a task card to a list
     # not yet connected to trello
     def add_task(self):
-        board_name = self.card_add_board_edit.text()
         list_name = self.card_add_list_edit.text()
         card_name = self.card_add_edit.text()
         task_description = self.card_description_edit.toPlainText()
 
-        if board_name+list_name+card_name+task_description == "":
-            error_text = "Missing board name / list name / task card name / task card description"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
-
-        elif board_name != "" and list_name+card_name+task_description == "":
+        if list_name+card_name+task_description == "":
             error_text = "Missing list name / task card name / task card description"
             self.tasks_error_label.setText(error_text)
             self.error_frame_show(self.tasks_error_frame)
 
-        elif list_name != "" and board_name+card_name+task_description == "":
-            error_text = "Missing board name / task card name / task card description"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
 
-        elif card_name != "" and board_name+list_name+task_description == "":
-            error_text = "Missing board name / list name / task card description"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
-
-        elif task_description != "" and board_name+list_name+card_name == "":
-            error_text = "Missing board name / list name / task card name"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
-
-        elif board_name != "" and list_name != "" and card_name+task_description == "":
+        elif list_name != "" and card_name+task_description == "":
             error_text = "Missing task card name / task card description"
             self.tasks_error_label.setText(error_text)
             self.error_frame_show(self.tasks_error_frame)
 
-        elif board_name != "" and card_name != "" and list_name+task_description == "":
+        elif card_name != "" and list_name+task_description == "":
             error_text = "Missing list name / task card description"
             self.tasks_error_label.setText(error_text)
             self.error_frame_show(self.tasks_error_frame)
 
-        elif board_name != "" and task_description != "" and list_name+card_name == "":
+        elif task_description != "" and list_name+card_name == "":
             error_text = "Missing list name / task card name"
             self.tasks_error_label.setText(error_text)
             self.error_frame_show(self.tasks_error_frame)
 
-        elif list_name != "" and card_name != "" and board_name+task_description == "":
-            error_text = "Missing board name / task card description"
+        elif list_name != "" and card_name+task_description == "":
+            error_text = "Missing task card name / task card description"
             self.tasks_error_label.setText(error_text)
             self.error_frame_show(self.tasks_error_frame)
 
-        elif list_name != "" and task_description != "" and board_name+card_name == "":
-            error_text = "Missing board name / task card name"
+        elif card_name != "" and list_name+task_description == "":
+            error_text = "Missing list name / task card description"
             self.tasks_error_label.setText(error_text)
             self.error_frame_show(self.tasks_error_frame)
 
-        elif card_name != "" and task_description != "" and board_name+list_name == "":
-            error_text = "Missing board name / list name"
+        elif task_description != "" and list_name+card_name == "":
+            error_text = "Missing list name / task card name"
             self.tasks_error_label.setText(error_text)
             self.error_frame_show(self.tasks_error_frame)
 
-        elif board_name != "" and list_name != "" and card_name != "" and task_description == "":
+        elif list_name != "" and card_name != "" and task_description == "":
             error_text = "Missing task card description"
             self.tasks_error_label.setText(error_text)
             self.error_frame_show(self.tasks_error_frame)
 
-        elif board_name != "" and list_name != "" and task_description != "" and card_name == "":
+        elif list_name != "" and task_description != "" and card_name == "":
             error_text = "Missing task card name"
             self.tasks_error_label.setText(error_text)
             self.error_frame_show(self.tasks_error_frame)
 
-        elif board_name != "" and card_name != "" and task_description != "" and list_name == "":
+        elif card_name != "" and task_description != "" and list_name == "":
             error_text = "Missing list name"
-            self.tasks_error_label.setText(error_text)
-            self.error_frame_show(self.tasks_error_frame)
-
-        elif list_name != "" and card_name != "" and task_description != "" and board_name == "":
-            error_text = "Missing board name"
             self.tasks_error_label.setText(error_text)
             self.error_frame_show(self.tasks_error_frame)
 
         else:
             # add task card to trello
             # update function
-            self.trello.ping_card_create(self.current_group_name, list_name, card_name, task_description)
-            self.set_trello_tree()
+            print("card added")
+            #self.trello.ping_card_create(self.current_group_name, list_name, card_name, task_description)
+            #self.set_trello_tree()
 
 
     # get all trello boards, lists, and task cards to insert
