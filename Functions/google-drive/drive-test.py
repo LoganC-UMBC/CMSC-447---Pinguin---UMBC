@@ -21,6 +21,6 @@ def drive_delete(drive, file_title):
     file_list[0].Trash()
 
 # TESTING
-drive = authenticate()
-#create(drive, "my file")
-trash_files(drive, "my file")
+drive = drive_authenticate()
+#drive_create(drive, "my file")
+drive_delete(drive, "my file")
