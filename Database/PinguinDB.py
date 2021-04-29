@@ -2,6 +2,8 @@ import pymongo, datetime, time, hashlib
 
 from bson.objectid import ObjectId
 from utils.class_user import User
+from gcalendar import GoogleCalendar
+from pydrive.auth import GoogleAuth
 from random import seed, randint
 
 
@@ -68,6 +70,7 @@ class PinguinDB:
         userList.append(self.user._id)
         userList.append(self.user.user_id)
         userList.append(self.user.user_name)
+        userList.append(self.user.currentGroup)
         print(userList[0])
         print(userList[1])
         print(userList[2])
@@ -76,13 +79,9 @@ class PinguinDB:
     # Changes the current group to another group the user is in
     def change_group(self, group_id):
 
-        if(group_id in self.user.groups):
-            self.user.currentGroup = group
-            print(self.user.currentGroup)
-            return 1
-        else:
-            print("User is not a member of given group")
-            return 0
+        self.user.currentGroup = group_id
+        print(self.user.currentGroup)
+        return 1
 
     # Create a new account with the entered details
     def create_account(self, user_id, pword, name):
@@ -115,9 +114,10 @@ class PinguinDB:
             return 0
         else:
 
+ 
             group_post = {"group_name": name,
                           "owner":self.user._id,
-                          "description":description,  
+                          "description":description,
                           "members":[self.user._id],
                           "invites":[]}
         
@@ -127,6 +127,8 @@ class PinguinDB:
             self.user.groups.append(groupFind)
             self.users.update_one({"_id":self.user._id}, {"$push": {"groups":groupFind}})
 
+            
+
     # Checks if the user is the owner of the group
     def check_ownership(self, group_id, user_id):
         groupCheck = self.groups.find_one({"_id":group_id}).get("owner")
@@ -134,6 +136,29 @@ class PinguinDB:
             return 1
         else:
             return 0
+
+    def remove_user(self, user_id):
+        if(user_id == self.user._id):
+            print("Error, cannot remove self from group")
+            return 0
+
+        self.groups.update_one({"_id":self.user.currentGroup}, {"$pull": {"members":user_id}})
+        self.users.update_one({'_id':user_id},{"$pull": {"groups":self.user.currentGroup}})
+        return 1
+
+    def delete_group(self):
+        memberList = []
+        memberList = self.groups.find_one({'_id':self.user.currentGroup}).get('members')
+
+        for x in memberList:
+            self.users.update_one({'_id':x}, {"$pull": {"groups":self.user.currentGroup}})
+
+        self.groups.delete_one({'_id':self.user.currentGroup})
+        for x in self.user.groups:
+            if (x == self.user.currentGroup):
+                self.user.groups.remove(x)
+                if (len(self.user.groups) >= 1):
+                    self.user.currentGroup = self.user.groups[0]
 
     def testConnections(self):
         print(self.db.list_collection_names())
@@ -183,7 +208,14 @@ class PinguinDB:
 
         return 1
     
-    # Forums Window
+    def invite_find(self):
+            
+        inviteList = []
+        for x in self.users.find_one({'_id':self.user._id}).get("invites"):
+            inviteList.append(x)
+            print(x)
+        return inviteList
+
     def invite_accept(self, group_id):
 
         #remove the invite
@@ -193,8 +225,8 @@ class PinguinDB:
             if x['group_id'] == group_id:
                 inviteFind = x
 
-        self.groups.update_one({"_id":group_id}, {"$unset": {"invites":inviteFind}})
-        self.users.update_one({"_id":self.user._id}, {"$unset": {"invites":inviteFind}})
+        self.groups.update_one({"_id":group_id}, {"$pull": {"invites":inviteFind}})
+        self.users.update_one({"_id":self.user._id}, {"$pull": {"invites":inviteFind}})
         
 
         #add them to the group
@@ -210,8 +242,8 @@ class PinguinDB:
             if x['group_id'] == group_id:
                 inviteFind = x
 
-        self.groups.update_one({"_id":group_id}, {"$unset": {"invites":inviteFind}})
-        self.users.update_one({"_id":self.user._id}, {"$unset": {"invites":inviteFind}})
+        self.groups.update_one({"_id":group_id}, {"$pull": {"invites":inviteFind}})
+        self.users.update_one({"_id":self.user._id}, {"$pull": {"invites":inviteFind}})
 
         return 1
     
@@ -226,12 +258,18 @@ class PinguinDB:
         return 1
     
     def retrieve_all_posts(self):
+        print(self.user.currentGroup)
         postList = []
         groupFind = self.groups.find_one({'_id':self.user.currentGroup}).get("group_name")
         for x in self.forums[groupFind].find():
-            print(x)
+            
             postList.append(x)
         return postList
+
+    def delete_post(self, post_id):
+
+        groupFind = self.groups.find_one({'_id':self.user.currentGroup}).get("group_name")
+        self.forums[groupFind].delete_one({"_id":post_id})
 
     def calendar_add(self, description, date):
         
@@ -266,6 +304,11 @@ class PinguinDB:
 
         return calendarList
 
+    def delete_calendar(self, calendar_id):
+
+        groupFind = self.groups.find_one({'_id':self.user.currentGroup}).get("group_name")
+        self.calendars[groupFind].delete_one({"_id":calendar_id})
+
     def document_add(self, title, link):
 
         post = {
@@ -285,6 +328,10 @@ class PinguinDB:
             docList.append(x)
         return docList
 
+    def delete_doc(self, doc_id):
+
+        groupFind = self.groups.find_one({'_id':self.user.currentGroup}).get("group_name")
+        self.documents[groupFind].delete_one({"_id":doc_id})
 
     def user_lookup(self, user_id):
         if(self.users.find_one({'_id':user_id})):
