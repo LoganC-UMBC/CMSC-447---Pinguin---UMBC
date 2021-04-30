@@ -254,6 +254,7 @@ class Main_Window(Ui_main_window):
                 groups = self.db.get_groups()
                 for group in groups:
                     if group['group_name'] == group_name:
+                        self.user.currentGroup = group['_id']
                         print("got it")
                         id = group['calendar_id']
                         print(id)
@@ -272,6 +273,14 @@ class Main_Window(Ui_main_window):
                 calendar_id = self.google_client.google_calendar.CreateCalendar(group_name, 'America/New_York')
                 print("calendar id: ", calendar_id)
                 self.db.create_group(group_name, group_description, calendar_id)
+                groups = self.db.get_groups()
+                for group in groups:
+                    if group['group_name'] == group_name:
+                        self.user.currentGroup = group['_id']
+                        print("got it")
+                        id = group['calendar_id']
+                        print(id)
+                        # self.db.get_calendar_id()
                 self.trello.ping_board_create(group_name)
                 self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
                 self.send_invites(group_invites)
@@ -313,15 +322,17 @@ class Main_Window(Ui_main_window):
 
 
     # return all invites the user has
-    # not yet working
     def get_invites(self):
         self.invites_list.clear()
         invites = self.db.user_lookup(self.user._id)['invites']
+        print(invites)
         if len(invites) != 0:
             for group in invites:
                 #print(group)
                 invite_group = self.db.group_lookup(group['group_id'])
+                print(invite_group)
                 group_name = invite_group['group_name']
+                print(group_name)
                 invite = InvitesListItem(group_name, group['sender'], group['group_id'])
                 self.invites_list.addItem(invite)
 
