@@ -17,31 +17,101 @@ class Ui_main_window(object):
         main_window.resize(805, 631)
         main_window.setMinimumSize(QtCore.QSize(805, 631))
         main_window.setMaximumSize(QtCore.QSize(805, 631))
-        main_window.setStyleSheet("")
+        main_window.setStyleSheet("QMainWindow#main_window{\n"
+"border:0px;\n"
+"}")
         self.centralwidget = QtWidgets.QWidget(main_window)
-        self.centralwidget.setStyleSheet("")
+        self.centralwidget.setStyleSheet("QWidget#centralwidget{\n"
+"background-color:rgb(100,100,100);\n"
+"\n"
+"}")
         self.centralwidget.setObjectName("centralwidget")
         self.tab_widget = QtWidgets.QTabWidget(self.centralwidget)
         self.tab_widget.setGeometry(QtCore.QRect(0, 0, 808, 611))
-        self.tab_widget.setStyleSheet("QTabWidget:{}")
+        self.tab_widget.setStyleSheet("QTabWidget::pane {\n"
+"  top:-1px; \n"
+"  background: rgb(245, 245, 245);\n"
+"} \n"
+"\n"
+"QTabBar::tab {\n"
+"  background: rgb(191, 191, 191);\n"
+"  color:black\n"
+"} \n"
+"\n"
+"QTabBar::tab:selected { \n"
+"  }")
         self.tab_widget.setTabPosition(QtWidgets.QTabWidget.North)
+        self.tab_widget.setTabShape(QtWidgets.QTabWidget.Triangular)
         self.tab_widget.setMovable(True)
         self.tab_widget.setObjectName("tab_widget")
         self.groups_tab = QtWidgets.QWidget()
-        self.groups_tab.setStyleSheet("QWidget{background-color;}")
+        self.groups_tab.setStyleSheet("QWidget#groups_tab{\n"
+"background-color: rgb(100,100,100);\n"
+"\n"
+"}")
         self.groups_tab.setObjectName("groups_tab")
         self.group_name_edit = QtWidgets.QLineEdit(self.groups_tab)
         self.group_name_edit.setGeometry(QtCore.QRect(250, 40, 301, 22))
+        self.group_name_edit.setMinimumSize(QtCore.QSize(301, 22))
+        self.group_name_edit.setMaximumSize(QtCore.QSize(301, 22))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.group_name_edit.setFont(font)
+        self.group_name_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: white;}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.group_name_edit.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.group_name_edit.setObjectName("group_name_edit")
         self.group_description_edit = QtWidgets.QPlainTextEdit(self.groups_tab)
         self.group_description_edit.setGeometry(QtCore.QRect(250, 70, 301, 71))
+        self.group_description_edit.setMinimumSize(QtCore.QSize(301, 71))
+        self.group_description_edit.setMaximumSize(QtCore.QSize(301, 71))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.group_description_edit.setFont(font)
+        self.group_description_edit.setStyleSheet("QPlainTextEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QPlainTextEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QPlainTextEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.group_description_edit.setObjectName("group_description_edit")
         self.invites_list = QtWidgets.QListWidget(self.groups_tab)
         self.invites_list.setGeometry(QtCore.QRect(610, 40, 181, 451))
+        self.invites_list.setStyleSheet("QWidget#invites_list{\n"
+"background-color: rgb(75,75,75);\n"
+"border-radius:5px;\n"
+"border:0px;\n"
+"color:white\n"
+"}")
         self.invites_list.setObjectName("invites_list")
         self.group_description_view = QtWidgets.QPlainTextEdit(self.groups_tab)
         self.group_description_view.setGeometry(QtCore.QRect(250, 320, 301, 171))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.group_description_view.setFont(font)
+        self.group_description_view.setStyleSheet("QWidget#group_description_view{\n"
+"background-color: rgb(75,75,75);\n"
+"border-radius:5px;\n"
+"border:0px;\n"
+"color:white\n"
+"}")
         self.group_description_view.setReadOnly(True)
         self.group_description_view.setObjectName("group_description_view")
         self.horizontalLayoutWidget_9 = QtWidgets.QWidget(self.groups_tab)
@@ -51,9 +121,45 @@ class Ui_main_window(object):
         self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_10.setObjectName("horizontalLayout_10")
         self.accept_invite_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_9)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.accept_invite_button.setFont(font)
+        self.accept_invite_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.accept_invite_button.setObjectName("accept_invite_button")
         self.horizontalLayout_10.addWidget(self.accept_invite_button)
         self.decline_invite_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_9)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.decline_invite_button.setFont(font)
+        self.decline_invite_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.decline_invite_button.setObjectName("decline_invite_button")
         self.horizontalLayout_10.addWidget(self.decline_invite_button)
         self.group_tree_label = QtWidgets.QLabel(self.groups_tab)
@@ -79,6 +185,24 @@ class Ui_main_window(object):
         self.create_group_label.setObjectName("create_group_label")
         self.email_edit = QtWidgets.QPlainTextEdit(self.groups_tab)
         self.email_edit.setGeometry(QtCore.QRect(250, 150, 301, 71))
+        self.email_edit.setMinimumSize(QtCore.QSize(301, 71))
+        self.email_edit.setMaximumSize(QtCore.QSize(301, 71))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.email_edit.setFont(font)
+        self.email_edit.setStyleSheet("QPlainTextEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QPlainTextEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QPlainTextEdit:focus {\n"
+"    border: 2px solid rgb(255, 207, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.email_edit.setObjectName("email_edit")
         self.horizontalLayoutWidget_10 = QtWidgets.QWidget(self.groups_tab)
         self.horizontalLayoutWidget_10.setGeometry(QtCore.QRect(10, 490, 181, 81))
@@ -87,15 +211,51 @@ class Ui_main_window(object):
         self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
         self.invite_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_10)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.invite_button.setFont(font)
+        self.invite_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.invite_button.setObjectName("invite_button")
         self.horizontalLayout_11.addWidget(self.invite_button)
         self.delete_group_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_10)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.delete_group_button.setFont(font)
+        self.delete_group_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.delete_group_button.setObjectName("delete_group_button")
         self.horizontalLayout_11.addWidget(self.delete_group_button)
         self.group_description_label = QtWidgets.QLabel(self.groups_tab)
         self.group_description_label.setGeometry(QtCore.QRect(250, 290, 301, 31))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(14)
         self.group_description_label.setFont(font)
         self.group_description_label.setAlignment(QtCore.Qt.AlignCenter)
         self.group_description_label.setObjectName("group_description_label")
@@ -108,6 +268,24 @@ class Ui_main_window(object):
         self.create_group_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_11)
         self.create_group_button.setMinimumSize(QtCore.QSize(75, 24))
         self.create_group_button.setMaximumSize(QtCore.QSize(75, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.create_group_button.setFont(font)
+        self.create_group_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.create_group_button.setObjectName("create_group_button")
         self.horizontalLayout_12.addWidget(self.create_group_button)
         self.group_bar = QtWidgets.QFrame(self.groups_tab)
@@ -115,6 +293,7 @@ class Ui_main_window(object):
         self.group_bar.setGeometry(QtCore.QRect(0, 0, 801, 44))
         self.group_bar.setMinimumSize(QtCore.QSize(801, 44))
         self.group_bar.setMaximumSize(QtCore.QSize(801, 81))
+        self.group_bar.setStyleSheet("")
         self.group_bar.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.group_bar.setFrameShadow(QtWidgets.QFrame.Raised)
         self.group_bar.setObjectName("group_bar")
@@ -122,7 +301,11 @@ class Ui_main_window(object):
         self.groups_error_frame.setGeometry(QtCore.QRect(0, 0, 801, 44))
         self.groups_error_frame.setMinimumSize(QtCore.QSize(801, 44))
         self.groups_error_frame.setMaximumSize(QtCore.QSize(801, 44))
-        self.groups_error_frame.setStyleSheet("QFrame{background-color:rgb(255,255,255);}\n"
+        self.groups_error_frame.setStyleSheet("QFrame{\n"
+"background-color: rgb(255, 189, 83);\n"
+"border-radius: 15px;\n"
+"\n"
+"}\n"
 "")
         self.groups_error_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.groups_error_frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -133,7 +316,7 @@ class Ui_main_window(object):
         self.groups_error_label.setMinimumSize(QtCore.QSize(755, 24))
         self.groups_error_label.setMaximumSize(QtCore.QSize(755, 24))
         self.groups_error_label.setStyleSheet("QLabel{\n"
-"background-color:white;\n"
+"background-color: rgb(255, 189, 83);\n"
 "border-radius:5px;\n"
 "}")
         self.groups_error_label.setAlignment(QtCore.Qt.AlignCenter)
@@ -145,15 +328,37 @@ class Ui_main_window(object):
         font = QtGui.QFont()
         font.setPointSize(8)
         self.groups_close_popup_button.setFont(font)
-        self.groups_close_popup_button.setStyleSheet("")
+        self.groups_close_popup_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(250, 230, 0);\n"
+"    border: 2px solid rgb(255, 165, 24);    \n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.groups_close_popup_button.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../GitHub/Login_PyQt5/Images/cil-x.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../GitHub/CMSC-447---Pinguin---UMBC/Application/GUI/Images/cil-x.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.groups_close_popup_button.setIcon(icon)
         self.groups_close_popup_button.setObjectName("groups_close_popup_button")
         self.horizontalLayout_18.addWidget(self.groups_close_popup_button)
         self.groups_tree = QtWidgets.QTreeView(self.groups_tab)
         self.groups_tree.setGeometry(QtCore.QRect(10, 40, 181, 451))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.groups_tree.setFont(font)
+        self.groups_tree.setStyleSheet("QWidget#groups_tree{\n"
+"background-color: rgb(75,75,75);\n"
+"border-radius:5px;\n"
+"border:0px;\n"
+"color:white\n"
+"}")
         self.groups_tree.setObjectName("groups_tree")
         self.group_tree_label.raise_()
         self.invites_label.raise_()
@@ -171,6 +376,10 @@ class Ui_main_window(object):
         self.group_bar.raise_()
         self.tab_widget.addTab(self.groups_tab, "")
         self.forums_tab = QtWidgets.QWidget()
+        self.forums_tab.setStyleSheet("QWidget#forums_tab{\n"
+"background-color: rgb(100,100,100);\n"
+"\n"
+"}")
         self.forums_tab.setObjectName("forums_tab")
         self.horizontalLayoutWidget_6 = QtWidgets.QWidget(self.forums_tab)
         self.horizontalLayoutWidget_6.setGeometry(QtCore.QRect(200, 0, 591, 51))
@@ -201,6 +410,22 @@ class Ui_main_window(object):
         self.horizontalLayout_13.setObjectName("horizontalLayout_13")
         self.message_edit = QtWidgets.QTextEdit(self.widget)
         self.message_edit.setMaximumSize(QtCore.QSize(535, 93))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.message_edit.setFont(font)
+        self.message_edit.setStyleSheet("QTextEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QTextEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QTextEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.message_edit.setObjectName("message_edit")
         self.horizontalLayout_13.addWidget(self.message_edit)
         self.verticalLayout_3.addLayout(self.horizontalLayout_13)
@@ -209,6 +434,24 @@ class Ui_main_window(object):
         self.message_button = QtWidgets.QPushButton(self.widget)
         self.message_button.setMinimumSize(QtCore.QSize(91, 24))
         self.message_button.setMaximumSize(QtCore.QSize(91, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.message_button.setFont(font)
+        self.message_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.message_button.setObjectName("message_button")
         self.horizontalLayout_14.addWidget(self.message_button)
         self.verticalLayout_3.addLayout(self.horizontalLayout_14)
@@ -221,6 +464,12 @@ class Ui_main_window(object):
         self.forum_groups_label.setObjectName("forum_groups_label")
         self.forum_tree = QtWidgets.QTreeView(self.forums_tab)
         self.forum_tree.setGeometry(QtCore.QRect(10, 40, 181, 531))
+        self.forum_tree.setStyleSheet("QWidget#forum_tree{\n"
+"background-color: rgb(75,75,75);\n"
+"border-radius:5px;\n"
+"border:0px;\n"
+"color:white\n"
+"}")
         self.forum_tree.setObjectName("forum_tree")
         self.forums_bar = QtWidgets.QFrame(self.forums_tab)
         self.forums_bar.setEnabled(True)
@@ -234,7 +483,11 @@ class Ui_main_window(object):
         self.forums_error_frame.setGeometry(QtCore.QRect(0, 0, 801, 44))
         self.forums_error_frame.setMinimumSize(QtCore.QSize(801, 44))
         self.forums_error_frame.setMaximumSize(QtCore.QSize(801, 44))
-        self.forums_error_frame.setStyleSheet("QFrame{background-color:rgb(255,255,255);}\n"
+        self.forums_error_frame.setStyleSheet("QFrame{\n"
+"background-color: rgb(255, 189, 83);\n"
+"border-radius: 15px;\n"
+"\n"
+"}\n"
 "")
         self.forums_error_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.forums_error_frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -245,7 +498,7 @@ class Ui_main_window(object):
         self.forums_error_label.setMinimumSize(QtCore.QSize(755, 24))
         self.forums_error_label.setMaximumSize(QtCore.QSize(755, 24))
         self.forums_error_label.setStyleSheet("QLabel{\n"
-"background-color:white;\n"
+"background-color:rgb(255, 189, 83);\n"
 "border-radius:5px;\n"
 "}")
         self.forums_error_label.setAlignment(QtCore.Qt.AlignCenter)
@@ -257,13 +510,32 @@ class Ui_main_window(object):
         font = QtGui.QFont()
         font.setPointSize(8)
         self.forums_close_popup_button.setFont(font)
-        self.forums_close_popup_button.setStyleSheet("")
+        self.forums_close_popup_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(250, 230, 0);\n"
+"    border: 2px solid rgb(255, 165, 24);    \n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.forums_close_popup_button.setText("")
         self.forums_close_popup_button.setIcon(icon)
         self.forums_close_popup_button.setObjectName("forums_close_popup_button")
         self.horizontalLayout_19.addWidget(self.forums_close_popup_button)
         self.forum_view = QtWidgets.QPlainTextEdit(self.forums_tab)
         self.forum_view.setGeometry(QtCore.QRect(200, 40, 591, 391))
+        self.forum_view.setStyleSheet("QPlainTextEdit{\n"
+"background-color: rgb(150, 150, 150);\n"
+"border-radius:5px;\n"
+"border:0px;\n"
+"color:white\n"
+"}")
         self.forum_view.setReadOnly(True)
         self.forum_view.setObjectName("forum_view")
         self.horizontalLayoutWidget_6.raise_()
@@ -274,12 +546,22 @@ class Ui_main_window(object):
         self.forums_bar.raise_()
         self.tab_widget.addTab(self.forums_tab, "")
         self.calendar_tab = QtWidgets.QWidget()
+        self.calendar_tab.setStyleSheet("QWidget#calendar_tab{\n"
+"background-color: rgb(100,100,100);\n"
+"\n"
+"}")
         self.calendar_tab.setObjectName("calendar_tab")
         self.calendar = QtWidgets.QCalendarWidget(self.calendar_tab)
         self.calendar.setGeometry(QtCore.QRect(10, 10, 371, 281))
+        self.calendar.setStyleSheet("")
         self.calendar.setObjectName("calendar")
         self.todays_list = QtWidgets.QListWidget(self.calendar_tab)
         self.todays_list.setGeometry(QtCore.QRect(410, 40, 381, 191))
+        self.todays_list.setStyleSheet("QWidget#todays_list{\n"
+"background-color: rgb(75,75,75);\n"
+"border-radius:5px;\n"
+"border:0px\n"
+"}")
         self.todays_list.setObjectName("todays_list")
         self.today_label = QtWidgets.QLabel(self.calendar_tab)
         self.today_label.setGeometry(QtCore.QRect(410, 10, 381, 31))
@@ -290,12 +572,62 @@ class Ui_main_window(object):
         self.today_label.setObjectName("today_label")
         self.event_name_edit = QtWidgets.QLineEdit(self.calendar_tab)
         self.event_name_edit.setGeometry(QtCore.QRect(10, 390, 371, 22))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.event_name_edit.setFont(font)
+        self.event_name_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.event_name_edit.setObjectName("event_name_edit")
         self.event_description_edit = QtWidgets.QPlainTextEdit(self.calendar_tab)
         self.event_description_edit.setGeometry(QtCore.QRect(10, 420, 371, 121))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.event_description_edit.setFont(font)
+        self.event_description_edit.setStyleSheet("QPlainTextEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QPlainTextEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QPlainTextEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.event_description_edit.setObjectName("event_description_edit")
         self.add_event_button = QtWidgets.QPushButton(self.calendar_tab)
         self.add_event_button.setGeometry(QtCore.QRect(160, 550, 75, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.add_event_button.setFont(font)
+        self.add_event_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.add_event_button.setObjectName("add_event_button")
         self.months_label = QtWidgets.QLabel(self.calendar_tab)
         self.months_label.setGeometry(QtCore.QRect(410, 320, 381, 31))
@@ -306,6 +638,11 @@ class Ui_main_window(object):
         self.months_label.setObjectName("months_label")
         self.months_list = QtWidgets.QListWidget(self.calendar_tab)
         self.months_list.setGeometry(QtCore.QRect(410, 350, 381, 191))
+        self.months_list.setStyleSheet("QWidget#months_list{\n"
+"background-color: rgb(75,75,75);\n"
+"border-radius:5px;\n"
+"border:0px\n"
+"}")
         self.months_list.setObjectName("months_list")
         self.verticalLayoutWidget_3 = QtWidgets.QWidget(self.calendar_tab)
         self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(9, 319, 371, 65))
@@ -325,6 +662,14 @@ class Ui_main_window(object):
         self.date_edit = QtWidgets.QDateEdit(self.verticalLayoutWidget_3)
         self.date_edit.setMinimumSize(QtCore.QSize(91, 24))
         self.date_edit.setMaximumSize(QtCore.QSize(91, 24))
+        self.date_edit.setStyleSheet("QDateEdit{\n"
+"background-color:rgb(35,35,35);\n"
+"color:rgb(255,255,255);\n"
+"}\n"
+"QDateEdit:focus{\n"
+"border: 2px solid rgb(207, 138, 0);    \n"
+"}\n"
+"")
         self.date_edit.setAlignment(QtCore.Qt.AlignCenter)
         self.date_edit.setObjectName("date_edit")
         self.horizontalLayout_16.addWidget(self.date_edit)
@@ -341,7 +686,11 @@ class Ui_main_window(object):
         self.calendar_error_frame.setGeometry(QtCore.QRect(0, 0, 801, 44))
         self.calendar_error_frame.setMinimumSize(QtCore.QSize(801, 44))
         self.calendar_error_frame.setMaximumSize(QtCore.QSize(801, 44))
-        self.calendar_error_frame.setStyleSheet("QFrame{background-color:rgb(255,255,255);}\n"
+        self.calendar_error_frame.setStyleSheet("QFrame{\n"
+"background-color: rgb(255, 189, 83);\n"
+"border-radius: 15px;\n"
+"\n"
+"}\n"
 "")
         self.calendar_error_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.calendar_error_frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -352,7 +701,7 @@ class Ui_main_window(object):
         self.calendar_error_label.setMinimumSize(QtCore.QSize(755, 24))
         self.calendar_error_label.setMaximumSize(QtCore.QSize(755, 24))
         self.calendar_error_label.setStyleSheet("QLabel{\n"
-"background-color:white;\n"
+"background-color:rgb(255, 189, 83);\n"
 "border-radius:5px;\n"
 "}")
         self.calendar_error_label.setAlignment(QtCore.Qt.AlignCenter)
@@ -364,16 +713,38 @@ class Ui_main_window(object):
         font = QtGui.QFont()
         font.setPointSize(8)
         self.calendar_close_popup_button.setFont(font)
-        self.calendar_close_popup_button.setStyleSheet("")
+        self.calendar_close_popup_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(250, 230, 0);\n"
+"    border: 2px solid rgb(255, 165, 24);    \n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.calendar_close_popup_button.setText("")
         self.calendar_close_popup_button.setIcon(icon)
         self.calendar_close_popup_button.setObjectName("calendar_close_popup_button")
         self.horizontalLayout_20.addWidget(self.calendar_close_popup_button)
         self.tab_widget.addTab(self.calendar_tab, "")
         self.tasks_tab = QtWidgets.QWidget()
+        self.tasks_tab.setStyleSheet("QWidget#tasks_tab{\n"
+"background-color: rgb(100,100,100);\n"
+"\n"
+"}")
         self.tasks_tab.setObjectName("tasks_tab")
         self.trello_tree = QtWidgets.QTreeView(self.tasks_tab)
         self.trello_tree.setGeometry(QtCore.QRect(10, 40, 181, 531))
+        self.trello_tree.setStyleSheet("QWidget#trello_tree{\n"
+"background-color: rgb(75,75,75);\n"
+"border-radius:5px;\n"
+"border:0px\n"
+"}")
         self.trello_tree.setObjectName("trello_tree")
         self.line = QtWidgets.QFrame(self.tasks_tab)
         self.line.setGeometry(QtCore.QRect(200, 260, 591, 20))
@@ -381,18 +752,70 @@ class Ui_main_window(object):
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.horizontalLayoutWidget_4 = QtWidgets.QWidget(self.tasks_tab)
-        self.horizontalLayoutWidget_4.setGeometry(QtCore.QRect(360, 40, 271, 80))
+        self.horizontalLayoutWidget_4.setGeometry(QtCore.QRect(360, 40, 281, 80))
         self.horizontalLayoutWidget_4.setObjectName("horizontalLayoutWidget_4")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_4)
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.add_list_edit = QtWidgets.QLineEdit(self.horizontalLayoutWidget_4)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.add_list_edit.setFont(font)
+        self.add_list_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.add_list_edit.setObjectName("add_list_edit")
         self.horizontalLayout_4.addWidget(self.add_list_edit, 0, QtCore.Qt.AlignLeft)
         self.add_list_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_4)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.add_list_button.setFont(font)
+        self.add_list_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.add_list_button.setObjectName("add_list_button")
         self.horizontalLayout_4.addWidget(self.add_list_button)
         self.delete_list_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_4)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.delete_list_button.setFont(font)
+        self.delete_list_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.delete_list_button.setObjectName("delete_list_button")
         self.horizontalLayout_4.addWidget(self.delete_list_button)
         self.horizontalLayoutWidget_5 = QtWidgets.QWidget(self.tasks_tab)
@@ -402,17 +825,83 @@ class Ui_main_window(object):
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.list_move_from_edit = QtWidgets.QLineEdit(self.horizontalLayoutWidget_5)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.list_move_from_edit.setFont(font)
+        self.list_move_from_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.list_move_from_edit.setObjectName("list_move_from_edit")
         self.horizontalLayout_5.addWidget(self.list_move_from_edit)
         self.card_move_edit = QtWidgets.QLineEdit(self.horizontalLayoutWidget_5)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.card_move_edit.setFont(font)
+        self.card_move_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.card_move_edit.setText("")
         self.card_move_edit.setObjectName("card_move_edit")
         self.horizontalLayout_5.addWidget(self.card_move_edit)
         self.list_move_to_edit = QtWidgets.QLineEdit(self.horizontalLayoutWidget_5)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.list_move_to_edit.setFont(font)
+        self.list_move_to_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.list_move_to_edit.setText("")
         self.list_move_to_edit.setObjectName("list_move_to_edit")
         self.horizontalLayout_5.addWidget(self.list_move_to_edit)
         self.move_card_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_5)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.move_card_button.setFont(font)
+        self.move_card_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.move_card_button.setObjectName("move_card_button")
         self.horizontalLayout_5.addWidget(self.move_card_button)
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.tasks_tab)
@@ -422,15 +911,67 @@ class Ui_main_window(object):
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.task_card_view = QtWidgets.QPlainTextEdit(self.verticalLayoutWidget_2)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.task_card_view.setFont(font)
+        self.task_card_view.setStyleSheet("QPlainTextEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QPlainTextEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QPlainTextEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.task_card_view.setReadOnly(True)
         self.task_card_view.setObjectName("task_card_view")
         self.verticalLayout_2.addWidget(self.task_card_view)
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.edit_task_description_button = QtWidgets.QPushButton(self.verticalLayoutWidget_2)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.edit_task_description_button.setFont(font)
+        self.edit_task_description_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.edit_task_description_button.setObjectName("edit_task_description_button")
         self.horizontalLayout_6.addWidget(self.edit_task_description_button)
         self.delete_task_button = QtWidgets.QPushButton(self.verticalLayoutWidget_2)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.delete_task_button.setFont(font)
+        self.delete_task_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.delete_task_button.setObjectName("delete_task_button")
         self.horizontalLayout_6.addWidget(self.delete_task_button)
         self.verticalLayout_2.addLayout(self.horizontalLayout_6)
@@ -441,15 +982,81 @@ class Ui_main_window(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.card_add_list_edit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.card_add_list_edit.setFont(font)
+        self.card_add_list_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.card_add_list_edit.setObjectName("card_add_list_edit")
         self.verticalLayout.addWidget(self.card_add_list_edit)
         self.card_add_edit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.card_add_edit.setFont(font)
+        self.card_add_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.card_add_edit.setObjectName("card_add_edit")
         self.verticalLayout.addWidget(self.card_add_edit)
         self.card_description_edit = QtWidgets.QPlainTextEdit(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.card_description_edit.setFont(font)
+        self.card_description_edit.setStyleSheet("QPlainTextEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QPlainTextEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QPlainTextEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.card_description_edit.setObjectName("card_description_edit")
         self.verticalLayout.addWidget(self.card_description_edit)
         self.card_add_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.card_add_button.setFont(font)
+        self.card_add_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.card_add_button.setObjectName("card_add_button")
         self.verticalLayout.addWidget(self.card_add_button)
         self.task_card_label = QtWidgets.QLabel(self.tasks_tab)
@@ -485,7 +1092,11 @@ class Ui_main_window(object):
         self.tasks_error_frame.setGeometry(QtCore.QRect(0, 0, 801, 44))
         self.tasks_error_frame.setMinimumSize(QtCore.QSize(801, 44))
         self.tasks_error_frame.setMaximumSize(QtCore.QSize(801, 44))
-        self.tasks_error_frame.setStyleSheet("QFrame{background-color:rgb(255,255,255);}\n"
+        self.tasks_error_frame.setStyleSheet("QFrame{\n"
+"background-color: rgb(255, 189, 83);\n"
+"border-radius: 15px;\n"
+"\n"
+"}\n"
 "")
         self.tasks_error_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.tasks_error_frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -496,7 +1107,7 @@ class Ui_main_window(object):
         self.tasks_error_label.setMinimumSize(QtCore.QSize(755, 24))
         self.tasks_error_label.setMaximumSize(QtCore.QSize(755, 24))
         self.tasks_error_label.setStyleSheet("QLabel{\n"
-"background-color:white;\n"
+"background-color:rgb(255, 189, 83);\n"
 "border-radius:5px;\n"
 "}")
         self.tasks_error_label.setAlignment(QtCore.Qt.AlignCenter)
@@ -508,16 +1119,38 @@ class Ui_main_window(object):
         font = QtGui.QFont()
         font.setPointSize(8)
         self.tasks_close_popup_button.setFont(font)
-        self.tasks_close_popup_button.setStyleSheet("")
+        self.tasks_close_popup_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(250, 230, 0);\n"
+"    border: 2px solid rgb(255, 165, 24);    \n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.tasks_close_popup_button.setText("")
         self.tasks_close_popup_button.setIcon(icon)
         self.tasks_close_popup_button.setObjectName("tasks_close_popup_button")
         self.horizontalLayout_21.addWidget(self.tasks_close_popup_button)
         self.tab_widget.addTab(self.tasks_tab, "")
         self.documents_tab = QtWidgets.QWidget()
+        self.documents_tab.setStyleSheet("QWidget#documents_tab{\n"
+"background-color: rgb(100,100,100);\n"
+"\n"
+"}")
         self.documents_tab.setObjectName("documents_tab")
         self.document_list = QtWidgets.QListWidget(self.documents_tab)
         self.document_list.setGeometry(QtCore.QRect(10, 40, 781, 211))
+        self.document_list.setStyleSheet("QWidget#document_list{\n"
+"background-color: rgb(75,75,75);\n"
+"border-radius:5px;\n"
+"border:0px\n"
+"}")
         self.document_list.setObjectName("document_list")
         self.document_label = QtWidgets.QLabel(self.documents_tab)
         self.document_label.setGeometry(QtCore.QRect(10, 10, 781, 31))
@@ -534,14 +1167,68 @@ class Ui_main_window(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.doc_share_name_edit = QtWidgets.QLineEdit(self.horizontalLayoutWidget)
+        self.doc_share_name_edit.setMinimumSize(QtCore.QSize(338, 24))
+        self.doc_share_name_edit.setMaximumSize(QtCore.QSize(338, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.doc_share_name_edit.setFont(font)
+        self.doc_share_name_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.doc_share_name_edit.setObjectName("doc_share_name_edit")
         self.horizontalLayout.addWidget(self.doc_share_name_edit)
         self.doc_share_link_edit = QtWidgets.QLineEdit(self.horizontalLayoutWidget)
+        self.doc_share_link_edit.setMinimumSize(QtCore.QSize(0, 0))
+        self.doc_share_link_edit.setMaximumSize(QtCore.QSize(338, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.doc_share_link_edit.setFont(font)
+        self.doc_share_link_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.doc_share_link_edit.setObjectName("doc_share_link_edit")
         self.horizontalLayout.addWidget(self.doc_share_link_edit)
         self.doc_share_button = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.doc_share_button.setMinimumSize(QtCore.QSize(91, 24))
-        self.doc_share_button.setMaximumSize(QtCore.QSize(91, 24))
+        self.doc_share_button.setMinimumSize(QtCore.QSize(100, 24))
+        self.doc_share_button.setMaximumSize(QtCore.QSize(100, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.doc_share_button.setFont(font)
+        self.doc_share_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.doc_share_button.setObjectName("doc_share_button")
         self.horizontalLayout.addWidget(self.doc_share_button)
         self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.documents_tab)
@@ -551,11 +1238,47 @@ class Ui_main_window(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.doc_create_edit = QtWidgets.QLineEdit(self.horizontalLayoutWidget_2)
+        self.doc_create_edit.setMinimumSize(QtCore.QSize(0, 0))
+        self.doc_create_edit.setMaximumSize(QtCore.QSize(680, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.doc_create_edit.setFont(font)
+        self.doc_create_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.doc_create_edit.setObjectName("doc_create_edit")
         self.horizontalLayout_2.addWidget(self.doc_create_edit)
         self.doc_create_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_2)
-        self.doc_create_button.setMinimumSize(QtCore.QSize(91, 24))
-        self.doc_create_button.setMaximumSize(QtCore.QSize(91, 24))
+        self.doc_create_button.setMinimumSize(QtCore.QSize(100, 24))
+        self.doc_create_button.setMaximumSize(QtCore.QSize(100, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.doc_create_button.setFont(font)
+        self.doc_create_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.doc_create_button.setObjectName("doc_create_button")
         self.horizontalLayout_2.addWidget(self.doc_create_button)
         self.horizontalLayoutWidget_3 = QtWidgets.QWidget(self.documents_tab)
@@ -565,11 +1288,47 @@ class Ui_main_window(object):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.doc_delete_edit = QtWidgets.QLineEdit(self.horizontalLayoutWidget_3)
+        self.doc_delete_edit.setMinimumSize(QtCore.QSize(0, 0))
+        self.doc_delete_edit.setMaximumSize(QtCore.QSize(680, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.doc_delete_edit.setFont(font)
+        self.doc_delete_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(200, 200, 200);\n"
+"}")
         self.doc_delete_edit.setObjectName("doc_delete_edit")
         self.horizontalLayout_3.addWidget(self.doc_delete_edit)
         self.doc_delete_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_3)
-        self.doc_delete_button.setMinimumSize(QtCore.QSize(91, 24))
-        self.doc_delete_button.setMaximumSize(QtCore.QSize(91, 24))
+        self.doc_delete_button.setMinimumSize(QtCore.QSize(100, 24))
+        self.doc_delete_button.setMaximumSize(QtCore.QSize(100, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.doc_delete_button.setFont(font)
+        self.doc_delete_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.doc_delete_button.setObjectName("doc_delete_button")
         self.horizontalLayout_3.addWidget(self.doc_delete_button)
         self.docs_bar = QtWidgets.QFrame(self.documents_tab)
@@ -584,7 +1343,11 @@ class Ui_main_window(object):
         self.docs_error_frame.setGeometry(QtCore.QRect(0, 0, 801, 44))
         self.docs_error_frame.setMinimumSize(QtCore.QSize(801, 44))
         self.docs_error_frame.setMaximumSize(QtCore.QSize(801, 44))
-        self.docs_error_frame.setStyleSheet("QFrame{background-color:rgb(255,255,255);}\n"
+        self.docs_error_frame.setStyleSheet("QFrame{\n"
+"background-color: rgb(255, 189, 83);\n"
+"border-radius: 15px;\n"
+"\n"
+"}\n"
 "")
         self.docs_error_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.docs_error_frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -595,7 +1358,7 @@ class Ui_main_window(object):
         self.docs_error_label.setMinimumSize(QtCore.QSize(755, 24))
         self.docs_error_label.setMaximumSize(QtCore.QSize(755, 24))
         self.docs_error_label.setStyleSheet("QLabel{\n"
-"background-color:white;\n"
+"background-color:rgb(255, 189, 83);\n"
 "border-radius:5px;\n"
 "}")
         self.docs_error_label.setAlignment(QtCore.Qt.AlignCenter)
@@ -607,7 +1370,20 @@ class Ui_main_window(object):
         font = QtGui.QFont()
         font.setPointSize(8)
         self.docs_close_popup_button.setFont(font)
-        self.docs_close_popup_button.setStyleSheet("")
+        self.docs_close_popup_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(250, 230, 0);\n"
+"    border: 2px solid rgb(255, 165, 24);    \n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.docs_close_popup_button.setText("")
         self.docs_close_popup_button.setIcon(icon)
         self.docs_close_popup_button.setObjectName("docs_close_popup_button")

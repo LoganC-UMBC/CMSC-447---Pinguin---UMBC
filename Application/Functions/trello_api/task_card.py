@@ -208,6 +208,21 @@ class Trello():
         all_boards[i].add_list(list_name)
         return True
 
+    def ping_list_delete(client, board_name, list_name):
+        # store the boards index
+        i = board_index(client, board_name)
+        if i == None:
+            return None
+        # store the lists index
+        j = list_index(client, board_name, list_name, i)
+        if j == None:
+            return None
+
+        # store all lists for this board
+        board_lists = ping_lists(client, board_name)
+        # delete the board
+        board_lists[j].close()
+        return True
 
     # create a board
     def ping_board_create(self, board_name):

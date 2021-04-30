@@ -63,6 +63,9 @@ class Main_Window(Ui_main_window):
         self.menubar.addMenu(self.help_menu)
 
         # defining some QActions for menubar - NEED
+        self.action1 = QtWidgets.QAction("&Log Out")
+        self.action2 = QtWidgets.QAction("&About")
+        self.exit_menu.addAction(self.action1)
 
 ########################################################################################################################
 #                                                         Groups Tree model setup                                      #

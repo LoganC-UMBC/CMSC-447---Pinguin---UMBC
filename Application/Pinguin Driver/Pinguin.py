@@ -82,7 +82,8 @@ class Pinguin(QMainWindow):
 		elif self.auth.access_token_expired:
 			print("creds expired")
 			# Refresh them if expired
-			self.auth.Refresh()
+			self.auth.LocalWebserverAuth()
+			#self.auth.Refresh()
 
 			print("creds renewed")
 
