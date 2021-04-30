@@ -203,7 +203,7 @@ class PinguinDB:
 
 
     # Forums Window
-    d    def invite_accept(self, group_id):
+    def invite_accept(self, group_id):
 
         #remove the invite
 
