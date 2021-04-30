@@ -203,21 +203,23 @@ class PinguinDB:
 
 
     # Forums Window
-    def invite_accept(self, group_id):
-        # remove the invite
+    d    def invite_accept(self, group_id):
 
-        inviteList = self.users.find_one({"_id": self.user._id}).get("invites")
+        #remove the invite
+
+        inviteList = self.users.find_one({"_id":self.user._id}).get("invites")
         for x in inviteList:
             if x['group_id'] == group_id:
                 inviteFind = x
 
-        self.groups.update_one({"_id": group_id}, {"$unset": {"invites": inviteFind}})
-        self.users.update_one({"_id": self.user._id}, {"$unset": {"invites": inviteFind}})
+        self.groups.update_one({"_id":group_id}, {"$pull": {"invites":inviteFind}})
+        self.users.update_one({"_id":self.user._id}, {"$pull": {"invites":inviteFind}})
 
-        # add them to the group
+
+        #add them to the group
         self.user.groups.append(group_id)
-        self.users.update_one({"_id": self.user._id}, {"$push": {"groups": group_id}})
-        self.groups.update_one({"_id": group_id}, {"$push": {"members": self.user._id}})
+        self.users.update_one({"_id":self.user._id}, {"$push": {"groups":group_id}})
+        self.groups.update_one({"_id":group_id}, {"$push": {"members":self.user._id}})
         return 1
 
     def invite_deny(self, group_id):
@@ -226,8 +228,8 @@ class PinguinDB:
             if x['group_id'] == group_id:
                 inviteFind = x
 
-        self.groups.update_one({"_id": group_id}, {"$unset": {"invites": inviteFind}})
-        self.users.update_one({"_id": self.user._id}, {"$unset": {"invites": inviteFind}})
+        self.groups.update_one({"_id": group_id}, {"$pull": {"invites": inviteFind}})
+        self.users.update_one({"_id": self.user._id}, {"$pull": {"invites": inviteFind}})
 
         return 1
 

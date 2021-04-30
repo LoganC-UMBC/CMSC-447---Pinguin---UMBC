@@ -735,8 +735,8 @@ class Main_Window(Ui_main_window):
             # add task card to trello
             # update function
             print("card added")
-            #self.trello.ping_card_create(self.current_group_name, list_name, card_name, task_description)
-            #self.set_trello_tree()
+            self.trello.ping_card_create(self.current_group_name, list_name, card_name, task_description)
+            self.set_trello_tree()
 
 
     # get all trello boards, lists, and task cards to insert
