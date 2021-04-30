@@ -58,15 +58,20 @@ class Main_Window(Ui_main_window):
 ########################################################################################################################
         # adding menu bar items
         self.exit_menu = QtWidgets.QMenu("&Exit",main_window)
+        self.refresh_menu = QtWidgets.QMenu("&Tools", main_window)
         self.help_menu = QtWidgets.QMenu("&Help",main_window)
 
         self.menubar.addMenu(self.exit_menu)
         self.menubar.addMenu(self.help_menu)
+        self.menubar.addMenu(self.refresh_menu)
 
         # defining some QActions for menubar - NEED
         self.action1 = QtWidgets.QAction("&Log Out")
         self.action2 = QtWidgets.QAction("&About")
+        self.action3 = QtWidgets.QAction("&Refresh")
         self.exit_menu.addAction(self.action1)
+        self.refresh_menu.addAction(self.action3)
+        self.action3.triggered.connect(self.widgets_refresh)
 
 ########################################################################################################################
 #                                                         Groups Tree model setup                                      #
@@ -421,7 +426,7 @@ class Main_Window(Ui_main_window):
                     boards = self.trello.ping_boards()
                     for board in boards:
                         if(board.name == self.current_group_name):
-                            self.board.add_members(member_doc['user_id'], member_type='admin')
+                            self.board.add_member(member_doc['user_id'], member_type='admin')
             else:
                 error_text = "Some users were not found"
                 self.groups_error_label.setText(error_text)
