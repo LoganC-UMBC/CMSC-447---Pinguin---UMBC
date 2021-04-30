@@ -9,15 +9,19 @@ class Google_Drive(object):
 
     #create file
     def create(self, user_title):
-
         user_file = self.drive.CreateFile({'title': user_title})
-        print(user_file)
         user_file.Upload()
-        print(user_file)
 
 
-    def trash_files(self, trash_file):
-        #creates an instance of the file
-        file2 = self.drive.CreateFile({'title': trash_file})
-        #puts file into trash folder
-        file2.Trash()
+    def trash_files(self, file_title):
+        # find the file with this name
+        file_list = self.drive.ListFile({'q': "title = '%s' and trashed = false" % file_title}).GetList()
+        # delete the first occurance of this file
+        file_list[0].Trash()
+
+
+"""auth = GoogleAuth()
+auth.LocalWebserverAuth()
+auth.SaveCredentialsFile("mycred.txt")  # Saves credentials to a file
+d = Google_Drive(auth)
+d.create("my file")"""
