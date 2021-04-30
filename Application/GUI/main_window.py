@@ -246,6 +246,7 @@ class Main_Window(Ui_main_window):
 
             # creating group with or without invites
             if group_invites[0] == '':
+                print("creating group")
                 calendar_id = self.google_client.google_calendar.CreateCalendar(group_name, 'America/New_York')
                 print("calendar id: ", calendar_id)
                 self.db.create_group(group_name, group_description, calendar_id)
@@ -257,11 +258,14 @@ class Main_Window(Ui_main_window):
                         print(id)
                         #self.db.get_calendar_id()
 
-                self.trello.ping_board_create(group_name)
-                self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
-
                 # set up single trello board for group
                 self.trello.ping_board_create(group_name)
+
+                print("updating tree")
+                self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
+                print("updated")
+
+
 
             else:
                 calendar_id = self.google_client.google_calendar.CreateCalendar(group_name, 'America/New_York')
