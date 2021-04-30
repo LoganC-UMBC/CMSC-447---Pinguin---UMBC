@@ -259,7 +259,7 @@ class Main_Window(Ui_main_window):
                 groups = self.db.get_groups()
                 for group in groups:
                     if group['group_name'] == group_name:
-                        self.user.currentGroup = group['_id']
+                        self.set_current_group(group['_id'])
                         print("got it")
                         id = group['calendar_id']
                         print(id)
@@ -281,7 +281,7 @@ class Main_Window(Ui_main_window):
                 groups = self.db.get_groups()
                 for group in groups:
                     if group['group_name'] == group_name:
-                        self.user.currentGroup = group['_id']
+                        self.set_current_group(group['_id'])
                         print("got it")
                         id = group['calendar_id']
                         print(id)
@@ -423,10 +423,13 @@ class Main_Window(Ui_main_window):
             if member_doc:
                 print("Sending invites")
                 if self.db.send_invite(member_doc['_id']):
+                    print(member_doc['user_id'])
                     boards = self.trello.ping_boards()
+                    print(boards)
                     for board in boards:
                         if(board.name == self.current_group_name):
-                            self.board.add_member(member_doc['user_id'], member_type='admin')
+                            print("adding members")
+                            self.trello.board.add_member(member_doc['user_id'], member_type='admin')
             else:
                 error_text = "Some users were not found"
                 self.groups_error_label.setText(error_text)
