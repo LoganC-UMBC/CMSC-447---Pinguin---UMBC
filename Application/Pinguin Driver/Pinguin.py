@@ -70,6 +70,7 @@ class Pinguin(QMainWindow):
 			print(self.db.user.user_id)
 			self.trello.action_setup2(self.db.user.user_id)
 
+		"""
 		self.auth = GoogleAuth()
 		# Try to load saved client credentials
 		self.auth.LoadCredentialsFile("Credentials.json")
@@ -95,10 +96,10 @@ class Pinguin(QMainWindow):
 		self.auth.SaveCredentialsFile("Credentials.json")
 
 		self.main_window.ui.google_client = GoogleClient(self.auth)
+		"""
 		print("heresdasd")
 		self.main_window.ui.widgets_refresh()
 		self.main_window.show()
-
 
 	def run(self):
 		self.login_menu.show()
