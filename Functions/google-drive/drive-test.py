@@ -1,25 +1,26 @@
 from pydrive.auth import GoogleAuth
-#Authorizes google drive access
+from pydrive.drive import GoogleDrive
 
-
-
-def authenticate ():
+def drive_authenticate():
     gauth = GoogleAuth()
     gauth.LocalWebserverAuth() # Creates local webserver and auto handles authentication.
-    #gauth.SaveCredentialsFile("mycred.txt") #saves credentials to a file
+    gauth.SaveCredentialsFile("mycred.txt") # Saves credentials to a file
     drive = GoogleDrive(gauth)
+    return drive
 
-#create file
-def create(user_title):
-
+# create a file
+def drive_create(drive, user_title):
     user_file = drive.CreateFile({'title': user_title})
     user_file.Upload()
 
+# delete a file
+def drive_delete(drive, file_title):
+    # find the file with this name
+    file_list = drive.ListFile({'q': "title = '%s' and trashed = false" % file_title}).GetList()
+    # delete the first occurance of this file
+    file_list[0].Trash()
 
-def trash_files(trash_file):
-    #creates an instance of the file 
-    file2 = drive.CreateFile({'title': trash_file})
-    #puts file into trash folder
-    file2.Trash()
-
-
+# TESTING
+drive = drive_authenticate()
+#drive_create(drive, "my file")
+drive_delete(drive, "my file")
