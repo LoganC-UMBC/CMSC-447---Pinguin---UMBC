@@ -59,6 +59,7 @@ class Main_Window(Ui_main_window):
         # adding menu bar items
         self.exit_menu = QtWidgets.QMenu("&Exit",main_window)
         self.help_menu = QtWidgets.QMenu("&Help",main_window)
+
         self.menubar.addMenu(self.exit_menu)
         self.menubar.addMenu(self.help_menu)
 
@@ -347,8 +348,10 @@ class Main_Window(Ui_main_window):
     # decline an invite to a group
     # not currently connected to the db
     def decline_invite(self):
-        if self.invites_list.currentItem() != None:
-            self.invites_list.takeItem(self.invites_list.row(self.invites_list.currentItem()))
+        invite = self.invites_list.selectedItems()
+        if len(invite) == 1:
+            self.db.invite_deny(invite[0].group_id)
+
 
         else:
             error_text = "No invite selected to decline"
@@ -403,14 +406,18 @@ class Main_Window(Ui_main_window):
             member_doc = self.db.user_lookup_by_email(member)
             if member_doc:
                 print("Sending invites")
-                self.db.send_invite(member_doc['_id'])
-                boards = self.trello.ping_boards()
-                for board in boards:
-                    if(board.name == self.current_group_name):
-                        self.trello.add_members(board.name,member_doc['user_id'])
+                if self.db.send_invite(member_doc['_id']):
+                    boards = self.trello.ping_boards()
+                    for board in boards:
+                        if(board.name == self.current_group_name):
+                            self.board.add_members(member_doc['user_id'], member_type='admin')
+            else:
+                error_text = "Some users were not found"
+                self.groups_error_label.setText(error_text)
+                self.error_frame_show(self.groups_error_frame)
 
 
-########################################################################################################################
+    ########################################################################################################################
 #                                               Forums Tab                                                             #
 ########################################################################################################################
 
