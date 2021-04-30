@@ -45,22 +45,16 @@ class trello_pin_window_ext(Ui_trello_pin_window):
                 token_secret=user_token_secret
             )
 
-            print('WIll it open?')
-
-            with open("pinguin.json", "r+") as file:
+            accounts = {}
+            with open("pinguin.json", "r") as file:
                 accounts = json.load(file)
-                #account = {self.email:{"token": user_token, "token_secret": user_token_secret}}
                 accounts[self.email] = {"token": user_token, "token_secret": user_token_secret}
-
-                print(accounts)
-
-                json.dump(accounts,file)
-
-                print('BBB')
-
                 file.close()
 
-            print('yes')
+            with open("pinguin.json","w") as file:
+                json.dump(accounts,file,indent=4)
+                file.close()
+
 
             self.trello.client = client
             self.parent.close()
