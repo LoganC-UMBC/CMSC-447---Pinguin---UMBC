@@ -2,6 +2,7 @@
 from Application.GUI.Uis.Main_Window_Ui.main_window_ui import *
 from bson.objectid import ObjectId
 
+
 # GUI library
 from PyQt5 import QtCore, QtGui, QtWidgets, Qt
 
@@ -17,6 +18,7 @@ from Application.Functions.Google_Calendar.gcalendar import *
 
 # client for trello
 from Application.Functions.trello_api.task_card import *
+from trello.member import Member
 
 from Application.Functions.google_client import *
 
@@ -421,6 +423,8 @@ class Main_Window(Ui_main_window):
             member = member.strip()
             member_doc = self.db.user_lookup_by_email(member)
             if member_doc:
+                member_info = Member(self.trello.client, member_doc['user_id'])
+                print(member_info)
                 print("Sending invites")
                 if self.db.send_invite(member_doc['_id']):
                     print(member_doc['user_id'])
@@ -429,7 +433,8 @@ class Main_Window(Ui_main_window):
                     for board in boards:
                         if(board.name == self.current_group_name):
                             print("adding members")
-                            self.trello.board.add_member(member_doc['user_id'], member_type='admin')
+                            board.add_member(member_info, member_type='admin')
+                            print("added")
             else:
                 error_text = "Some users were not found"
                 self.groups_error_label.setText(error_text)
