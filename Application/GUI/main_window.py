@@ -423,7 +423,7 @@ class Main_Window(Ui_main_window):
             member = member.strip()
             member_doc = self.db.user_lookup_by_email(member)
             if member_doc:
-                member_info = Member(self.trello.client, member_doc['user_id'])
+                member_info = Member(self.trello.client, '6065275be91b234654b4df7d')
                 print(member_info)
                 print("Sending invites")
                 if self.db.send_invite(member_doc['_id']):
