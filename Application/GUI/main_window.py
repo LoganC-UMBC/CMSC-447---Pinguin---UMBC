@@ -932,8 +932,9 @@ class Main_Window(Ui_main_window):
             # add doc to database
             print("making the doc")
             doc_url = self.google_client.google_drive.create(doc_name)
-            print(doc_url)
-            self.document_list.addItem(DocListItem(doc_name),"doc",doc_url)
+            self.db.document_add(doc_name, "link", doc_url)
+            self.document_list.addItem(DocListItem(doc_name,"doc",str(doc_url)))
+            print("doc added")
 
         elif doc_type == "share":
             self.db.document_add(doc_name, "link", doc_url)

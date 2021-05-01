@@ -13,7 +13,7 @@ from Application.GUI.login_window import Ui_Login_Window
 from Application.Database.PinguinDB import PinguinDB
 from Application.Functions.trello_api.task_card import Trello
 from Application.Functions.google_client import *
-from pydrive.auth import GoogleAuth
+from pydrive2.auth import GoogleAuth
 
 
 MAX_W = 700

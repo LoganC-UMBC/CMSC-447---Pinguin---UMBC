@@ -1,5 +1,5 @@
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
+from pydrive2.auth import GoogleAuth
+from pydrive2.drive import GoogleDrive
 #Authorizes google drive access
 
 
@@ -29,4 +29,4 @@ auth.LocalWebserverAuth()
 d = Google_Drive(auth)
 #auth.SaveCredentialsFile("mycred.txt")  # Saves credentials to a file
 
-d.create("my file")"""
+print(d.create("my file"))"""
