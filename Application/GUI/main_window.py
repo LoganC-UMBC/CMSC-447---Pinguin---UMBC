@@ -418,7 +418,7 @@ class Main_Window(Ui_main_window):
 
             node.appendRow(new_group)
 
-    def send_invites(self, group_invite):
+    def send_invites(self, group_invites):
         for member in group_invites:
             member = member.strip()
             member_doc = self.db.user_lookup_by_email(member)

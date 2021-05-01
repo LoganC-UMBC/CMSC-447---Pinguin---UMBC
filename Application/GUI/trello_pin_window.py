@@ -8,12 +8,12 @@ os.environ["TRELLO_API_SECRET"] = 'd4446e39644f0992f6db9859c77441754f0085ad5725d
 
 class trello_pin_window_ext(Ui_trello_pin_window):
 
-    def __init__(self, trello, email, acct_window):
+    def __init__(self, trello, email, acct_window,db):
         super().__init__()
         self.trello = trello
         self.email = email
         self.parent = acct_window
-
+        self.db = db
 
     def setupUi(self, trello_pin_window):
         super().setupUi(trello_pin_window)
@@ -55,15 +55,19 @@ class trello_pin_window_ext(Ui_trello_pin_window):
                 json.dump(accounts,file,indent=4)
                 file.close()
 
+            print('XD')
 
             self.trello.client = client
             self.trello.ping_board_create("member_id")
             boards = self.trello.ping_boards()
+            trello_id = 0
             for board in boards:
                 if board.name == "member_id":
-                    print(board.all_members()[0].id)
+                    trello_id = board.all_members()[0].id
 
                     self.trello.trello_id = board.all_members()[0].id
                     board.close()
+
+            self.db.set_trello_id(trello_id)
 
             self.parent.close()

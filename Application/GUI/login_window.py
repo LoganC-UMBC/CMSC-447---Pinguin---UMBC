@@ -194,8 +194,13 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
         elif password != confirm_password:
             error_text = "Non-matching passwords"
         else:
-            if self.db.create_account(email, password, name, self.trello.trello_id):
+            print(self.db.user_lookup_by_email(email))
+            if self.db.user_lookup_by_email(email) == 0:
+                print('adafa')
                 self.trello_pin_window(email)
+                print('A')
+                self.db.create_account(email, password, name, self.trello.trello_id)
+                print('B')
             else:
                 error_text = "Email already exists"
 
@@ -205,7 +210,7 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
 
     def trello_pin_window(self, email):
         self.acct_trello_widget = QtWidgets.QWidget()
-        self.acct_trello_window_ui = trello_pin_window_ext(self.trello, email, self.acct_window)
+        self.acct_trello_window_ui = trello_pin_window_ext(self.trello, email, self.acct_window, self.db)
 
         self.acct_trello_window_ui.setupUi(self.acct_trello_widget)
         self.acct_window.setCentralWidget(self.acct_trello_widget)

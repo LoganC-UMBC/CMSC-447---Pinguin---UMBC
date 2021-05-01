@@ -114,6 +114,9 @@ class PinguinDB:
 
             return 1
 
+    def set_trello_id(self,trello_id):
+        self.users.update_one({"_id":self.user._id},{"$set":{"trello_id":trello_id}})
+
     # Create a group
     def create_group(self, name, description, calendar_id):
         if (self.groups.find_one({"group_name": name})):
