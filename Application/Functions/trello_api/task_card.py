@@ -17,6 +17,7 @@ os.environ["TRELLO_API_SECRET"] = 'd4446e39644f0992f6db9859c77441754f0085ad5725d
 class Trello():
     def __init__(self):
         self.client = None
+        self.trello_id = None
 
     # returns dictionary storing
     def dict_generate(self):
@@ -258,6 +259,8 @@ class Trello():
         card_list[k].change_list(board_lists[new_list_index].id)
         print("Card Movement Successful")
         return True
+
+
 
     def action_setup(self, email):
         # if the config file already exists, use the existing tokens

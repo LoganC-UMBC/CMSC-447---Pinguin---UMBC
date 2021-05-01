@@ -88,7 +88,7 @@ class PinguinDB:
             return group['calendar_id']
 
     # Create a new account with the entered details
-    def create_account(self, user_id, pword, name):
+    def create_account(self, user_id, pword, name, trello_id):
         # Rejects the request if an account with that email already exists
         if (self.users.find_one({"user_id": user_id})):
             print('User already exists')
@@ -98,13 +98,15 @@ class PinguinDB:
             encPass = hashlib.sha256(pword.encode())
             self.user.pword = encPass.hexdigest()
             self.user.user_name = name
+            self.user.trello_id = trello_id
 
             user_account = {"user_id": self.user.user_id,
                             "user_name": self.user.user_name,
                             "pass": self.user.pword,
                             "role": "user",
                             "groups": [],
-                            "invites": []}
+                            "invites": [],
+                            "trello_id": trello_id}
 
             self.users.insert_one(user_account)
 

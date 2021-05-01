@@ -57,4 +57,13 @@ class trello_pin_window_ext(Ui_trello_pin_window):
 
 
             self.trello.client = client
+            self.trello.ping_board_create("member_id")
+            boards = self.trello.ping_boards()
+            for board in boards:
+                if board.name == "member_id":
+                    print(board.all_members()[0].id)
+
+                    self.trello.trello_id = board.all_members()[0].id
+                    board.close()
+
             self.parent.close()

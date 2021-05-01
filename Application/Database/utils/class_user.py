@@ -7,3 +7,4 @@ class User:
         self._id = ''
         self.groups = []
         self.currentGroup = ''
+        self.trello_id = ''

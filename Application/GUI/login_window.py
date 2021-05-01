@@ -194,7 +194,7 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
         elif password != confirm_password:
             error_text = "Non-matching passwords"
         else:
-            if self.db.create_account(email, password, name):
+            if self.db.create_account(email, password, name, self.trello.trello_id):
                 self.trello_pin_window(email)
             else:
                 error_text = "Email already exists"
