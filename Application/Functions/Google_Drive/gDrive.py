@@ -9,8 +9,11 @@ class Google_Drive(object):
 
     #create file
     def create(self, user_title):
-        user_file = self.drive.CreateFile({'title': user_title})
+        user_file = self.drive.CreateFile({'mimeType': 'application/vnd.google-apps.document', 'title': user_title})
+        print(user_file)
         user_file.Upload()
+        print(user_file)
+        return user_file['alternateLink']
 
 
     def trash_files(self, file_title):
@@ -21,7 +24,9 @@ class Google_Drive(object):
 
 
 """auth = GoogleAuth()
+
 auth.LocalWebserverAuth()
-auth.SaveCredentialsFile("mycred.txt")  # Saves credentials to a file
 d = Google_Drive(auth)
+#auth.SaveCredentialsFile("mycred.txt")  # Saves credentials to a file
+
 d.create("my file")"""

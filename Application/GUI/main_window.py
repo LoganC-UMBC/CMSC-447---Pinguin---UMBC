@@ -423,6 +423,7 @@ class Main_Window(Ui_main_window):
             member = member.strip()
             member_doc = self.db.user_lookup_by_email(member)
             if member_doc:
+
                 member_info = Member(self.trello.client, member_doc['trello_id'])
                 print(member_info)
                 print("Sending invites")
@@ -929,8 +930,10 @@ class Main_Window(Ui_main_window):
     def add_link(self, doc_name, doc_type, doc_url=None):
         if doc_type == "create":
             # add doc to database
-            self.google_client.google_drive.create(doc_name)
-            #self.document_list.addItem(DocListItem(doc_name),"doc")
+            print("making the doc")
+            doc_url = self.google_client.google_drive.create(doc_name)
+            print(doc_url)
+            self.document_list.addItem(DocListItem(doc_name),"doc",doc_url)
 
         elif doc_type == "share":
             self.db.document_add(doc_name, "link", doc_url)
