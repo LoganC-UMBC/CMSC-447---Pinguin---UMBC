@@ -49,7 +49,7 @@ class GoogleCalendar(object):
 
         return created_calendar['id']
 
-    def DeleteCalendar(self, calendarId=None):
+    def DeleteCalendar(self, calId=None):
         """deletes the calendar.
            Every account that had the calendar will no longer
            have access to the calendar
@@ -60,10 +60,10 @@ class GoogleCalendar(object):
         """
 
 
-        self.auth.service2.calendars().delete(calendarId).execute()
+        self.auth.service2.calendars().delete(calendarId = calId).execute()
 
 
-    def AddToCalendarList(self, calendarId=None):
+    def AddToCalendarList(self, calId=None):
         """Adds the calendar to the associated accounts calendar list
 
         :param calendarId: parameter that google calendar service uses
@@ -72,9 +72,9 @@ class GoogleCalendar(object):
         """
 
 
-        self.auth.service2.calendarList().insert(calendarId).execute()
+        self.auth.service2.calendarList().insert(calendarId = calId).execute()
 
-    def DeleteFromCalendarList(self, calendarID=None):
+    def DeleteFromCalendarList(self, calID=None):
 
         """deletes the calendar from the associated accounts calendar list
 
@@ -83,9 +83,9 @@ class GoogleCalendar(object):
         :type param: str
         """
 
-        self.auth.service2.calendarList().delete(calendarId).execute()
+        self.auth.service2.calendarList().delete(calendarId = calId).execute()
 
-    def CreateEvent(self, calendarId=None, eventTitle=None, eventDescription=None, startTime=None, endTime=None, timeZone=None):
+    def CreateEvent(self, calId=None, eventTitle=None, eventDescription=None, startTime=None, endTime=None, timeZone=None):
         """creates the event to be inserted into the associated calendar
 
         :param calendarId: parameter that google calendar service uses
@@ -122,9 +122,9 @@ class GoogleCalendar(object):
             },
         }
 
-        service.events().insert(calendarId, body=newEvent).execute()
+         self.auth.service2.events().insert(calendarId = calId, body=newEvent).execute()
 
-    def DeleteEvent(self, calendarID=None, eventId=None):
+    def DeleteEvent(self, calID=None, currEventId=None):
         """Deletes an event in the associated calendar
 
         :param calendarId: parameter that google calendar service uses
@@ -135,7 +135,7 @@ class GoogleCalendar(object):
                         to determine which event to operate within
         :type param:str
         """
-        self.auth.service2.events().delete(calendarId, eventId).execute()
+        self.auth.service2.events().delete(calendarId = calId, eventId = currEventID).execute()
 
         #returns list of events
     def getMonthEvents(self, monthBegin, monthEnd):
@@ -146,8 +146,8 @@ class GoogleCalendar(object):
         the only things that would need to change are year and month day should always be the first of the current month and first of the next month.
 
         """
-        dateStart = startTime + 'T00:00:00' + 'Z' # 'Z' indicates UTC time
-        dateEnd = endTime + 'T00:00:00' + 'Z' # 'Z' indicates UTC time
+        dateStart = monthBegin + 'T00:00:00' + 'Z' # 'Z' indicates UTC time
+        dateEnd = monthEnd + 'T00:00:00' + 'Z' # 'Z' indicates UTC time
 
 
         months_events = eventsself.auth.service2.events().list(calendarId='primary', timeMin=dateStart, timeMax=dateEnd, singleEvents=True, timeZone='America/New_York', orderBy='startTime').execute()
