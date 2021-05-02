@@ -122,7 +122,7 @@ class GoogleCalendar(object):
             },
         }
 
-         self.auth.service2.events().insert(calendarId = calId, body=newEvent).execute()
+        self.auth.service2.events().insert(calendarId = calId, body=newEvent).execute()
 
     def DeleteEvent(self, calID=None, currEventId=None):
         """Deletes an event in the associated calendar
