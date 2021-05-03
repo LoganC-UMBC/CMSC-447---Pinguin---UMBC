@@ -321,6 +321,11 @@ class PinguinDB:
         self.documents[groupFind].insert_one(post)
         return 1
 
+    def retrieve_document(self, doc_name, group_id):
+        groupFind = self.groups.find_one({'_id':group_id}).get('group_name')
+        doc_id = self.documents[groupFind].find_one({'title':doc_name}).get('_id')
+        return doc_id
+
     def retrieve_docs(self):
         docList = []
         groupFind = self.groups.find_one({'_id':self.user.currentGroup}).get("group_name")
