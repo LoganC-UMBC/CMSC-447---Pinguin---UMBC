@@ -590,9 +590,9 @@ class Main_Window(Ui_main_window):
             self.tasks_error_label.setText(error_text)
             self.error_frame_show(self.tasks_error_frame)
 
-        elif list_name != "" and len(duplicate) == 1:
-            pass
-
+        elif list_name != "":
+            self.trello.ping_list_delete(self.current_group_name, list_name)
+            self.set_trello_tree()
         else:
             error_text = list_name + " doesn't exist"
             self.tasks_error_label.setText(error_text)
@@ -699,8 +699,8 @@ class Main_Window(Ui_main_window):
                 self.error_frame_show(self.tasks_error_frame)
 
             else:
-                # call to trello client to delete card
-                # remove from tree
+                self.trello.ping_card_delete(self.current_group_name, index.parent().data(), index.data())
+                self.set_trello_tree()
                 pass
 
 

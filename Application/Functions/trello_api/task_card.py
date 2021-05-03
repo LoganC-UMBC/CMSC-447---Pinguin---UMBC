@@ -28,7 +28,7 @@ class Trello():
         # iterate through all possible boards
         for i in range(len(all_boards)):
             print("BOARD NAME: ", all_boards[i].name)
-            all_lists = all_boards[i].list_lists()
+            all_lists = all_boards[i].get_lists(list_filter="open")
             # reset the dict list for a new board
             dict_list = {}
             # iterate through all of this boards lists
@@ -65,7 +65,7 @@ class Trello():
 
         all_boards = self.ping_boards()
         # return all lists for a board
-        return all_boards[i].list_lists()
+        return all_boards[i].get_lists(list_filter="open")
 
 
     # returns all cards under a list
@@ -80,7 +80,7 @@ class Trello():
         j = self.list_index(board_name, list_name, i)
 
         # store all lists under a board
-        board_lists = all_boards[i].list_lists()
+        board_lists = all_boards[i].get_lists(list_filter="open")
         # return all cards under a list
         return board_lists[j].list_cards()
 
@@ -89,7 +89,6 @@ class Trello():
     def board_index(self, board_name):
         # store all boards for this client
         all_boards = self.ping_boards()
-
         # locate the proper board
         for i in range(len(all_boards)):
             # if we have located the board
@@ -103,7 +102,7 @@ class Trello():
         # store all boards for this client
         all_boards = self.ping_boards()
         # store all lists for this board
-        board_lists = all_boards[i].list_lists()
+        board_lists = all_boards[i].get_lists(list_filter="open")
 
         # locate the proper list
         for j in range(len(board_lists)):
@@ -120,7 +119,7 @@ class Trello():
         all_boards = self.ping_boards()
 
         # store all lists for this board
-        board_lists = all_boards[i].list_lists()
+        board_lists = all_boards[i].get_lists(list_filter="open")
         # store all the cards for this list
         card_list = board_lists[j].list_cards()
         # locate the proper card
@@ -209,18 +208,17 @@ class Trello():
         all_boards[i].add_list(list_name)
         return True
 
-    def ping_list_delete(client, board_name, list_name):
+    def ping_list_delete(self, board_name, list_name):
         # store the boards index
-        i = board_index(client, board_name)
+        i = self.board_index(board_name)
         if i == None:
             return None
         # store the lists index
-        j = list_index(client, board_name, list_name, i)
+        j = self.list_index(board_name, list_name, i)
         if j == None:
             return None
-
         # store all lists for this board
-        board_lists = ping_lists(client, board_name)
+        board_lists = self.ping_lists(board_name)
         # delete the board
         board_lists[j].close()
         return True
