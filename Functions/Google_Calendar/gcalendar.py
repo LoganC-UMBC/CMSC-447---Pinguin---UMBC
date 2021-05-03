@@ -128,7 +128,7 @@ class GoogleCalendar(object):
     def getMonthEvents(self, calId = None, monthBegin = None, monthEnd = None):
         """
         monthBegin and monthEnd has to be in this format for GoogleCalendar to pull informaiton
-        '2021-01-01'
+        '2021-01-01'/'YYYY-MM-DD'
         the only things that would need to change are year and month day should always be the first of the current month and first of the next month.
         """
         dateStart = monthBegin + 'T00:00:00' + 'Z' # 'Z' indicates UTC time
@@ -154,3 +154,35 @@ class GoogleCalendar(object):
         Test 1
         Test 1
         """
+    def addAccessRule(self, calId=None, email = None):
+        """Allows a non-owner user to modify and read a calendar
+        :param calId: parameter that google calendar service uses
+                           to determine which calendar to opperate within
+        :type param: str
+        :param email: parameter that method uses to determine which email to apply the rule to
+        :type param:str
+        """
+
+
+        rule = {
+            'scope': {
+                'type': 'user',
+                'value': email,
+            },
+            'role': 'writer'
+        }
+
+
+        self.auth.service2.acl().insert(calendarId=calId, body=rule).execute()
+
+    def DeleteAccessRule(self, calId=None, aclRuleId = None ):
+        """Deletes an event in the associated calendar
+        :param calId: parameter that google calendar service uses
+                           to determine which calendar to opperate within
+        :type param: str
+        :param aclRuleId: parameter that determines which rule is being deleted
+        :type param:str
+        """
+
+
+        self.auth.service2.acl().delete(calendarId=calId, ruleId = aclRuleIde).execute()
