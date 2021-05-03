@@ -10,7 +10,7 @@ to opperate is "https://www.googleapis.com/auth/calendar"
 """
 
 
-class GoogleCalendar(object):
+class Google_Calendar(object):
 
 
 
@@ -173,9 +173,9 @@ class GoogleCalendar(object):
         }
 
 
-       acl_rule =  self.auth.service2.acl().insert(calendarId=calId, body=rule).execute()
+        acl_rule =  self.auth.service2.acl().insert(calendarId=calId, body=rule).execute()
     
-       return acl_rule['id']
+        return acl_rule['id']
 
     def DeleteAccessRule(self, calId=None, aclRuleId = None ):
         """Deletes an event in the associated calendar
@@ -187,4 +187,4 @@ class GoogleCalendar(object):
         """
 
 
-        self.auth.service2.acl().delete(calendarId=calId, ruleId = aclRuleIde).execute()
+        self.auth.service2.acl().delete(calendarId=calId, ruleId = aclRuleId).execute()
