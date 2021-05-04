@@ -30,8 +30,8 @@ class trello_pin_window_ext(Ui_trello_pin_window):
             error_text = "Enter the pin provided in the link"
 
         else:
-
             self.trello_pin_edit.clear()
+            provided_pin = provided_pin.split()
             ping_token = ping_oauth_pin(provided_pin)
             user_token = ping_token.get('oauth_token')
             user_token_secret = ping_token.get('oauth_token_secret')

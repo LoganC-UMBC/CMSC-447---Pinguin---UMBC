@@ -25,6 +25,11 @@
   <property name="windowTitle">
    <string>trello_pin_window</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#trello_pin_window{
+background-color: rgb(100,100,100);
+}</string>
+  </property>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
@@ -57,6 +62,21 @@
           <height>22</height>
          </size>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QLineEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
+        </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
@@ -82,6 +102,23 @@
           <width>100</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
         </property>
         <property name="text">
          <string>Connect with Trello</string>

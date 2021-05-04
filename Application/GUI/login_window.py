@@ -83,6 +83,9 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
     @pyqtSlot()
     def create_account(self):
         self.acct_window = QtWidgets.QMainWindow(self)
+        self.acct_window.setStyleSheet("QWidget {\n"
+"    background-color: rgb(100, 100, 100);\n"
+"}\n")
         self.acct_window.resize(300, 300)
         self.acct_window.setWindowTitle("Pinguin")
         self.acct_window.setWindowIcon(QtGui.QIcon("447logoicon.ico"))
@@ -92,28 +95,115 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
         self.acct_widget.setLayout(self.acct_layout)
 
         self.acct_label = QtWidgets.QLabel("Create Account")
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.acct_label.setFont(font)
         self.acct_label.setAlignment(Qt.AlignCenter)
 
         self.acct_id_edit = QtWidgets.QLineEdit()
         self.acct_id_edit.setPlaceholderText("user@gmail.com")
+        self.acct_id_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(255,255,255);\n"
+"}")
 
         self.acct_name_edit = QtWidgets.QLineEdit()
         self.acct_name_edit.setPlaceholderText("Enter First Name")
+        self.acct_name_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(255,255,255);\n"
+"}")
 
         self.acct_pass_edit = QtWidgets.QLineEdit()
+        self.acct_pass_edit.setEchoMode(QtWidgets.QLineEdit.Password)
         self.acct_pass_edit.setPlaceholderText("Enter Password")
+        self.acct_pass_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(255,255,255);\n"
+"}")
 
         self.acct_confirm_pass_edit = QtWidgets.QLineEdit()
+        self.acct_confirm_pass_edit.setEchoMode(QtWidgets.QLineEdit.Password)
         self.acct_confirm_pass_edit.setPlaceholderText("Confirm Password")
+        self.acct_confirm_pass_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(255,255,255);\n"
+"}")
 
         self.acct_buttons_widget = QtWidgets.QWidget()
         self.acct_buttons_layout = QtWidgets.QHBoxLayout()
         self.acct_buttons_widget.setLayout(self.acct_buttons_layout)
 
         self.acct_accept_button = QtWidgets.QPushButton("Create")
+        self.acct_accept_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.acct_accept_button.clicked.connect(self.create_account_accept)
 
         self.acct_cancel_button = QtWidgets.QPushButton("Cancel")
+        self.acct_cancel_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.acct_cancel_button.clicked.connect(self.create_account_cancel)
 
         self.acct_buttons_layout.addWidget(self.acct_accept_button)
@@ -318,7 +408,7 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
         login_window.setFont(login_font)
 
         login_window.setWindowTitle("Pinguin")
-        login_window.setWindowIcon(QtGui.QIcon("Application/GUI/Images/447logoicon.ico"))
+        login_window.setWindowIcon(QtGui.QIcon("/Images/447logoicon.ico"))
         login_window.setStyleSheet("color: rgb(200, 200, 200);\n"
                                    "background-color: rgb(100,100,100);")
 

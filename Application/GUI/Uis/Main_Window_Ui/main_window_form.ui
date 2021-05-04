@@ -25,12 +25,21 @@
   <property name="windowTitle">
    <string>main_window</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../Images/447logoicon.ico</normaloff>../../Images/447logoicon.ico</iconset>
+  </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">QMainWindow#main_window{
+border:0px;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">QWidget#centralwidget{
+background-color:rgb(100,100,100);
+
+}</string>
    </property>
    <widget class="QTabWidget" name="tab_widget">
     <property name="geometry">
@@ -42,10 +51,24 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QTabWidget:{}</string>
+     <string notr="true">QTabWidget::pane {
+  top:-1px; 
+  background: rgb(245, 245, 245);
+} 
+
+QTabBar::tab {
+  background: rgb(191, 191, 191);
+  color:black
+} 
+
+QTabBar::tab:selected { 
+  }</string>
     </property>
     <property name="tabPosition">
      <enum>QTabWidget::North</enum>
+    </property>
+    <property name="tabShape">
+     <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
      <number>0</number>
@@ -55,7 +78,10 @@
     </property>
     <widget class="QWidget" name="groups_tab">
      <property name="styleSheet">
-      <string notr="true">QWidget{background-color;}</string>
+      <string notr="true">QWidget#groups_tab{
+background-color: rgb(100,100,100);
+
+}</string>
      </property>
      <attribute name="title">
       <string>Groups</string>
@@ -63,11 +89,43 @@
      <widget class="QLineEdit" name="group_name_edit">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>80</y>
+        <x>250</x>
+        <y>40</y>
         <width>301</width>
         <height>22</height>
        </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>301</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>301</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QLineEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -79,11 +137,43 @@
      <widget class="QPlainTextEdit" name="group_description_edit">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>110</y>
+        <x>250</x>
+        <y>70</y>
         <width>301</width>
         <height>71</height>
        </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>301</width>
+        <height>71</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>301</width>
+        <height>71</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPlainTextEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QPlainTextEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QPlainTextEdit:focus {
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(255,255,255);
+}</string>
       </property>
       <property name="placeholderText">
        <string>Description for the Group you want to create.</string>
@@ -101,15 +191,36 @@
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Click on an invite, if you want to accept or decline the invitation.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget#invites_list{
+background-color: rgb(75,75,75);
+border-radius:5px;
+border:0px;
+color:white
+}</string>
+      </property>
      </widget>
      <widget class="QPlainTextEdit" name="group_description_view">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>370</y>
+        <x>250</x>
+        <y>320</y>
         <width>301</width>
         <height>171</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget#group_description_view{
+background-color: rgb(75,75,75);
+border-radius:5px;
+border:0px;
+color:white
+}</string>
       </property>
       <property name="readOnly">
        <bool>true</bool>
@@ -130,6 +241,28 @@
       <layout class="QHBoxLayout" name="horizontalLayout_10">
        <item>
         <widget class="QPushButton" name="accept_invite_button">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
+         </property>
          <property name="text">
           <string>Accept</string>
          </property>
@@ -137,6 +270,28 @@
        </item>
        <item>
         <widget class="QPushButton" name="decline_invite_button">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
+         </property>
          <property name="text">
           <string>Decline</string>
          </property>
@@ -189,8 +344,8 @@
      <widget class="QLabel" name="create_group_label">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>50</y>
+        <x>250</x>
+        <y>10</y>
         <width>301</width>
         <height>31</height>
        </rect>
@@ -210,54 +365,60 @@
      <widget class="QPlainTextEdit" name="email_edit">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>190</y>
+        <x>250</x>
+        <y>150</y>
         <width>301</width>
         <height>71</height>
        </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>301</width>
+        <height>71</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>301</width>
+        <height>71</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPlainTextEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QPlainTextEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QPlainTextEdit:focus {
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(255,255,255);
+}</string>
       </property>
       <property name="placeholderText">
        <string>Enter emails of invites (e.g. email1@gmail.com, email2@gmail.com). If you don't invite any members now, you can invite them with the &quot;Invite Members&quot; button.</string>
       </property>
      </widget>
-     <widget class="QWidget" name="horizontalLayoutWidget_10">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>490</y>
-        <width>181</width>
-        <height>81</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_11">
-       <item>
-        <widget class="QPushButton" name="invite_button">
-         <property name="text">
-          <string>Invite Members</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="delete_group_button">
-         <property name="text">
-          <string>Delete Group</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
      <widget class="QLabel" name="group_description_label">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>340</y>
+        <x>250</x>
+        <y>290</y>
         <width>301</width>
         <height>31</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>14</pointsize>
        </font>
       </property>
       <property name="text">
@@ -270,8 +431,8 @@
      <widget class="QWidget" name="horizontalLayoutWidget_11">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>260</y>
+        <x>250</x>
+        <y>220</y>
         <width>301</width>
         <height>41</height>
        </rect>
@@ -281,15 +442,37 @@
         <widget class="QPushButton" name="create_group_button">
          <property name="minimumSize">
           <size>
-           <width>75</width>
+           <width>87</width>
            <height>24</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>75</width>
+           <width>87</width>
            <height>24</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
          </property>
          <property name="text">
           <string>Create Group</string>
@@ -322,6 +505,9 @@
         <height>81</height>
        </size>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="frameShape">
        <enum>QFrame::NoFrame</enum>
       </property>
@@ -350,7 +536,11 @@
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">QFrame{background-color:rgb(255,255,255);}
+        <string notr="true">QFrame{
+background-color: rgb(255, 189, 83);
+border-radius: 15px;
+
+}
 </string>
        </property>
        <property name="frameShape">
@@ -376,7 +566,7 @@
           </property>
           <property name="styleSheet">
            <string notr="true">QLabel{
-background-color:white;
+background-color: rgb(255, 189, 83);
 border-radius:5px;
 }</string>
           </property>
@@ -408,14 +598,27 @@ border-radius:5px;
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color: rgb(255, 189, 83);
+	border: 2px solid rgb(255, 165, 24);	
+	color: rgb(35, 35, 35);
+}</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>../GitHub/Login_PyQt5/Images/cil-x.png</normaloff>../GitHub/Login_PyQt5/Images/cil-x.png</iconset>
+            <normaloff>../GitHub/CMSC-447---Pinguin---UMBC/Application/GUI/Images/cil-x.png</normaloff>../GitHub/CMSC-447---Pinguin---UMBC/Application/GUI/Images/cil-x.png</iconset>
           </property>
          </widget>
         </item>
@@ -431,6 +634,158 @@ border-radius:5px;
         <height>451</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget#groups_tree{
+background-color: rgb(75,75,75);
+border-radius:5px;
+border:0px;
+color:white
+}</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>500</y>
+        <width>184</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_11">
+         <item>
+          <widget class="QPushButton" name="invite_button">
+           <property name="minimumSize">
+            <size>
+             <width>87</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>87</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
+           </property>
+           <property name="text">
+            <string>Invite Users</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="delete_group_button">
+           <property name="minimumSize">
+            <size>
+             <width>87</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>87</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
+           </property>
+           <property name="text">
+            <string>Delete Group</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item alignment="Qt::AlignHCenter">
+        <widget class="QPushButton" name="remove_user_edit">
+         <property name="minimumSize">
+          <size>
+           <width>87</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>87</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
+         </property>
+         <property name="text">
+          <string>Remove User</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
      <zorder>group_tree_label</zorder>
      <zorder>invites_label</zorder>
@@ -441,13 +796,19 @@ border-radius:5px;
      <zorder>horizontalLayoutWidget_9</zorder>
      <zorder>create_group_label</zorder>
      <zorder>email_edit</zorder>
-     <zorder>horizontalLayoutWidget_10</zorder>
      <zorder>group_description_label</zorder>
      <zorder>horizontalLayoutWidget_11</zorder>
      <zorder>groups_tree</zorder>
      <zorder>group_bar</zorder>
+     <zorder>verticalLayoutWidget_4</zorder>
     </widget>
     <widget class="QWidget" name="forums_tab">
+     <property name="styleSheet">
+      <string notr="true">QWidget#forums_tab{
+background-color: rgb(100,100,100);
+
+}</string>
+     </property>
      <attribute name="title">
       <string>Forums</string>
      </attribute>
@@ -510,6 +871,26 @@ border-radius:5px;
              <height>93</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QTextEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QTextEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QTextEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255, 255, 255);
+}</string>
+           </property>
            <property name="placeholderText">
             <string>Enter a message to send to your group members.</string>
            </property>
@@ -532,6 +913,28 @@ border-radius:5px;
              <width>91</width>
              <height>24</height>
             </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
            </property>
            <property name="text">
             <string>Send Message</string>
@@ -569,8 +972,16 @@ border-radius:5px;
         <x>10</x>
         <y>40</y>
         <width>181</width>
-        <height>531</height>
+        <height>451</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget#forum_tree{
+background-color: rgb(75,75,75);
+border-radius:5px;
+border:0px;
+color:white
+}</string>
       </property>
      </widget>
      <widget class="QFrame" name="forums_bar">
@@ -625,7 +1036,11 @@ border-radius:5px;
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">QFrame{background-color:rgb(255,255,255);}
+        <string notr="true">QFrame{
+background-color: rgb(255, 189, 83);
+border-radius: 15px;
+
+}
 </string>
        </property>
        <property name="frameShape">
@@ -651,7 +1066,7 @@ border-radius:5px;
           </property>
           <property name="styleSheet">
            <string notr="true">QLabel{
-background-color:white;
+background-color:rgb(255, 189, 83);
 border-radius:5px;
 }</string>
           </property>
@@ -683,21 +1098,34 @@ border-radius:5px;
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color: rgb(255, 189, 83);
+	border: 2px solid rgb(255, 165, 24);	
+	color: rgb(35, 35, 35);
+}</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>../GitHub/Login_PyQt5/Images/cil-x.png</normaloff>../GitHub/Login_PyQt5/Images/cil-x.png</iconset>
+            <normaloff>../GitHub/CMSC-447---Pinguin---UMBC/Application/GUI/Images/cil-x.png</normaloff>../GitHub/CMSC-447---Pinguin---UMBC/Application/GUI/Images/cil-x.png</iconset>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
      </widget>
-     <widget class="QPlainTextEdit" name="forum_view">
+     <widget class="QListWidget" name="forum_view">
       <property name="geometry">
        <rect>
         <x>200</x>
@@ -706,9 +1134,71 @@ border-radius:5px;
         <height>391</height>
        </rect>
       </property>
-      <property name="readOnly">
-       <bool>true</bool>
+      <property name="styleSheet">
+       <string notr="true">QListWidget{
+background-color: rgb(150, 150, 150);
+border-radius:5px;
+border:0px;
+color:white
+}</string>
       </property>
+     </widget>
+     <widget class="QWidget" name="widget_2" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>490</y>
+        <width>181</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QPushButton" name="delete_post_button">
+           <property name="minimumSize">
+            <size>
+             <width>91</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>91</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
+           </property>
+           <property name="text">
+            <string>Remove Post</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
      <zorder>horizontalLayoutWidget_6</zorder>
      <zorder>widget</zorder>
@@ -716,8 +1206,15 @@ border-radius:5px;
      <zorder>forum_tree</zorder>
      <zorder>forum_view</zorder>
      <zorder>forums_bar</zorder>
+     <zorder>widget_2</zorder>
     </widget>
     <widget class="QWidget" name="calendar_tab">
+     <property name="styleSheet">
+      <string notr="true">QWidget#calendar_tab{
+background-color: rgb(100,100,100);
+
+}</string>
+     </property>
      <attribute name="title">
       <string>Calendar</string>
      </attribute>
@@ -729,6 +1226,9 @@ border-radius:5px;
         <width>371</width>
         <height>281</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
      </widget>
      <widget class="QListWidget" name="todays_list">
@@ -742,6 +1242,13 @@ border-radius:5px;
       </property>
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Click on an event to view its description.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget#todays_list{
+background-color: rgb(75,75,75);
+border-radius:5px;
+border:0px
+}</string>
       </property>
      </widget>
      <widget class="QLabel" name="today_label">
@@ -774,6 +1281,26 @@ border-radius:5px;
         <height>22</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QLineEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
+      </property>
       <property name="placeholderText">
        <string>Enter a title for your event.</string>
       </property>
@@ -787,6 +1314,26 @@ border-radius:5px;
         <height>121</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPlainTextEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QPlainTextEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QPlainTextEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255, 255, 255);
+}</string>
+      </property>
       <property name="placeholderText">
        <string>Enter a description for your event.</string>
       </property>
@@ -799,6 +1346,28 @@ border-radius:5px;
         <width>75</width>
         <height>24</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
       </property>
       <property name="text">
        <string>Add Event</string>
@@ -836,6 +1405,13 @@ border-radius:5px;
       </property>
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Click on an event to view its description.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget#months_list{
+background-color: rgb(75,75,75);
+border-radius:5px;
+border:0px
+}</string>
       </property>
      </widget>
      <widget class="QWidget" name="verticalLayoutWidget_3">
@@ -881,6 +1457,16 @@ border-radius:5px;
            </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Select a day from the calendar to change the date.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QDateEdit{
+background-color:rgb(35,35,35);
+color:rgb(255,255,255);
+}
+QDateEdit:focus{
+border: 2px solid rgb(207, 138, 0);	
+}
+</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -943,7 +1529,11 @@ border-radius:5px;
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">QFrame{background-color:rgb(255,255,255);}
+        <string notr="true">QFrame{
+background-color: rgb(255, 189, 83);
+border-radius: 15px;
+
+}
 </string>
        </property>
        <property name="frameShape">
@@ -969,7 +1559,7 @@ border-radius:5px;
           </property>
           <property name="styleSheet">
            <string notr="true">QLabel{
-background-color:white;
+background-color:rgb(255, 189, 83);
 border-radius:5px;
 }</string>
           </property>
@@ -1001,14 +1591,27 @@ border-radius:5px;
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color: rgb(255, 189, 83);
+	border: 2px solid rgb(255, 165, 24);	
+	color: rgb(35, 35, 35);
+}</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>../GitHub/Login_PyQt5/Images/cil-x.png</normaloff>../GitHub/Login_PyQt5/Images/cil-x.png</iconset>
+            <normaloff>../GitHub/CMSC-447---Pinguin---UMBC/Application/GUI/Images/cil-x.png</normaloff>../GitHub/CMSC-447---Pinguin---UMBC/Application/GUI/Images/cil-x.png</iconset>
           </property>
          </widget>
         </item>
@@ -1017,6 +1620,12 @@ border-radius:5px;
      </widget>
     </widget>
     <widget class="QWidget" name="tasks_tab">
+     <property name="styleSheet">
+      <string notr="true">QWidget#tasks_tab{
+background-color: rgb(100,100,100);
+
+}</string>
+     </property>
      <attribute name="title">
       <string>Tasks</string>
      </attribute>
@@ -1031,6 +1640,13 @@ border-radius:5px;
       </property>
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Click on task card to view its description.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget#trello_tree{
+background-color: rgb(75,75,75);
+border-radius:5px;
+border:0px
+}</string>
       </property>
      </widget>
      <widget class="Line" name="line">
@@ -1051,13 +1667,33 @@ border-radius:5px;
        <rect>
         <x>360</x>
         <y>40</y>
-        <width>271</width>
+        <width>281</width>
         <height>80</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item alignment="Qt::AlignLeft">
         <widget class="QLineEdit" name="add_list_edit">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QLineEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
+         </property>
          <property name="placeholderText">
           <string>List Name</string>
          </property>
@@ -1065,6 +1701,28 @@ border-radius:5px;
        </item>
        <item>
         <widget class="QPushButton" name="add_list_button">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
+         </property>
          <property name="text">
           <string>Add List</string>
          </property>
@@ -1072,6 +1730,28 @@ border-radius:5px;
        </item>
        <item>
         <widget class="QPushButton" name="delete_list_button">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
+         </property>
          <property name="text">
           <string>Delete List</string>
          </property>
@@ -1090,17 +1770,27 @@ border-radius:5px;
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
-        <widget class="QLineEdit" name="board_move_edit">
-         <property name="styleSheet">
-          <string notr="true">QLineEdit{}</string>
-         </property>
-         <property name="placeholderText">
-          <string>Board(From)</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLineEdit" name="list_move_from_edit">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QLineEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
+         </property>
          <property name="placeholderText">
           <string>List(From)</string>
          </property>
@@ -1108,6 +1798,26 @@ border-radius:5px;
        </item>
        <item>
         <widget class="QLineEdit" name="card_move_edit">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QLineEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -1118,6 +1828,26 @@ border-radius:5px;
        </item>
        <item>
         <widget class="QLineEdit" name="list_move_to_edit">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QLineEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -1128,6 +1858,28 @@ border-radius:5px;
        </item>
        <item>
         <widget class="QPushButton" name="move_card_button">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
+         </property>
          <property name="text">
           <string>Move Card</string>
          </property>
@@ -1138,15 +1890,35 @@ border-radius:5px;
      <widget class="QWidget" name="verticalLayoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>210</x>
         <y>320</y>
-        <width>300</width>
+        <width>241</width>
         <height>251</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QPlainTextEdit" name="task_card_view">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPlainTextEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QPlainTextEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QPlainTextEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -1159,6 +1931,28 @@ border-radius:5px;
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
           <widget class="QPushButton" name="edit_task_description_button">
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
+           </property>
            <property name="text">
             <string>Edit Description</string>
            </property>
@@ -1166,6 +1960,28 @@ border-radius:5px;
          </item>
          <item>
           <widget class="QPushButton" name="delete_task_button">
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
+           </property>
            <property name="text">
             <string>Delete Task Card</string>
            </property>
@@ -1186,14 +2002,27 @@ border-radius:5px;
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QLineEdit" name="card_add_board_edit">
-         <property name="placeholderText">
-          <string>Board Name</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLineEdit" name="card_add_list_edit">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QLineEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
+         </property>
          <property name="placeholderText">
           <string>List Name</string>
          </property>
@@ -1201,6 +2030,26 @@ border-radius:5px;
        </item>
        <item>
         <widget class="QLineEdit" name="card_add_edit">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QLineEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
+         </property>
          <property name="placeholderText">
           <string>Task Card Name</string>
          </property>
@@ -1208,6 +2057,26 @@ border-radius:5px;
        </item>
        <item>
         <widget class="QPlainTextEdit" name="card_description_edit">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPlainTextEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QPlainTextEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QPlainTextEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
+         </property>
          <property name="placeholderText">
           <string>Enter a description for the task card.</string>
          </property>
@@ -1215,6 +2084,28 @@ border-radius:5px;
        </item>
        <item>
         <widget class="QPushButton" name="card_add_button">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
+         </property>
          <property name="text">
           <string>Add Task Card</string>
          </property>
@@ -1227,7 +2118,7 @@ border-radius:5px;
        <rect>
         <x>215</x>
         <y>290</y>
-        <width>251</width>
+        <width>231</width>
         <height>20</height>
        </rect>
       </property>
@@ -1337,7 +2228,11 @@ border-radius:5px;
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">QFrame{background-color:rgb(255,255,255);}
+        <string notr="true">QFrame{
+background-color: rgb(255, 189, 83);
+border-radius: 15px;
+
+}
 </string>
        </property>
        <property name="frameShape">
@@ -1363,7 +2258,7 @@ border-radius:5px;
           </property>
           <property name="styleSheet">
            <string notr="true">QLabel{
-background-color:white;
+background-color:rgb(255, 189, 83);
 border-radius:5px;
 }</string>
           </property>
@@ -1395,41 +2290,78 @@ border-radius:5px;
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color: rgb(255, 189, 83);
+	border: 2px solid rgb(255, 165, 24);	
+	color: rgb(35, 35, 35);
+}</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>../GitHub/Login_PyQt5/Images/cil-x.png</normaloff>../GitHub/Login_PyQt5/Images/cil-x.png</iconset>
+            <normaloff>../GitHub/CMSC-447---Pinguin---UMBC/Application/GUI/Images/cil-x.png</normaloff>../GitHub/CMSC-447---Pinguin---UMBC/Application/GUI/Images/cil-x.png</iconset>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
      </widget>
+     <zorder>Tasks_Label</zorder>
+     <zorder>trello_tree</zorder>
+     <zorder>tasks_bar</zorder>
+     <zorder>line</zorder>
+     <zorder>horizontalLayoutWidget_4</zorder>
+     <zorder>horizontalLayoutWidget_5</zorder>
+     <zorder>verticalLayoutWidget_2</zorder>
+     <zorder>verticalLayoutWidget</zorder>
+     <zorder>task_card_label</zorder>
+     <zorder>label_7</zorder>
     </widget>
     <widget class="QWidget" name="documents_tab">
+     <property name="styleSheet">
+      <string notr="true">QWidget#documents_tab{
+background-color: rgb(100,100,100);
+
+}</string>
+     </property>
      <attribute name="title">
       <string>Documents</string>
      </attribute>
      <widget class="QListWidget" name="document_list">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>200</x>
         <y>40</y>
-        <width>781</width>
+        <width>591</width>
         <height>211</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget#document_list{
+background-color: rgb(75,75,75);
+color: white;
+border-radius:5px;
+border:0px
+}</string>
       </property>
      </widget>
      <widget class="QLabel" name="document_label">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>230</x>
         <y>10</y>
-        <width>781</width>
+        <width>561</width>
         <height>31</height>
        </rect>
       </property>
@@ -1451,24 +2383,88 @@ border-radius:5px;
      <widget class="QWidget" name="horizontalLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>210</x>
         <y>370</y>
-        <width>781</width>
+        <width>582</width>
         <height>80</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QLineEdit" name="doc_share_name_edit">
+         <property name="minimumSize">
+          <size>
+           <width>234</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>338</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QLineEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
+         </property>
          <property name="placeholderText">
-          <string>Enter a name for the document to store.</string>
+          <string>Enter a name for the link</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="doc_share_link_edit">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>338</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QLineEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
+         </property>
          <property name="placeholderText">
-          <string>Enter the link for your document.</string>
+          <string>Enter the link</string>
          </property>
         </widget>
        </item>
@@ -1476,15 +2472,37 @@ border-radius:5px;
         <widget class="QPushButton" name="doc_share_button">
          <property name="minimumSize">
           <size>
-           <width>91</width>
+           <width>100</width>
            <height>24</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>91</width>
+           <width>100</width>
            <height>24</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
          </property>
          <property name="text">
           <string>Share Link</string>
@@ -1496,17 +2514,49 @@ border-radius:5px;
      <widget class="QWidget" name="horizontalLayoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>210</x>
         <y>260</y>
-        <width>781</width>
+        <width>581</width>
         <height>80</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QLineEdit" name="doc_create_edit">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>680</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QLineEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
+         </property>
          <property name="placeholderText">
-          <string>Enter a name for the document to store.</string>
+          <string>Enter a name for the Google Doc</string>
          </property>
         </widget>
        </item>
@@ -1514,18 +2564,40 @@ border-radius:5px;
         <widget class="QPushButton" name="doc_create_button">
          <property name="minimumSize">
           <size>
-           <width>91</width>
+           <width>100</width>
            <height>24</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>91</width>
+           <width>100</width>
            <height>24</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
+         </property>
          <property name="text">
-          <string>Create Document</string>
+          <string>Create Doc</string>
          </property>
         </widget>
        </item>
@@ -1534,17 +2606,49 @@ border-radius:5px;
      <widget class="QWidget" name="horizontalLayoutWidget_3">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>210</x>
         <y>480</y>
-        <width>781</width>
+        <width>581</width>
         <height>80</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QLineEdit" name="doc_delete_edit">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>680</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QLineEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255,255,255);
+}</string>
+         </property>
          <property name="placeholderText">
-          <string>Enter the name of the document you want to delete or you can right click the document you want to delete.</string>
+          <string>Enter the name of the document you want to delete</string>
          </property>
         </widget>
        </item>
@@ -1552,15 +2656,37 @@ border-radius:5px;
         <widget class="QPushButton" name="doc_delete_button">
          <property name="minimumSize">
           <size>
-           <width>91</width>
+           <width>100</width>
            <height>24</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>91</width>
+           <width>100</width>
            <height>24</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
          </property>
          <property name="text">
           <string>Delete Link</string>
@@ -1621,7 +2747,11 @@ border-radius:5px;
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">QFrame{background-color:rgb(255,255,255);}
+        <string notr="true">QFrame{
+background-color: rgb(255, 189, 83);
+border-radius: 15px;
+
+}
 </string>
        </property>
        <property name="frameShape">
@@ -1647,7 +2777,7 @@ border-radius:5px;
           </property>
           <property name="styleSheet">
            <string notr="true">QLabel{
-background-color:white;
+background-color:rgb(255, 189, 83);
 border-radius:5px;
 }</string>
           </property>
@@ -1679,20 +2809,82 @@ border-radius:5px;
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color: rgb(255, 189, 83);
+	border: 2px solid rgb(255, 165, 24);	
+	color: rgb(35, 35, 35);
+}</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>../GitHub/Login_PyQt5/Images/cil-x.png</normaloff>../GitHub/Login_PyQt5/Images/cil-x.png</iconset>
+            <normaloff>../GitHub/CMSC-447---Pinguin---UMBC/Application/GUI/Images/cil-x.png</normaloff>../GitHub/CMSC-447---Pinguin---UMBC/Application/GUI/Images/cil-x.png</iconset>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
      </widget>
+     <widget class="QTreeView" name="docs_tree">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>181</width>
+        <height>531</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Click on task card to view its description.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget#docs_tree{
+background-color: rgb(75,75,75);
+border-radius:5px;
+border:0px
+}</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="docs_group_label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>181</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Groups</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <zorder>document_list</zorder>
+     <zorder>document_label</zorder>
+     <zorder>horizontalLayoutWidget</zorder>
+     <zorder>horizontalLayoutWidget_2</zorder>
+     <zorder>horizontalLayoutWidget_3</zorder>
+     <zorder>docs_tree</zorder>
+     <zorder>docs_group_label</zorder>
+     <zorder>docs_bar</zorder>
     </widget>
    </widget>
   </widget>

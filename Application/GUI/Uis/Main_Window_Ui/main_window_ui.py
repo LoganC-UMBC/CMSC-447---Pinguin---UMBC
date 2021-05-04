@@ -17,6 +17,9 @@ class Ui_main_window(object):
         main_window.resize(805, 631)
         main_window.setMinimumSize(QtCore.QSize(805, 631))
         main_window.setMaximumSize(QtCore.QSize(805, 631))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("/Images/447logoicon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        main_window.setWindowIcon(icon)
         main_window.setStyleSheet("QMainWindow#main_window{\n"
 "border:0px;\n"
 "}")
@@ -61,13 +64,14 @@ class Ui_main_window(object):
 "    border: 2px solid rgb(45, 45, 45);\n"
 "    border-radius: 5px;\n"
 "    background-color: rgb(30, 30, 30);    \n"
-"    color: white;}\n"
+"    color: rgb(255,255,255);\n"
+"}\n"
 "QLineEdit:hover {\n"
 "    border: 2px solid rgb(55, 55, 55);\n"
 "}\n"
 "QLineEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.group_name_edit.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.group_name_edit.setObjectName("group_name_edit")
@@ -89,7 +93,7 @@ class Ui_main_window(object):
 "}\n"
 "QPlainTextEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);\n"
-"    color: rgb(35, 35, 35);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.group_description_edit.setObjectName("group_description_edit")
         self.invites_list = QtWidgets.QListWidget(self.groups_tab)
@@ -201,7 +205,7 @@ class Ui_main_window(object):
 "}\n"
 "QPlainTextEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);\n"
-"    color: rgb(35, 35, 35);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.email_edit.setObjectName("email_edit")
         self.group_description_label = QtWidgets.QLabel(self.groups_tab)
@@ -295,9 +299,9 @@ class Ui_main_window(object):
 "    color: rgb(35, 35, 35);\n"
 "}")
         self.groups_close_popup_button.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../GitHub/CMSC-447---Pinguin---UMBC/Application/GUI/Images/cil-x.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.groups_close_popup_button.setIcon(icon)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("../GitHub/CMSC-447---Pinguin---UMBC/Application/GUI/Images/cil-x.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.groups_close_popup_button.setIcon(icon1)
         self.groups_close_popup_button.setObjectName("groups_close_popup_button")
         self.horizontalLayout_18.addWidget(self.groups_close_popup_button)
         self.groups_tree = QtWidgets.QTreeView(self.groups_tab)
@@ -454,7 +458,7 @@ class Ui_main_window(object):
 "}\n"
 "QTextEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255, 255, 255);\n"
 "}")
         self.message_edit.setObjectName("message_edit")
         self.horizontalLayout_13.addWidget(self.message_edit)
@@ -555,7 +559,7 @@ class Ui_main_window(object):
 "    color: rgb(35, 35, 35);\n"
 "}")
         self.forums_close_popup_button.setText("")
-        self.forums_close_popup_button.setIcon(icon)
+        self.forums_close_popup_button.setIcon(icon1)
         self.forums_close_popup_button.setObjectName("forums_close_popup_button")
         self.horizontalLayout_19.addWidget(self.forums_close_popup_button)
         self.forum_view = QtWidgets.QListWidget(self.forums_tab)
@@ -648,7 +652,7 @@ class Ui_main_window(object):
 "}\n"
 "QLineEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.event_name_edit.setObjectName("event_name_edit")
         self.event_description_edit = QtWidgets.QPlainTextEdit(self.calendar_tab)
@@ -667,7 +671,7 @@ class Ui_main_window(object):
 "}\n"
 "QPlainTextEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255, 255, 255);\n"
 "}")
         self.event_description_edit.setObjectName("event_description_edit")
         self.add_event_button = QtWidgets.QPushButton(self.calendar_tab)
@@ -790,7 +794,7 @@ class Ui_main_window(object):
 "    color: rgb(35, 35, 35);\n"
 "}")
         self.calendar_close_popup_button.setText("")
-        self.calendar_close_popup_button.setIcon(icon)
+        self.calendar_close_popup_button.setIcon(icon1)
         self.calendar_close_popup_button.setObjectName("calendar_close_popup_button")
         self.horizontalLayout_20.addWidget(self.calendar_close_popup_button)
         self.tab_widget.addTab(self.calendar_tab, "")
@@ -834,7 +838,7 @@ class Ui_main_window(object):
 "}\n"
 "QLineEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.add_list_edit.setObjectName("add_list_edit")
         self.horizontalLayout_4.addWidget(self.add_list_edit, 0, QtCore.Qt.AlignLeft)
@@ -901,7 +905,7 @@ class Ui_main_window(object):
 "}\n"
 "QLineEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.list_move_from_edit.setObjectName("list_move_from_edit")
         self.horizontalLayout_5.addWidget(self.list_move_from_edit)
@@ -920,7 +924,7 @@ class Ui_main_window(object):
 "}\n"
 "QLineEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.card_move_edit.setText("")
         self.card_move_edit.setObjectName("card_move_edit")
@@ -940,7 +944,7 @@ class Ui_main_window(object):
 "}\n"
 "QLineEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.list_move_to_edit.setText("")
         self.list_move_to_edit.setObjectName("list_move_to_edit")
@@ -987,7 +991,7 @@ class Ui_main_window(object):
 "}\n"
 "QPlainTextEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.task_card_view.setReadOnly(True)
         self.task_card_view.setObjectName("task_card_view")
@@ -1058,7 +1062,7 @@ class Ui_main_window(object):
 "}\n"
 "QLineEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.card_add_list_edit.setObjectName("card_add_list_edit")
         self.verticalLayout.addWidget(self.card_add_list_edit)
@@ -1077,7 +1081,7 @@ class Ui_main_window(object):
 "}\n"
 "QLineEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.card_add_edit.setObjectName("card_add_edit")
         self.verticalLayout.addWidget(self.card_add_edit)
@@ -1096,7 +1100,7 @@ class Ui_main_window(object):
 "}\n"
 "QPlainTextEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.card_description_edit.setObjectName("card_description_edit")
         self.verticalLayout.addWidget(self.card_description_edit)
@@ -1196,7 +1200,7 @@ class Ui_main_window(object):
 "    color: rgb(35, 35, 35);\n"
 "}")
         self.tasks_close_popup_button.setText("")
-        self.tasks_close_popup_button.setIcon(icon)
+        self.tasks_close_popup_button.setIcon(icon1)
         self.tasks_close_popup_button.setObjectName("tasks_close_popup_button")
         self.horizontalLayout_21.addWidget(self.tasks_close_popup_button)
         self.Tasks_Label.raise_()
@@ -1256,7 +1260,7 @@ class Ui_main_window(object):
 "}\n"
 "QLineEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.doc_share_name_edit.setObjectName("doc_share_name_edit")
         self.horizontalLayout.addWidget(self.doc_share_name_edit)
@@ -1277,7 +1281,7 @@ class Ui_main_window(object):
 "}\n"
 "QLineEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.doc_share_link_edit.setObjectName("doc_share_link_edit")
         self.horizontalLayout.addWidget(self.doc_share_link_edit)
@@ -1327,7 +1331,7 @@ class Ui_main_window(object):
 "}\n"
 "QLineEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.doc_create_edit.setObjectName("doc_create_edit")
         self.horizontalLayout_2.addWidget(self.doc_create_edit)
@@ -1377,7 +1381,7 @@ class Ui_main_window(object):
 "}\n"
 "QLineEdit:focus {\n"
 "    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    color: rgb(255,255,255);\n"
 "}")
         self.doc_delete_edit.setObjectName("doc_delete_edit")
         self.horizontalLayout_3.addWidget(self.doc_delete_edit)
@@ -1458,7 +1462,7 @@ class Ui_main_window(object):
 "    color: rgb(35, 35, 35);\n"
 "}")
         self.docs_close_popup_button.setText("")
-        self.docs_close_popup_button.setIcon(icon)
+        self.docs_close_popup_button.setIcon(icon1)
         self.docs_close_popup_button.setObjectName("docs_close_popup_button")
         self.horizontalLayout_22.addWidget(self.docs_close_popup_button)
         self.docs_tree = QtWidgets.QTreeView(self.documents_tab)
@@ -1568,7 +1572,7 @@ class Ui_main_window(object):
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.documents_tab), _translate("main_window", "Documents"))
 
 
-"""if __name__ == "__main__":
+if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     main_window = QtWidgets.QMainWindow()
@@ -1576,4 +1580,3 @@ class Ui_main_window(object):
     ui.setupUi(main_window)
     main_window.show()
     sys.exit(app.exec_())
-"""

@@ -23,10 +23,10 @@ class Google_Drive(object):
         file_list[0].Trash()
 
 
-auth = GoogleAuth()
+"""auth = GoogleAuth()
 
 auth.LocalWebserverAuth()
 d = Google_Drive(auth)
 #auth.SaveCredentialsFile("mycred.txt")  # Saves credentials to a file
 
-print(d.create("my file"))
+print(d.create("my file"))"""

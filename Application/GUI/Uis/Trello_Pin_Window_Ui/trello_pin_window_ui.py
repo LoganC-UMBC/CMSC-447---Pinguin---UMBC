@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'form.ui'
+# Form implementation generated from reading ui file '..\GitHub\CMSC-447---Pinguin---UMBC\Application\GUI\Uis\Trello_Pin_Window_Ui\form.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.2
 #
@@ -17,6 +17,9 @@ class Ui_trello_pin_window(object):
         trello_pin_window.resize(300, 300)
         trello_pin_window.setMinimumSize(QtCore.QSize(300, 300))
         trello_pin_window.setMaximumSize(QtCore.QSize(300, 300))
+        trello_pin_window.setStyleSheet("QWidget#trello_pin_window{\n"
+"background-color: rgb(100,100,100);\n"
+"}")
         self.verticalLayoutWidget = QtWidgets.QWidget(trello_pin_window)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 120, 301, 80))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
@@ -29,6 +32,19 @@ class Ui_trello_pin_window(object):
         self.trello_pin_edit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
         self.trello_pin_edit.setMinimumSize(QtCore.QSize(250, 22))
         self.trello_pin_edit.setMaximumSize(QtCore.QSize(250, 22))
+        self.trello_pin_edit.setStyleSheet("QLineEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(255,255,255);\n"
+"}")
         self.trello_pin_edit.setAlignment(QtCore.Qt.AlignCenter)
         self.trello_pin_edit.setObjectName("trello_pin_edit")
         self.horizontalLayout.addWidget(self.trello_pin_edit)
@@ -38,6 +54,21 @@ class Ui_trello_pin_window(object):
         self.connect_trello_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.connect_trello_button.setMinimumSize(QtCore.QSize(100, 0))
         self.connect_trello_button.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.connect_trello_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.connect_trello_button.setObjectName("connect_trello_button")
         self.horizontalLayout_2.addWidget(self.connect_trello_button)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
@@ -60,8 +91,7 @@ class Ui_trello_pin_window(object):
         self.trello_pin_label.setText(_translate("trello_pin_window", "Connect with Trello"))
 
 
-
-"""if __name__ == "__main__":
+if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     trello_pin_window = QtWidgets.QWidget()
@@ -69,4 +99,3 @@ class Ui_trello_pin_window(object):
     ui.setupUi(trello_pin_window)
     trello_pin_window.show()
     sys.exit(app.exec_())
-"""
