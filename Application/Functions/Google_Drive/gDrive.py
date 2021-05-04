@@ -18,11 +18,10 @@ class Google_Drive(object):
 
     def trash_files(self, file_title):
         # find the file with this name
-        print("trashing file")
-        file_list = self.drive.ListFile({'q': "title = '%s' and trashed = false" % file_title}).GetList()
-        print(file_list)
-        # delete the first occurance of this file
-        file_list[0].Trash()
+        file_list = self.drive.ListFile({'q': "trashed = false"}).GetList()
+        for file in file_list:
+            if file['title'] == file_title:
+                file.Trash()
 
 
 """auth = GoogleAuth()
