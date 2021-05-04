@@ -428,7 +428,7 @@ class Main_Window(Ui_main_window):
                 print(invite_group)
                 group_name = invite_group['group_name']
                 print(group_name)
-                invite = InvitesListItem(group_name, group['sender'], group['group_id'])
+                invite = InvitesListItem(group_name, group['sender'], group['group_id'], group['calendar_id'])
                 self.invites_list.addItem(invite)
 
 
@@ -441,6 +441,7 @@ class Main_Window(Ui_main_window):
         if len(invites) == 1:
             self.db.invite_accept(invites[0].group_id)
             self.google_client.google_calendar.AddToCalendarList(self.db.group_lookup(self.user.currentGroup)['calendar_id'])
+            self.get_invites()
             """invite = self.invites_list.takeItem(self.invites_list.row(self.invites_list.currentItem()))
             self.groups_node.appendRow(StandardItem(invite.text()))"""
             print("Wheew made it out")
@@ -1054,9 +1055,11 @@ class Main_Window(Ui_main_window):
                 # clear edits
                 self.doc_delete_edit.clear()
                 for doc in docs:
-                    self.document_list.takeItem(self.document_list.row(doc))
-                    self.db.delete_doc(doc._id)
                     print(doc)
+                    self.document_list.takeItem(self.document_list.row(doc))
+                    if doc.doc_type == "doc":
+                        self.google_client.google_drive.trash_files(doc)
+                    self.db.delete_doc(doc._id)
 
     # helper function to insert a document to the list widget
     # not yet connected to the database
@@ -1065,7 +1068,7 @@ class Main_Window(Ui_main_window):
             # add doc to database
             print("making the doc")
             doc_url = self.google_client.google_drive.create(doc_name)
-            self.db.document_add(doc_name, "link", doc_url)
+            self.db.document_add(doc_name, "doc", doc_url)
             self.get_group_documents()
             print("doc added")
 
@@ -1142,10 +1145,11 @@ class ForumListItem(Qt.QListWidgetItem):
         self.time = time
 
 class InvitesListItem(Qt.QListWidgetItem):
-    def __init__(self, group_name, inviter, group_id=None):
+    def __init__(self, group_name, inviter, group_id=None, calendar_id=None):
         super().__init__(group_name)
         self.inviter = inviter
         self.group_id = group_id
+        self.calendar_id = calendar_id
 
 # A QStandardItem for tree widgets
 class StandardItem(QtGui.QStandardItem):

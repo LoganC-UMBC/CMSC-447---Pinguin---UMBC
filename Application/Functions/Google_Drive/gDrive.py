@@ -18,15 +18,18 @@ class Google_Drive(object):
 
     def trash_files(self, file_title):
         # find the file with this name
+        print("trashing file")
         file_list = self.drive.ListFile({'q': "title = '%s' and trashed = false" % file_title}).GetList()
+        print(file_list)
         # delete the first occurance of this file
-        file_list[0].Trash()
+        #file_list[0].Trash()
 
 
 """auth = GoogleAuth()
 
 auth.LocalWebserverAuth()
 d = Google_Drive(auth)
+d.trash_files("Quiz 2 Study Guide")
 #auth.SaveCredentialsFile("mycred.txt")  # Saves credentials to a file
 
-print(d.create("my file"))"""
+#print(d.create("my file"))"""
