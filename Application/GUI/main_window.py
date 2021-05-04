@@ -72,8 +72,11 @@ class Main_Window(Ui_main_window):
         self.action1 = QtWidgets.QAction("&Log Out")
         self.action2 = QtWidgets.QAction("&About")
         self.action3 = QtWidgets.QAction("&Refresh")
-        self.exit_menu.addAction(self.action1)
-        self.action1.triggered.connect(self.exit_app)
+        self.action4 = QtWidgets.QAction("&Quit")
+        #self.exit_menu.addAction(self.action1)
+        self.exit_menu.addAction(self.action4)
+        #self.action1.triggered.connect(self.logout)
+        self.action4.triggered.connect(self.exit_app)
         self.refresh_menu.addAction(self.action3)
         self.action3.triggered.connect(self.widgets_refresh)
 
@@ -238,7 +241,10 @@ class Main_Window(Ui_main_window):
         self.user.currentGroup = ObjectId(group_id)
         self.current_group_name = self.db.group_lookup(self.user.currentGroup)['group_name']
         self.current_calendar_id = self.db.group_lookup(self.user.currentGroup)['calendar_id']
-        #self.get_months_events()
+        self.get_months_events()
+
+    def logout(self):
+        sys.exit(0)
 
     def exit_app(self):
         sys.exit(0)
@@ -404,6 +410,7 @@ class Main_Window(Ui_main_window):
                         self.error_frame_show(self.groups_error_frame)
 
                     else:
+                        self.db.remove_user(item.group_id)
                         print("removing member")
 
                 else:
@@ -425,11 +432,14 @@ class Main_Window(Ui_main_window):
         if len(invites) != 0:
             for group in invites:
                 #print(group)
+                print(group['group_id'])
                 invite_group = self.db.group_lookup(group['group_id'])
-                print(invite_group)
+                print("invite", invite_group)
                 group_name = invite_group['group_name']
-                print(group_name)
-                invite = InvitesListItem(group_name, group['sender'], group['group_id'], group['calendar_id'])
+                print("shit")
+                print(invite_group['calendar_id'])
+
+                invite = InvitesListItem(group_name, group['sender'], group['group_id'], invite_group['calendar_id'])
                 self.invites_list.addItem(invite)
 
 
@@ -441,6 +451,7 @@ class Main_Window(Ui_main_window):
         invites = self.invites_list.selectedItems()
         if len(invites) == 1:
             self.db.invite_accept(invites[0].group_id)
+            self.google_client.google_calendar.addAccessRule(invites[0].calendar_id, self.db.user.user_id)
             self.google_client.google_calendar.AddToCalendarList(self.db.group_lookup(self.user.currentGroup)['calendar_id'])
             self.get_invites()
             """invite = self.invites_list.takeItem(self.invites_list.row(self.invites_list.currentItem()))
@@ -661,7 +672,8 @@ class Main_Window(Ui_main_window):
         else:
             print("creating an event")
             print(self.current_calendar_id)
-
+            self.event_name_edit.clear()
+            self.event_description_edit.clear()
 
             self.get_months_events()
             self.google_client.google_calendar.CreateEvent(self.current_calendar_id, event_name, event_description, start_time.isoformat(), end_time.isoformat(), 'America/New_York')
@@ -676,8 +688,21 @@ class Main_Window(Ui_main_window):
         self.date_edit.setDate(self.calendar.selectedDate())
 
     def get_months_events(self):
+        self.months_list.clear()
         print("getting months events")
-        print(self.google_client.google_calendar.getMonthEvents(self.current_calendar_id, '2021-05-01', '2021-06-01'))
+        print(self.current_calendar_id)
+        year = self.calendar.selectedDate().year()
+        month = self.calendar.selectedDate().month()
+        date1 = datetime.datetime(year, month, 1, 0, 0, 0, 0, pytz.timezone('US/Eastern'))
+        date2 = datetime.datetime(year, month+1, 1, 0, 0, 0, 0, pytz.timezone('US/Eastern'))
+        events = self.google_client.google_calendar.getMonthEvents(self.current_calendar_id, date1.isoformat(), date2.isoformat())
+        print(events)
+        if len(events) != 0:
+            print("adding events")
+            for event in events:
+                new_event = CalendarListItem(event['summary'], event)
+                print(new_event.event_name)
+                self.months_list.addItem(new_event)
         print("end of getting months events")
 
 ########################################################################################################################
@@ -1133,6 +1158,7 @@ class DocListItem(Qt.QListWidgetItem):
 class CalendarListItem(Qt.QListWidgetItem):
     def __init__(self, event_name, event_json):
         super().__init__(event_name)
+        self.event_name = event_name
         self.event = event_json
 
 class ForumListItem(Qt.QListWidgetItem):

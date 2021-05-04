@@ -22,7 +22,7 @@ class Google_Drive(object):
         file_list = self.drive.ListFile({'q': "title = '%s' and trashed = false" % file_title}).GetList()
         print(file_list)
         # delete the first occurance of this file
-        #file_list[0].Trash()
+        file_list[0].Trash()
 
 
 """auth = GoogleAuth()

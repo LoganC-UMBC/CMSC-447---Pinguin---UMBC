@@ -125,8 +125,9 @@ class Google_Calendar(object):
         '2021-01-01'/'YYYY-MM-DD'
         the only things that would need to change are year and month day should always be the first of the current month and first of the next month.
         """
-        dateStart = monthBegin + 'T00:00:00' + 'Z'  # 'Z' indicates UTC time
-        dateEnd = monthEnd + 'T00:00:00' + 'Z'  # 'Z' indicates UTC time
+
+        dateStart = monthBegin # + 'T00:00:00' + 'Z'  # 'Z' indicates UTC time
+        dateEnd = monthEnd # + 'T00:00:00' + 'Z'  # 'Z' indicates UTC time
 
         months_events = self.auth.service2.events().list(calendarId=calId, timeMin=dateStart, timeMax=dateEnd,
                                                          singleEvents=True, timeZone='America/New_York',

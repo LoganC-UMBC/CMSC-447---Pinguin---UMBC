@@ -1579,7 +1579,7 @@ class Ui_main_window(object):
         self.doc_delete_edit.setPlaceholderText(_translate("main_window", "Enter the name of the document you want to delete"))
         self.doc_delete_button.setText(_translate("main_window", "Delete Link"))
         self.docs_error_label.setText(_translate("main_window", "This is an error"))
-        self.docs_tree.setToolTip(_translate("main_window", "<html><head/><body><p><span style=\" font-size:10pt;\">Click on task card to view its description.</span></p></body></html>"))
+        #self.docs_tree.setToolTip(_translate("main_window", "<html><head/><body><p><span style=\" font-size:10pt;\">Click on task card to view its description.</span></p></body></html>"))
         self.docs_group_label.setText(_translate("main_window", "Groups"))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.documents_tab), _translate("main_window", "Documents"))
 
