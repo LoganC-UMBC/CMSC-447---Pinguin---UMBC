@@ -238,6 +238,7 @@ class Main_Window(Ui_main_window):
         self.user.currentGroup = ObjectId(group_id)
         self.current_group_name = self.db.group_lookup(self.user.currentGroup)['group_name']
         self.current_calendar_id = self.db.group_lookup(self.user.currentGroup)['calendar_id']
+        #self.get_months_events()
 
     def exit_app(self):
         sys.exit(0)
@@ -675,11 +676,9 @@ class Main_Window(Ui_main_window):
         self.date_edit.setDate(self.calendar.selectedDate())
 
     def get_months_events(self):
-        print(self.google_client.google_calendar.getMonthEvents('2021-05-01', '2021-06-01'))
-
-    def get_months_events(self):
-        pass
-
+        print("getting months events")
+        print(self.google_client.google_calendar.getMonthEvents(self.current_calendar_id, '2021-05-01', '2021-06-01'))
+        print("end of getting months events")
 
 ########################################################################################################################
 #                                               Tasks Tab                                                              #
