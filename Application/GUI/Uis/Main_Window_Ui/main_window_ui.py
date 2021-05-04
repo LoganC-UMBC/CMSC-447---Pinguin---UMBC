@@ -18,7 +18,7 @@ class Ui_main_window(object):
         main_window.setMinimumSize(QtCore.QSize(805, 631))
         main_window.setMaximumSize(QtCore.QSize(805, 631))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("/Images/447logoicon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../GitHub/CMSC-447---Pinguin---UMBC/Application/GUI/Images/447logoicon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         main_window.setWindowIcon(icon)
         main_window.setStyleSheet("QMainWindow#main_window{\n"
 "border:0px;\n"
@@ -617,10 +617,6 @@ class Ui_main_window(object):
 "\n"
 "}")
         self.calendar_tab.setObjectName("calendar_tab")
-        self.calendar = QtWidgets.QCalendarWidget(self.calendar_tab)
-        self.calendar.setGeometry(QtCore.QRect(10, 10, 371, 281))
-        self.calendar.setStyleSheet("")
-        self.calendar.setObjectName("calendar")
         self.todays_list = QtWidgets.QListWidget(self.calendar_tab)
         self.todays_list.setGeometry(QtCore.QRect(410, 40, 381, 191))
         self.todays_list.setStyleSheet("QWidget#todays_list{\n"
@@ -797,6 +793,22 @@ class Ui_main_window(object):
         self.calendar_close_popup_button.setIcon(icon1)
         self.calendar_close_popup_button.setObjectName("calendar_close_popup_button")
         self.horizontalLayout_20.addWidget(self.calendar_close_popup_button)
+        self.calendar = QtWidgets.QCalendarWidget(self.calendar_tab)
+        self.calendar.setGeometry(QtCore.QRect(10, 10, 371, 281))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.calendar.setFont(font)
+        self.calendar.setObjectName("calendar")
+        self.todays_list.raise_()
+        self.today_label.raise_()
+        self.event_name_edit.raise_()
+        self.event_description_edit.raise_()
+        self.add_event_button.raise_()
+        self.months_label.raise_()
+        self.months_list.raise_()
+        self.verticalLayoutWidget_3.raise_()
+        self.calendar.raise_()
+        self.calendar_bar.raise_()
         self.tab_widget.addTab(self.calendar_tab, "")
         self.tasks_tab = QtWidgets.QWidget()
         self.tasks_tab.setStyleSheet("QWidget#tasks_tab{\n"

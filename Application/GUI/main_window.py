@@ -207,6 +207,7 @@ class Main_Window(Ui_main_window):
 
 
     def widgets_refresh(self):
+        self.widgets_timer.stop()
         print("refreshing")
         self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
         print("populated groups_tree")
@@ -220,6 +221,7 @@ class Main_Window(Ui_main_window):
         print("setting trello tree")
         self.get_invites()
         print("getting invites")
+        self.widgets_timer.start(30000)
 
 
     # error displaying func - don't really need but wth
@@ -719,8 +721,10 @@ class Main_Window(Ui_main_window):
             self.tasks_error_label.setText(error_text)
             self.error_frame_show(self.tasks_error_frame)
 
-        elif list_name != "" and len(duplicate) == 1:
-            pass
+        elif list_name != "":
+            self.trello.ping_list_delete(self.current_group_name, list_name)
+            self.set_trello_tree()
+
 
         else:
             error_text = list_name + " doesn't exist"
@@ -827,10 +831,10 @@ class Main_Window(Ui_main_window):
                 self.tasks_error_label.setText(error_text)
                 self.error_frame_show(self.tasks_error_frame)
 
+
             else:
-                # call to trello client to delete card
-                # remove from tree
-                pass
+                self.trello.ping_card_delete(self.current_group_name, index.parent().data(), index.data())
+                self.set_trello_tree()
 
 
 
@@ -1049,9 +1053,9 @@ class Main_Window(Ui_main_window):
             else:
                 # clear edits
                 self.doc_delete_edit.clear()
-
                 for doc in docs:
                     self.document_list.takeItem(self.document_list.row(doc))
+                    self.db.delete_doc(doc._id)
                     print(doc)
 
     # helper function to insert a document to the list widget
@@ -1062,7 +1066,7 @@ class Main_Window(Ui_main_window):
             print("making the doc")
             doc_url = self.google_client.google_drive.create(doc_name)
             self.db.document_add(doc_name, "link", doc_url)
-            self.document_list.addItem(DocListItem(doc_name,"doc",str(doc_url)))
+            self.get_group_documents()
             print("doc added")
 
         elif doc_type == "share":
@@ -1104,7 +1108,7 @@ class Main_Window(Ui_main_window):
 
     def populate_docs_list(self, documents):
         for doc in documents:
-            new_doc = DocListItem(doc['title'], doc['type'], doc['doc'])
+            new_doc = DocListItem(doc['title'], doc['type'], doc['_id'], doc['doc'])
             self.document_list.addItem(new_doc)
 
 
@@ -1118,9 +1122,10 @@ class GroupsListItem(Qt.QListWidgetItem):
 # Extension of QListWidgetItem to include link for document
 # Used for insertion in the documents tab QListWidget self.document_list
 class DocListItem(Qt.QListWidgetItem):
-    def __init__(self, text, type=None, url=None):
+    def __init__(self, text, doc_type=None, _id=None, url=None):
         super().__init__(text)
-        self.type = type
+        self.doc_type = doc_type
+        self._id = _id
         self.url = QtCore.QUrl(url)
 
 class CalendarListItem(Qt.QListWidgetItem):
