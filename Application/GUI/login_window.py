@@ -8,12 +8,12 @@ Created on Mon Apr  5 21:03:37 2021
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt
-from Application.Database.PinguinDB import PinguinDB
-from Application.GUI.trello_pin_window import *
+from ..Database.PinguinDB import PinguinDB
+from .trello_pin_window import *
 
 from trello import TrelloClient
 from trello.util import create_oauth_token
-from Application.Functions.trello_api.ping_authorization import *
+from ..Functions.trello_api.ping_authorization import *
 import os
 import os.path
 from os import path
@@ -56,8 +56,8 @@ class Ui_Login_Window(QtWidgets.QMainWindow):
                           "    color: rgb(200, 200, 200);\n"
                           "}")
 
-    stylePopupError = ("background-color: rgb(255, 85, 127); border-radius: 5px;")
-    stylePopupOk = ("background-color: rgb(0, 255, 123); border-radius: 5px;")
+    stylePopupError = ("background-color: rgb(207, 138, 0); border-radius: 5px;")
+    stylePopupOk = ("background-color: rgb(207, 138, 0); border-radius: 5px;")
 
     def __init__(self, login_signal,db, trello):
         super(QtWidgets.QMainWindow, self).__init__()

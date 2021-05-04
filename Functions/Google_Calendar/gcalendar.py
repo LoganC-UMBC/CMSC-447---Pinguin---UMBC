@@ -1,6 +1,6 @@
 from __future__ import print_function
 import datetime
-from pydrive.auth import GoogleAuth
+from pydrive2.auth import GoogleAuth
 
 """
 must edit auth.py in PyDrive for GoogleAuth to work with Google Calendar's APIs

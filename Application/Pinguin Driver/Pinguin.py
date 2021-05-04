@@ -13,7 +13,7 @@ from Application.GUI.login_window import Ui_Login_Window
 from Application.Database.PinguinDB import PinguinDB
 from Application.Functions.trello_api.task_card import Trello
 from Application.Functions.google_client import *
-from pydrive2.auth import GoogleAuth
+from pydrive.auth import GoogleAuth
 
 
 MAX_W = 700
@@ -65,14 +65,19 @@ class Pinguin(QMainWindow):
 
 	@pyqtSlot()
 	def login_success(self):
-		self.login_menu.hide()
+		self.login_menu.close()
 		if self.trello.client == None:
+			print("setting up trello client")
 			print(self.db.user.user_id)
 			self.trello.action_setup2(self.db.user.user_id)
+			print("trello client all set")
 
+		print("setting up google auth")
 		self.auth = GoogleAuth()
+		print(self.auth)
 		# Try to load saved client credentials
 		self.auth.LoadCredentialsFile("Credentials.json")
+
 
 		if self.auth.credentials is None:
 			print("no creds")
@@ -93,11 +98,13 @@ class Pinguin(QMainWindow):
 			self.auth.Authorize()
 		# Save the current credentials to a file
 		self.auth.SaveCredentialsFile("Credentials.json")
+		print("authorization complete")
 
 		self.main_window.ui.google_client = GoogleClient(self.auth)
 
 		print("heresdasd")
 		self.main_window.ui.widgets_refresh()
+		self.main_window.ui.widgets_timer.start(30000)
 		self.main_window.show()
 
 	def run(self):

@@ -88,8 +88,8 @@ class Ui_main_window(object):
 "    border: 2px solid rgb(55, 55, 55);\n"
 "}\n"
 "QPlainTextEdit:focus {\n"
-"    border: 2px solid rgb(207, 138, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
 "}")
         self.group_description_edit.setObjectName("group_description_edit")
         self.invites_list = QtWidgets.QListWidget(self.groups_tab)
@@ -200,58 +200,10 @@ class Ui_main_window(object):
 "    border: 2px solid rgb(55, 55, 55);\n"
 "}\n"
 "QPlainTextEdit:focus {\n"
-"    border: 2px solid rgb(255, 207, 0);    \n"
-"    color: rgb(200, 200, 200);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
 "}")
         self.email_edit.setObjectName("email_edit")
-        self.horizontalLayoutWidget_10 = QtWidgets.QWidget(self.groups_tab)
-        self.horizontalLayoutWidget_10.setGeometry(QtCore.QRect(10, 490, 181, 81))
-        self.horizontalLayoutWidget_10.setObjectName("horizontalLayoutWidget_10")
-        self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_10)
-        self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
-        self.invite_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_10)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.invite_button.setFont(font)
-        self.invite_button.setStyleSheet("QPushButton {    \n"
-"    background-color: rgb(50, 50, 50);\n"
-"    border: 2px solid rgb(60, 60, 60);\n"
-"    border-radius: 5px;\n"
-"    color:white\n"
-"}\n"
-"QPushButton:hover {    \n"
-"    background-color: rgb(60, 60, 60);\n"
-"    border: 2px solid rgb(70, 70, 70);\n"
-"}\n"
-"QPushButton:pressed {    \n"
-"    background-color:rgb(255, 170, 0);\n"
-"    border: 2px solid rgb(207, 138, 0);\n"
-"    color: rgb(35, 35, 35);\n"
-"}")
-        self.invite_button.setObjectName("invite_button")
-        self.horizontalLayout_11.addWidget(self.invite_button)
-        self.delete_group_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_10)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.delete_group_button.setFont(font)
-        self.delete_group_button.setStyleSheet("QPushButton {    \n"
-"    background-color: rgb(50, 50, 50);\n"
-"    border: 2px solid rgb(60, 60, 60);\n"
-"    border-radius: 5px;\n"
-"    color:white\n"
-"}\n"
-"QPushButton:hover {    \n"
-"    background-color: rgb(60, 60, 60);\n"
-"    border: 2px solid rgb(70, 70, 70);\n"
-"}\n"
-"QPushButton:pressed {    \n"
-"    background-color:rgb(255, 170, 0);\n"
-"    border: 2px solid rgb(207, 138, 0);\n"
-"    color: rgb(35, 35, 35);\n"
-"}")
-        self.delete_group_button.setObjectName("delete_group_button")
-        self.horizontalLayout_11.addWidget(self.delete_group_button)
         self.group_description_label = QtWidgets.QLabel(self.groups_tab)
         self.group_description_label.setGeometry(QtCore.QRect(250, 290, 301, 31))
         font = QtGui.QFont()
@@ -266,8 +218,8 @@ class Ui_main_window(object):
         self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_12.setObjectName("horizontalLayout_12")
         self.create_group_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_11)
-        self.create_group_button.setMinimumSize(QtCore.QSize(75, 24))
-        self.create_group_button.setMaximumSize(QtCore.QSize(75, 24))
+        self.create_group_button.setMinimumSize(QtCore.QSize(87, 24))
+        self.create_group_button.setMaximumSize(QtCore.QSize(87, 24))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.create_group_button.setFont(font)
@@ -338,7 +290,7 @@ class Ui_main_window(object):
 "    border: 2px solid rgb(70, 70, 70);\n"
 "}\n"
 "QPushButton:pressed {    \n"
-"    background-color: rgb(250, 230, 0);\n"
+"    background-color: rgb(255, 189, 83);\n"
 "    border: 2px solid rgb(255, 165, 24);    \n"
 "    color: rgb(35, 35, 35);\n"
 "}")
@@ -360,6 +312,84 @@ class Ui_main_window(object):
 "color:white\n"
 "}")
         self.groups_tree.setObjectName("groups_tree")
+        self.verticalLayoutWidget_4 = QtWidgets.QWidget(self.groups_tab)
+        self.verticalLayoutWidget_4.setGeometry(QtCore.QRect(10, 500, 184, 80))
+        self.verticalLayoutWidget_4.setObjectName("verticalLayoutWidget_4")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_4)
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.horizontalLayout_11 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
+        self.invite_button = QtWidgets.QPushButton(self.verticalLayoutWidget_4)
+        self.invite_button.setMinimumSize(QtCore.QSize(87, 24))
+        self.invite_button.setMaximumSize(QtCore.QSize(87, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.invite_button.setFont(font)
+        self.invite_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
+        self.invite_button.setObjectName("invite_button")
+        self.horizontalLayout_11.addWidget(self.invite_button)
+        self.delete_group_button = QtWidgets.QPushButton(self.verticalLayoutWidget_4)
+        self.delete_group_button.setMinimumSize(QtCore.QSize(87, 24))
+        self.delete_group_button.setMaximumSize(QtCore.QSize(87, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.delete_group_button.setFont(font)
+        self.delete_group_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
+        self.delete_group_button.setObjectName("delete_group_button")
+        self.horizontalLayout_11.addWidget(self.delete_group_button)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_11)
+        self.remove_user_edit = QtWidgets.QPushButton(self.verticalLayoutWidget_4)
+        self.remove_user_edit.setMinimumSize(QtCore.QSize(87, 24))
+        self.remove_user_edit.setMaximumSize(QtCore.QSize(87, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.remove_user_edit.setFont(font)
+        self.remove_user_edit.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
+        self.remove_user_edit.setObjectName("remove_user_edit")
+        self.verticalLayout_5.addWidget(self.remove_user_edit, 0, QtCore.Qt.AlignHCenter)
         self.group_tree_label.raise_()
         self.invites_label.raise_()
         self.group_name_edit.raise_()
@@ -369,11 +399,11 @@ class Ui_main_window(object):
         self.horizontalLayoutWidget_9.raise_()
         self.create_group_label.raise_()
         self.email_edit.raise_()
-        self.horizontalLayoutWidget_10.raise_()
         self.group_description_label.raise_()
         self.horizontalLayoutWidget_11.raise_()
         self.groups_tree.raise_()
         self.group_bar.raise_()
+        self.verticalLayoutWidget_4.raise_()
         self.tab_widget.addTab(self.groups_tab, "")
         self.forums_tab = QtWidgets.QWidget()
         self.forums_tab.setStyleSheet("QWidget#forums_tab{\n"
@@ -463,7 +493,7 @@ class Ui_main_window(object):
         self.forum_groups_label.setAlignment(QtCore.Qt.AlignCenter)
         self.forum_groups_label.setObjectName("forum_groups_label")
         self.forum_tree = QtWidgets.QTreeView(self.forums_tab)
-        self.forum_tree.setGeometry(QtCore.QRect(10, 40, 181, 531))
+        self.forum_tree.setGeometry(QtCore.QRect(10, 40, 181, 451))
         self.forum_tree.setStyleSheet("QWidget#forum_tree{\n"
 "background-color: rgb(75,75,75);\n"
 "border-radius:5px;\n"
@@ -520,7 +550,7 @@ class Ui_main_window(object):
 "    border: 2px solid rgb(70, 70, 70);\n"
 "}\n"
 "QPushButton:pressed {    \n"
-"    background-color: rgb(250, 230, 0);\n"
+"    background-color: rgb(255, 189, 83);\n"
 "    border: 2px solid rgb(255, 165, 24);    \n"
 "    color: rgb(35, 35, 35);\n"
 "}")
@@ -528,22 +558,54 @@ class Ui_main_window(object):
         self.forums_close_popup_button.setIcon(icon)
         self.forums_close_popup_button.setObjectName("forums_close_popup_button")
         self.horizontalLayout_19.addWidget(self.forums_close_popup_button)
-        self.forum_view = QtWidgets.QPlainTextEdit(self.forums_tab)
+        self.forum_view = QtWidgets.QListWidget(self.forums_tab)
         self.forum_view.setGeometry(QtCore.QRect(200, 40, 591, 391))
-        self.forum_view.setStyleSheet("QPlainTextEdit{\n"
+        self.forum_view.setStyleSheet("QListWidget{\n"
 "background-color: rgb(150, 150, 150);\n"
 "border-radius:5px;\n"
 "border:0px;\n"
 "color:white\n"
 "}")
-        self.forum_view.setReadOnly(True)
         self.forum_view.setObjectName("forum_view")
+        self.widget_2 = QtWidgets.QWidget(self.forums_tab)
+        self.widget_2.setGeometry(QtCore.QRect(10, 490, 181, 61))
+        self.widget_2.setObjectName("widget_2")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.widget_2)
+        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
+        self.delete_post_button = QtWidgets.QPushButton(self.widget_2)
+        self.delete_post_button.setMinimumSize(QtCore.QSize(91, 24))
+        self.delete_post_button.setMaximumSize(QtCore.QSize(91, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.delete_post_button.setFont(font)
+        self.delete_post_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
+        self.delete_post_button.setObjectName("delete_post_button")
+        self.horizontalLayout_8.addWidget(self.delete_post_button)
+        self.verticalLayout_6.addLayout(self.horizontalLayout_8)
         self.horizontalLayoutWidget_6.raise_()
         self.widget.raise_()
         self.forum_groups_label.raise_()
         self.forum_tree.raise_()
         self.forum_view.raise_()
         self.forums_bar.raise_()
+        self.widget_2.raise_()
         self.tab_widget.addTab(self.forums_tab, "")
         self.calendar_tab = QtWidgets.QWidget()
         self.calendar_tab.setStyleSheet("QWidget#calendar_tab{\n"
@@ -723,7 +785,7 @@ class Ui_main_window(object):
 "    border: 2px solid rgb(70, 70, 70);\n"
 "}\n"
 "QPushButton:pressed {    \n"
-"    background-color: rgb(250, 230, 0);\n"
+"    background-color: rgb(255, 189, 83);\n"
 "    border: 2px solid rgb(255, 165, 24);    \n"
 "    color: rgb(35, 35, 35);\n"
 "}")
@@ -1129,7 +1191,7 @@ class Ui_main_window(object):
 "    border: 2px solid rgb(70, 70, 70);\n"
 "}\n"
 "QPushButton:pressed {    \n"
-"    background-color: rgb(250, 230, 0);\n"
+"    background-color: rgb(255, 189, 83);\n"
 "    border: 2px solid rgb(255, 165, 24);    \n"
 "    color: rgb(35, 35, 35);\n"
 "}")
@@ -1137,6 +1199,16 @@ class Ui_main_window(object):
         self.tasks_close_popup_button.setIcon(icon)
         self.tasks_close_popup_button.setObjectName("tasks_close_popup_button")
         self.horizontalLayout_21.addWidget(self.tasks_close_popup_button)
+        self.Tasks_Label.raise_()
+        self.trello_tree.raise_()
+        self.tasks_bar.raise_()
+        self.line.raise_()
+        self.horizontalLayoutWidget_4.raise_()
+        self.horizontalLayoutWidget_5.raise_()
+        self.verticalLayoutWidget_2.raise_()
+        self.verticalLayoutWidget.raise_()
+        self.task_card_label.raise_()
+        self.label_7.raise_()
         self.tab_widget.addTab(self.tasks_tab, "")
         self.documents_tab = QtWidgets.QWidget()
         self.documents_tab.setStyleSheet("QWidget#documents_tab{\n"
@@ -1145,15 +1217,16 @@ class Ui_main_window(object):
 "}")
         self.documents_tab.setObjectName("documents_tab")
         self.document_list = QtWidgets.QListWidget(self.documents_tab)
-        self.document_list.setGeometry(QtCore.QRect(10, 40, 781, 211))
+        self.document_list.setGeometry(QtCore.QRect(200, 40, 591, 211))
         self.document_list.setStyleSheet("QWidget#document_list{\n"
 "background-color: rgb(75,75,75);\n"
+"color: white;\n"
 "border-radius:5px;\n"
 "border:0px\n"
 "}")
         self.document_list.setObjectName("document_list")
         self.document_label = QtWidgets.QLabel(self.documents_tab)
-        self.document_label.setGeometry(QtCore.QRect(10, 10, 781, 31))
+        self.document_label.setGeometry(QtCore.QRect(230, 10, 561, 31))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.document_label.setFont(font)
@@ -1161,13 +1234,13 @@ class Ui_main_window(object):
         self.document_label.setAlignment(QtCore.Qt.AlignCenter)
         self.document_label.setObjectName("document_label")
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.documents_tab)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 370, 781, 80))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(210, 370, 582, 80))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.doc_share_name_edit = QtWidgets.QLineEdit(self.horizontalLayoutWidget)
-        self.doc_share_name_edit.setMinimumSize(QtCore.QSize(338, 24))
+        self.doc_share_name_edit.setMinimumSize(QtCore.QSize(234, 24))
         self.doc_share_name_edit.setMaximumSize(QtCore.QSize(338, 24))
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -1232,7 +1305,7 @@ class Ui_main_window(object):
         self.doc_share_button.setObjectName("doc_share_button")
         self.horizontalLayout.addWidget(self.doc_share_button)
         self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.documents_tab)
-        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(10, 260, 781, 80))
+        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(210, 260, 581, 80))
         self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -1282,7 +1355,7 @@ class Ui_main_window(object):
         self.doc_create_button.setObjectName("doc_create_button")
         self.horizontalLayout_2.addWidget(self.doc_create_button)
         self.horizontalLayoutWidget_3 = QtWidgets.QWidget(self.documents_tab)
-        self.horizontalLayoutWidget_3.setGeometry(QtCore.QRect(10, 480, 781, 80))
+        self.horizontalLayoutWidget_3.setGeometry(QtCore.QRect(210, 480, 581, 80))
         self.horizontalLayoutWidget_3.setObjectName("horizontalLayoutWidget_3")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_3)
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -1380,7 +1453,7 @@ class Ui_main_window(object):
 "    border: 2px solid rgb(70, 70, 70);\n"
 "}\n"
 "QPushButton:pressed {    \n"
-"    background-color: rgb(250, 230, 0);\n"
+"    background-color: rgb(255, 189, 83);\n"
 "    border: 2px solid rgb(255, 165, 24);    \n"
 "    color: rgb(35, 35, 35);\n"
 "}")
@@ -1388,6 +1461,29 @@ class Ui_main_window(object):
         self.docs_close_popup_button.setIcon(icon)
         self.docs_close_popup_button.setObjectName("docs_close_popup_button")
         self.horizontalLayout_22.addWidget(self.docs_close_popup_button)
+        self.docs_tree = QtWidgets.QTreeView(self.documents_tab)
+        self.docs_tree.setGeometry(QtCore.QRect(10, 40, 181, 531))
+        self.docs_tree.setStyleSheet("QWidget#docs_tree{\n"
+"background-color: rgb(75,75,75);\n"
+"border-radius:5px;\n"
+"border:0px\n"
+"}")
+        self.docs_tree.setObjectName("docs_tree")
+        self.docs_group_label = QtWidgets.QLabel(self.documents_tab)
+        self.docs_group_label.setGeometry(QtCore.QRect(10, 10, 181, 31))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.docs_group_label.setFont(font)
+        self.docs_group_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.docs_group_label.setObjectName("docs_group_label")
+        self.document_list.raise_()
+        self.document_label.raise_()
+        self.horizontalLayoutWidget.raise_()
+        self.horizontalLayoutWidget_2.raise_()
+        self.horizontalLayoutWidget_3.raise_()
+        self.docs_tree.raise_()
+        self.docs_group_label.raise_()
+        self.docs_bar.raise_()
         self.tab_widget.addTab(self.documents_tab, "")
         main_window.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(main_window)
@@ -1412,11 +1508,12 @@ class Ui_main_window(object):
         self.invites_label.setText(_translate("main_window", "Group Invites"))
         self.create_group_label.setText(_translate("main_window", "Create Group"))
         self.email_edit.setPlaceholderText(_translate("main_window", "Enter emails of invites (e.g. email1@gmail.com, email2@gmail.com). If you don\'t invite any members now, you can invite them with the \"Invite Members\" button."))
-        self.invite_button.setText(_translate("main_window", "Invite Members"))
-        self.delete_group_button.setText(_translate("main_window", "Delete Group"))
         self.group_description_label.setText(_translate("main_window", "Group Description"))
         self.create_group_button.setText(_translate("main_window", "Create Group"))
         self.groups_error_label.setText(_translate("main_window", "This is an error"))
+        self.invite_button.setText(_translate("main_window", "Invite Users"))
+        self.delete_group_button.setText(_translate("main_window", "Delete Group"))
+        self.remove_user_edit.setText(_translate("main_window", "Remove User"))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.groups_tab), _translate("main_window", "Groups"))
         self.forum_group_label.setText(_translate("main_window", "Talking in Group:"))
         self.group_in_label.setText(_translate("main_window", "Pick a group"))
@@ -1424,6 +1521,7 @@ class Ui_main_window(object):
         self.message_button.setText(_translate("main_window", "Send Message"))
         self.forum_groups_label.setText(_translate("main_window", "Groups"))
         self.forums_error_label.setText(_translate("main_window", "This is an error"))
+        self.delete_post_button.setText(_translate("main_window", "Remove Post"))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.forums_tab), _translate("main_window", "Forums"))
         self.todays_list.setToolTip(_translate("main_window", "<html><head/><body><p><span style=\" font-size:10pt;\">Click on an event to view its description.</span></p></body></html>"))
         self.today_label.setText(_translate("main_window", "Todays Events"))
@@ -1457,18 +1555,20 @@ class Ui_main_window(object):
         self.tasks_error_label.setText(_translate("main_window", "This is an error"))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.tasks_tab), _translate("main_window", "Tasks"))
         self.document_label.setText(_translate("main_window", "Document Links"))
-        self.doc_share_name_edit.setPlaceholderText(_translate("main_window", "Enter a name for the document to store."))
-        self.doc_share_link_edit.setPlaceholderText(_translate("main_window", "Enter the link for your document."))
+        self.doc_share_name_edit.setPlaceholderText(_translate("main_window", "Enter a name for the link"))
+        self.doc_share_link_edit.setPlaceholderText(_translate("main_window", "Enter the link"))
         self.doc_share_button.setText(_translate("main_window", "Share Link"))
-        self.doc_create_edit.setPlaceholderText(_translate("main_window", "Enter a name for the document to store."))
-        self.doc_create_button.setText(_translate("main_window", "Create Document"))
-        self.doc_delete_edit.setPlaceholderText(_translate("main_window", "Enter the name of the document you want to delete or you can right click the document you want to delete."))
+        self.doc_create_edit.setPlaceholderText(_translate("main_window", "Enter a name for the Google Doc"))
+        self.doc_create_button.setText(_translate("main_window", "Create Doc"))
+        self.doc_delete_edit.setPlaceholderText(_translate("main_window", "Enter the name of the document you want to delete"))
         self.doc_delete_button.setText(_translate("main_window", "Delete Link"))
         self.docs_error_label.setText(_translate("main_window", "This is an error"))
+        self.docs_tree.setToolTip(_translate("main_window", "<html><head/><body><p><span style=\" font-size:10pt;\">Click on task card to view its description.</span></p></body></html>"))
+        self.docs_group_label.setText(_translate("main_window", "Groups"))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.documents_tab), _translate("main_window", "Documents"))
 
 
-if __name__ == "__main__":
+"""if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     main_window = QtWidgets.QMainWindow()
@@ -1476,3 +1576,4 @@ if __name__ == "__main__":
     ui.setupUi(main_window)
     main_window.show()
     sys.exit(app.exec_())
+"""

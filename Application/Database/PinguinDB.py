@@ -1,7 +1,7 @@
 import pymongo, datetime, time, hashlib
 
 from bson.objectid import ObjectId
-from Application.Database.utils.class_user import User
+from .utils.class_user import User
 from random import seed, randint
 
 
@@ -139,8 +139,8 @@ class PinguinDB:
 
     # Checks if the user is the owner of the group
     def check_ownership(self, group_id, user_id):
-        groupCheck = self.groups.find_one({"_id": group_id}).get("owner")
-        if user == groupCheck:
+        groupCheck = self.groups.find_one({"_id": ObjectId(group_id)})
+        if user_id == groupCheck['owner']:
             return 1
         else:
             return 0
@@ -311,6 +311,11 @@ class PinguinDB:
         groupFind = self.groups.find_one({'_id': self.user.currentGroup}).get("group_name")
         self.documents[groupFind].insert_one(post)
         return 1
+
+    def retrieve_document(self, doc_name, group_id):
+        groupFind = self.groups.find_one({'_id':group_id}).get('group_name')
+        doc_id = self.documents[groupFind].find_one({'title':doc_name}).get('_id')
+        return doc_id
 
     def retrieve_docs(self):
         docList = []
