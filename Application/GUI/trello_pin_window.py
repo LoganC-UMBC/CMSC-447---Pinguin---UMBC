@@ -31,7 +31,7 @@ class trello_pin_window_ext(Ui_trello_pin_window):
 
         else:
             self.trello_pin_edit.clear()
-            provided_pin = provided_pin.split()
+            #provided_pin = provided_pin.split()
             ping_token = ping_oauth_pin(provided_pin)
             user_token = ping_token.get('oauth_token')
             user_token_secret = ping_token.get('oauth_token_secret')
@@ -56,14 +56,19 @@ class trello_pin_window_ext(Ui_trello_pin_window):
                 file.close()
 
             print('XD')
-
+            print(trello.client)
             self.trello.client = client
+            print("trello.client")
             self.trello.ping_board_create("member_id")
+            print("made bogus board")
             boards = self.trello.ping_boards()
             trello_id = 0
             for board in boards:
                 if board.name == "member_id":
+                    print(board.all_members()[0])
+                    print("here")
                     trello_id = board.all_members()[0].id
+                    print(trello_id)
 
                     self.trello.trello_id = board.all_members()[0].id
                     board.close()

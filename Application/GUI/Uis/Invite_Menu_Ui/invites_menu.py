@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'form.ui'
+# Form implementation generated from reading ui file '..\GitHub\CMSC-447---Pinguin---UMBC\Application\GUI\Uis\Invite_Menu_Ui\form.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.2
 #
@@ -17,6 +17,8 @@ class Ui_invites_menu(object):
         invites_menu.resize(400, 400)
         invites_menu.setMinimumSize(QtCore.QSize(400, 400))
         invites_menu.setMaximumSize(QtCore.QSize(213123, 16777215))
+        invites_menu.setStyleSheet("QDialog{\n"
+" background-color:rgb(100, 100, 100);}")
         self.horizontalLayoutWidget = QtWidgets.QWidget(invites_menu)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(70, 340, 261, 41))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
@@ -28,6 +30,21 @@ class Ui_invites_menu(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.send_invites_button.setFont(font)
+        self.send_invites_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.send_invites_button.setObjectName("send_invites_button")
         self.horizontalLayout.addWidget(self.send_invites_button)
         self.cancel_invites_button = QtWidgets.QPushButton(self.horizontalLayoutWidget)
@@ -35,6 +52,21 @@ class Ui_invites_menu(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.cancel_invites_button.setFont(font)
+        self.cancel_invites_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.cancel_invites_button.setObjectName("cancel_invites_button")
         self.horizontalLayout.addWidget(self.cancel_invites_button)
         self.verticalLayoutWidget = QtWidgets.QWidget(invites_menu)
@@ -50,6 +82,19 @@ class Ui_invites_menu(object):
         font.setPointSize(10)
         self.send_invites_edit.setFont(font)
         self.send_invites_edit.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.send_invites_edit.setStyleSheet("QPlainTextEdit {\n"
+"    border: 2px solid rgb(45, 45, 45);\n"
+"    border-radius: 5px;\n"
+"    background-color: rgb(30, 30, 30);    \n"
+"    color: rgb(255,255,255);\n"
+"}\n"
+"QPlainTextEdit:hover {\n"
+"    border: 2px solid rgb(55, 55, 55);\n"
+"}\n"
+"QPlainTextEdit:focus {\n"
+"    border: 2px solid rgb(207, 138, 0);    \n"
+"    color: rgb(255, 255, 255);\n"
+"}")
         self.send_invites_edit.setInputMethodHints(QtCore.Qt.ImhMultiLine)
         self.send_invites_edit.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.send_invites_edit.setLineWidth(1)
@@ -64,7 +109,12 @@ class Ui_invites_menu(object):
         self.send_invites_label.setObjectName("send_invites_label")
         self.invites_error_frame = QtWidgets.QFrame(invites_menu)
         self.invites_error_frame.setGeometry(QtCore.QRect(0, 0, 401, 51))
-        self.invites_error_frame.setStyleSheet("QFrame{background-color:white;}")
+        self.invites_error_frame.setStyleSheet("QFrame{\n"
+"background-color: rgb(255, 189, 83);\n"
+"border-radius: 15px;\n"
+"\n"
+"}\n"
+"")
         self.invites_error_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.invites_error_frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.invites_error_frame.setObjectName("invites_error_frame")
@@ -77,12 +127,30 @@ class Ui_invites_menu(object):
         self.invites_error_label = QtWidgets.QLabel(self.horizontalLayoutWidget_2)
         self.invites_error_label.setMinimumSize(QtCore.QSize(370, 0))
         self.invites_error_label.setMaximumSize(QtCore.QSize(370, 16777215))
+        self.invites_error_label.setStyleSheet("QLabel{\n"
+"background-color:rgb(255, 189, 83);\n"
+"border-radius:5px;\n"
+"}")
         self.invites_error_label.setAlignment(QtCore.Qt.AlignCenter)
         self.invites_error_label.setObjectName("invites_error_label")
         self.horizontalLayout_2.addWidget(self.invites_error_label)
         self.invites_error_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_2)
         self.invites_error_button.setMinimumSize(QtCore.QSize(20, 20))
         self.invites_error_button.setMaximumSize(QtCore.QSize(20, 20))
+        self.invites_error_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(255, 189, 83);\n"
+"    border: 2px solid rgb(255, 165, 24);    \n"
+"    color: rgb(35, 35, 35);\n"
+"}")
         self.invites_error_button.setText("")
         self.invites_error_button.setObjectName("invites_error_button")
         self.horizontalLayout_2.addWidget(self.invites_error_button)
@@ -100,4 +168,11 @@ class Ui_invites_menu(object):
         self.invites_error_label.setText(_translate("invites_menu", "This is an error"))
 
 
-
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    invites_menu = QtWidgets.QDialog()
+    ui = Ui_invites_menu()
+    ui.setupUi(invites_menu)
+    invites_menu.show()
+    sys.exit(app.exec_())

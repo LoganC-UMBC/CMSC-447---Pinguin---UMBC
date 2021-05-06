@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>invites_menu</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog{
+ background-color:rgb(100, 100, 100);}</string>
+  </property>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
@@ -48,6 +52,23 @@
         <pointsize>10</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
+      </property>
       <property name="text">
        <string>Send Invites</string>
       </property>
@@ -65,6 +86,23 @@
        <font>
         <pointsize>10</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+	color:white
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color:rgb(255, 170, 0);
+	border: 2px solid rgb(207, 138, 0);
+	color: rgb(35, 35, 35);
+}</string>
       </property>
       <property name="text">
        <string>Cancel</string>
@@ -107,6 +145,21 @@
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPlainTextEdit {
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 5px;
+	background-color: rgb(30, 30, 30);	
+	color: rgb(255,255,255);
+}
+QPlainTextEdit:hover {
+	border: 2px solid rgb(55, 55, 55);
+}
+QPlainTextEdit:focus {
+	border: 2px solid rgb(207, 138, 0);	
+	color: rgb(255, 255, 255);
+}</string>
       </property>
       <property name="inputMethodHints">
        <set>Qt::ImhMultiLine</set>
@@ -155,7 +208,12 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QFrame{background-color:white;}</string>
+    <string notr="true">QFrame{
+background-color: rgb(255, 189, 83);
+border-radius: 15px;
+
+}
+</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::StyledPanel</enum>
@@ -187,6 +245,12 @@
          <height>16777215</height>
         </size>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{
+background-color:rgb(255, 189, 83);
+border-radius:5px;
+}</string>
+       </property>
        <property name="text">
         <string>This is an error</string>
        </property>
@@ -208,6 +272,22 @@
          <width>20</width>
          <height>20</height>
         </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {	
+	background-color: rgb(50, 50, 50);
+	border: 2px solid rgb(60, 60, 60);
+	border-radius: 5px;
+}
+QPushButton:hover {	
+	background-color: rgb(60, 60, 60);
+	border: 2px solid rgb(70, 70, 70);
+}
+QPushButton:pressed {	
+	background-color: rgb(255, 189, 83);
+	border: 2px solid rgb(255, 165, 24);	
+	color: rgb(35, 35, 35);
+}</string>
        </property>
        <property name="text">
         <string/>

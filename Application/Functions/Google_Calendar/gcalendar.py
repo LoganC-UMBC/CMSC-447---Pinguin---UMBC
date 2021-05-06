@@ -163,7 +163,7 @@ class Google_Calendar(object):
         rule = {
             'scope': {
                 'type': 'user',
-                'value': email,
+                'value': email
             },
             'role': 'writer'
         }

@@ -617,14 +617,6 @@ class Ui_main_window(object):
 "\n"
 "}")
         self.calendar_tab.setObjectName("calendar_tab")
-        self.todays_list = QtWidgets.QListWidget(self.calendar_tab)
-        self.todays_list.setGeometry(QtCore.QRect(410, 40, 381, 191))
-        self.todays_list.setStyleSheet("QWidget#todays_list{\n"
-"background-color: rgb(75,75,75);\n"
-"border-radius:5px;\n"
-"border:0px\n"
-"}")
-        self.todays_list.setObjectName("todays_list")
         self.today_label = QtWidgets.QLabel(self.calendar_tab)
         self.today_label.setGeometry(QtCore.QRect(410, 10, 381, 31))
         font = QtGui.QFont()
@@ -670,27 +662,6 @@ class Ui_main_window(object):
 "    color: rgb(255, 255, 255);\n"
 "}")
         self.event_description_edit.setObjectName("event_description_edit")
-        self.add_event_button = QtWidgets.QPushButton(self.calendar_tab)
-        self.add_event_button.setGeometry(QtCore.QRect(160, 550, 75, 24))
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.add_event_button.setFont(font)
-        self.add_event_button.setStyleSheet("QPushButton {    \n"
-"    background-color: rgb(50, 50, 50);\n"
-"    border: 2px solid rgb(60, 60, 60);\n"
-"    border-radius: 5px;\n"
-"    color:white\n"
-"}\n"
-"QPushButton:hover {    \n"
-"    background-color: rgb(60, 60, 60);\n"
-"    border: 2px solid rgb(70, 70, 70);\n"
-"}\n"
-"QPushButton:pressed {    \n"
-"    background-color:rgb(255, 170, 0);\n"
-"    border: 2px solid rgb(207, 138, 0);\n"
-"    color: rgb(35, 35, 35);\n"
-"}")
-        self.add_event_button.setObjectName("add_event_button")
         self.months_label = QtWidgets.QLabel(self.calendar_tab)
         self.months_label.setGeometry(QtCore.QRect(410, 320, 381, 31))
         font = QtGui.QFont()
@@ -703,7 +674,8 @@ class Ui_main_window(object):
         self.months_list.setStyleSheet("QWidget#months_list{\n"
 "background-color: rgb(75,75,75);\n"
 "border-radius:5px;\n"
-"border:0px\n"
+"border:0px;\n"
+"color:rgb(255, 255, 255);\n"
 "}")
         self.months_list.setObjectName("months_list")
         self.verticalLayoutWidget_3 = QtWidgets.QWidget(self.calendar_tab)
@@ -799,15 +771,84 @@ class Ui_main_window(object):
         font.setPointSize(10)
         self.calendar.setFont(font)
         self.calendar.setObjectName("calendar")
-        self.todays_list.raise_()
+        self.todays_list = QtWidgets.QPlainTextEdit(self.calendar_tab)
+        self.todays_list.setGeometry(QtCore.QRect(410, 40, 381, 191))
+        self.todays_list.setStyleSheet("QPlainTextEdit{\n"
+"background-color: rgb(75,75,75);\n"
+"border-radius:5px;\n"
+"border:0px;\n"
+"color:rgb(255, 255, 255);\n"
+"\n"
+"}")
+        self.todays_list.setObjectName("todays_list")
+        self.horizontalLayoutWidget_7 = QtWidgets.QWidget(self.calendar_tab)
+        self.horizontalLayoutWidget_7.setGeometry(QtCore.QRect(409, 539, 381, 41))
+        self.horizontalLayoutWidget_7.setObjectName("horizontalLayoutWidget_7")
+        self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_7)
+        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
+        self.delete_event_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_7)
+        self.delete_event_button.setMinimumSize(QtCore.QSize(75, 24))
+        self.delete_event_button.setMaximumSize(QtCore.QSize(75, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.delete_event_button.setFont(font)
+        self.delete_event_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
+        self.delete_event_button.setObjectName("delete_event_button")
+        self.horizontalLayout_9.addWidget(self.delete_event_button)
+        self.horizontalLayoutWidget_8 = QtWidgets.QWidget(self.calendar_tab)
+        self.horizontalLayoutWidget_8.setGeometry(QtCore.QRect(10, 540, 371, 41))
+        self.horizontalLayoutWidget_8.setObjectName("horizontalLayoutWidget_8")
+        self.horizontalLayout_15 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_8)
+        self.horizontalLayout_15.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_15.setObjectName("horizontalLayout_15")
+        self.add_event_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_8)
+        self.add_event_button.setMinimumSize(QtCore.QSize(75, 24))
+        self.add_event_button.setMaximumSize(QtCore.QSize(75, 24))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.add_event_button.setFont(font)
+        self.add_event_button.setStyleSheet("QPushButton {    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 2px solid rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    color:white\n"
+"}\n"
+"QPushButton:hover {    \n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: 2px solid rgb(70, 70, 70);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color:rgb(255, 170, 0);\n"
+"    border: 2px solid rgb(207, 138, 0);\n"
+"    color: rgb(35, 35, 35);\n"
+"}")
+        self.add_event_button.setObjectName("add_event_button")
+        self.horizontalLayout_15.addWidget(self.add_event_button)
         self.today_label.raise_()
         self.event_name_edit.raise_()
         self.event_description_edit.raise_()
-        self.add_event_button.raise_()
         self.months_label.raise_()
         self.months_list.raise_()
         self.verticalLayoutWidget_3.raise_()
         self.calendar.raise_()
+        self.todays_list.raise_()
+        self.horizontalLayoutWidget_7.raise_()
+        self.horizontalLayoutWidget_8.raise_()
         self.calendar_bar.raise_()
         self.tab_widget.addTab(self.calendar_tab, "")
         self.tasks_tab = QtWidgets.QWidget()
@@ -1539,16 +1580,16 @@ class Ui_main_window(object):
         self.forums_error_label.setText(_translate("main_window", "This is an error"))
         self.delete_post_button.setText(_translate("main_window", "Remove Post"))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.forums_tab), _translate("main_window", "Forums"))
-        self.todays_list.setToolTip(_translate("main_window", "<html><head/><body><p><span style=\" font-size:10pt;\">Click on an event to view its description.</span></p></body></html>"))
         self.today_label.setText(_translate("main_window", "Todays Events"))
         self.event_name_edit.setPlaceholderText(_translate("main_window", "Enter a title for your event."))
         self.event_description_edit.setPlaceholderText(_translate("main_window", "Enter a description for your event."))
-        self.add_event_button.setText(_translate("main_window", "Add Event"))
         self.months_label.setText(_translate("main_window", "This Months Events"))
         self.months_list.setToolTip(_translate("main_window", "<html><head/><body><p><span style=\" font-size:10pt;\">Click on an event to view its description.</span></p></body></html>"))
         self.date_label.setText(_translate("main_window", "Enter a Date"))
         self.date_edit.setToolTip(_translate("main_window", "<html><head/><body><p><span style=\" font-size:10pt;\">Select a day from the calendar to change the date.</span></p></body></html>"))
         self.calendar_error_label.setText(_translate("main_window", "This is an error"))
+        self.delete_event_button.setText(_translate("main_window", "Delete Event"))
+        self.add_event_button.setText(_translate("main_window", "Add Event"))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.calendar_tab), _translate("main_window", "Calendar"))
         self.trello_tree.setToolTip(_translate("main_window", "<html><head/><body><p><span style=\" font-size:10pt;\">Click on task card to view its description.</span></p></body></html>"))
         self.add_list_edit.setPlaceholderText(_translate("main_window", "List Name"))
@@ -1579,7 +1620,7 @@ class Ui_main_window(object):
         self.doc_delete_edit.setPlaceholderText(_translate("main_window", "Enter the name of the document you want to delete"))
         self.doc_delete_button.setText(_translate("main_window", "Delete Link"))
         self.docs_error_label.setText(_translate("main_window", "This is an error"))
-        #self.docs_tree.setToolTip(_translate("main_window", "<html><head/><body><p><span style=\" font-size:10pt;\">Click on task card to view its description.</span></p></body></html>"))
+        self.docs_tree.setToolTip(_translate("main_window", "<html><head/><body><p><br/></p></body></html>"))
         self.docs_group_label.setText(_translate("main_window", "Groups"))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.documents_tab), _translate("main_window", "Documents"))
 

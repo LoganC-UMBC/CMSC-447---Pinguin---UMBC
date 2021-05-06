@@ -28,6 +28,7 @@ from .invites_menu_ext import *
 
 import datetime
 import pytz
+import dateutil.parser
 
 ########################################################################################################################
 #                                                         Main Window Class                                            #
@@ -187,6 +188,8 @@ class Main_Window(Ui_main_window):
     def connect_calendar_buttons(self):
         self.add_event_button.clicked.connect(self.add_event)
         self.calendar.clicked.connect(self.calendar_buttons)
+        self.months_list.clicked.connect(self.get_days_event)
+        self.delete_event_button.clicked.connect(self.delete_event)
 
 
     # connecting all task tab buttons
@@ -291,13 +294,16 @@ class Main_Window(Ui_main_window):
                 for group in groups:
                     if group['group_name'] == group_name:
                         self.set_current_group(group['_id'])
+                        print(group['_id'])
                         print("got it")
                         id = group['calendar_id']
                         print(id)
                         #self.db.get_calendar_id()
 
+                print("setting up trello")
                 # set up single trello board for group
                 self.trello.ping_board_create(group_name)
+                print("trello set up")
 
                 print("updating tree")
                 self.populate_groups_tree(self.groups_tree, self.groups_model, self.groups_node)
@@ -545,7 +551,8 @@ class Main_Window(Ui_main_window):
                 self.error_frame_show(self.groups_error_frame)
 
 
-    ########################################################################################################################
+
+########################################################################################################################
 #                                               Forums Tab                                                             #
 ########################################################################################################################
 
@@ -700,10 +707,54 @@ class Main_Window(Ui_main_window):
         if len(events) != 0:
             print("adding events")
             for event in events:
-                new_event = CalendarListItem(event['summary'], event)
-                print(new_event.event_name)
+                date = dateutil.parser.isoparse(event['start']['dateTime'])
+                year = date.year
+                month = date.month
+                day = date.day
+                date_string = str(month) + "/" + str(day) + "    " + event['summary']
+                #print(date_string)
+                #print(date)
+                new_event = CalendarListItem(date_string, event)
+                #print(new_event.event_name)
                 self.months_list.addItem(new_event)
         print("end of getting months events")
+
+
+    def get_days_event(self):
+        item = self.months_list.currentItem()
+        if item != None:
+            self.todays_list.clear()
+            date = dateutil.parser.isoparse(item.event['start']['dateTime'])
+            event_text = "Event name:             " + item.event['summary'] + "\n" +\
+                         "Date:                        " + str(date.month) + "/" +str(date.day) + "/" + str(date.year) + "\n" +\
+                         "Event Description:    " + item.event['description'] + "\n"
+
+            self.todays_list.setPlainText(event_text)
+
+
+    def delete_event(self):
+        item = self.months_list.currentItem()
+
+        if self.current_group == None:
+            error_text = "Select a group to delete events from"
+            self.calendar_error_label.setText(error_text)
+            self.error_frame_show(self.calendar_error_frame)
+
+        elif item == None:
+            error_text == "Select an event to delete"
+            self.calendar_error_label.setText(error_text)
+            self.error_frame_show(self.calendar_error_frame)
+
+        elif item != None:
+            print(item.event)
+            print(self.current_calendar_id)
+            self.google_client.google_calendar.DeleteEvent(self.current_calendar_id, item.event['id'])
+            self.get_months_events()
+            self.todays_list.clear()
+
+
+
+
 
 ########################################################################################################################
 #                                               Tasks Tab                                                              #
